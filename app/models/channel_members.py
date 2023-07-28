@@ -7,5 +7,5 @@ class ChannelMembers(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')), primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
+    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')))
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
