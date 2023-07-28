@@ -5,3 +5,6 @@ __pycache__/
 .DS_Store
 .vscode/
 private
+/instance
+**.db
+dev.db
