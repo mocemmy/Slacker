@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from app.models import ServerMembers
+from .server_members import ServerMembers
 
 class Server(db.Model):
     __tablename__ = 'servers'

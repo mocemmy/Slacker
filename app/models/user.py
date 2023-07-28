@@ -2,7 +2,8 @@ from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-from app.models import ServerMembers, ChannelMembers
+from .server_members import ServerMembers
+from .channel_members import ChannelMembers
 
 
 class User(db.Model, UserMixin):
