@@ -10,8 +10,11 @@ class Reaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('messages.id')))
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-    reaction_type = db.Column(db.Integer)
+    reaction_type = db.Column(db.String, nullable=False)
 
+    message = db.relationship('Message', back_populates='reactions')
+
+    user = db.relationship('User', back_populates='reactions')
 
     def to_dict(self):
           return {

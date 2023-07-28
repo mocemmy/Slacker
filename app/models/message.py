@@ -1,8 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
+
 class Message(db.Model):
     __tablename__ = 'messages'
+
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -17,12 +19,18 @@ class Message(db.Model):
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
 
+    sender = db.relationship('User', back_populates='sent_messages')
+
+    channel = db.relationship('Channel', back_populates='messages')
+
+    reactions = db.relationship('Reaction', back_populates='message', cascade='all, delete-orphan')
+
 
     def to_dict(self):
           return {
             'id': self.id,
             'message_body': self.message_body,
-            'channed_id': self.channed_id,
+            'channel_id': self.channel_id,
             'sent_by': self.sent_by,
             'edited': self.edited,
             'parent_message_id': self.parent_message_id,

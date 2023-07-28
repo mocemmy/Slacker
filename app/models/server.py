@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from ..models import server_members
 
 class Server(db.Model):
     __tablename__ = 'servers'
@@ -15,6 +16,12 @@ class Server(db.Model):
     description = db.Column(db.String(255))
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
+
+    owner = db.relationship('User', back_populates='owned_servers')
+
+    members = db.relationship('User', secondary=server_members, back_populates='servers')
+
+    channels = db.relationship('Channel', back_populates='servers', cascade='all, delete-orphan')
 
 
     def to_dict(self):
