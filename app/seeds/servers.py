@@ -27,8 +27,8 @@ def seed_servers():
 # it will reset the primary keys for you as well.
 def undo_servers():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.servers RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM servers"))
 
     db.session.commit()
