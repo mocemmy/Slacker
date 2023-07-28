@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2ab645a721c1
+Revision ID: de37ae80c6ac
 Revises:
-Create Date: 2023-07-28 16:22:52.712890
+Create Date: 2023-07-28 17:44:03.368384
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '2ab645a721c1'
+revision = 'de37ae80c6ac'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -59,18 +59,20 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('server_members',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('server_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['server_id'], ['servers.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('server_id', 'user_id')
+    sa.PrimaryKeyConstraint('id', 'server_id', 'user_id')
     )
     op.create_table('channel_members',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('channel_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('channel_id', 'user_id')
+    sa.PrimaryKeyConstraint('id', 'channel_id', 'user_id')
     )
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),

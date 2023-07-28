@@ -23,9 +23,9 @@ def seed_reactions():
     ]
 
     reaction1 = Reaction(message_id=1, user_id=1, reaction_type='&#128507')
-    reaction2 = Reaction(message_id=2, user_id=2, reaction_type='&#128508')
+    reaction2 = Reaction(message_id=2, user_id=4, reaction_type='&#128508')
     reaction3 = Reaction(message_id=3, user_id=3, reaction_type='&#128509')
-    reaction4 = Reaction(message_id=4, user_id=4, reaction_type='&#128510')
+    reaction4 = Reaction(message_id=4, user_id=2, reaction_type='&#128510')
     reaction5 = Reaction(message_id=5, user_id=2, reaction_type='&#128511')
     reaction6 = Reaction(message_id=6, user_id=3, reaction_type='&#128513')
     reaction7 = Reaction(message_id=7, user_id=4, reaction_type='&#128514')

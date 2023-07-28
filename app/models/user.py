@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-from ..models import server_members, channel_members
+from app.models import ServerMembers, ChannelMembers
 
 
 class User(db.Model, UserMixin):
@@ -28,9 +28,9 @@ class User(db.Model, UserMixin):
 
     sent_messages = db.relationship('Message', back_populates='sender', cascade='all, delete-orphan')
 
-    servers = db.relationship('Server', secondary=server_members, back_populates='members')
+    servers = db.relationship('Server', secondary=ServerMembers, back_populates='members')
 
-    channels = db.relationship('Channel', secondary=channel_members, back_populates='members')
+    channels = db.relationship('Channel', secondary=ChannelMembers, back_populates='members')
 
     reactions = db.relationship('Reaction', back_populates='user', cascade='all, delete-orphan')
 

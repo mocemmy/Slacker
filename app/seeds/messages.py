@@ -8,25 +8,25 @@ def seed_messages():
         message_body="Welcome to Channel 1", channel_id=1, sent_by=1
     )
     message2 = Message(
-        message_body="Hello world!", channel_id=1, sent_by=2
+        message_body="Hello world!", channel_id=1, sent_by=4
     )
     message3 = Message(
-        message_body="Welcome to Channel 2", channel_id=2, sent_by=1
+        message_body="Welcome to Channel 2", channel_id=2, sent_by=2
     )
     message4 = Message(
-        message_body="Hello world!", channel_id=2, sent_by=2
+        message_body="Hello world!", channel_id=2, sent_by=3
     )
     message5 = Message(
-        message_body="Welcome to Channel 3", channel_id=3, sent_by=1
+        message_body="Welcome to Channel 3", channel_id=3, sent_by=3
     )
     message6 = Message(
         message_body="Hello world!", channel_id=3, sent_by=2
     )
     message7 = Message(
-        message_body="Welcome to Channel 4", channel_id=4, sent_by=1
+        message_body="Welcome to Channel 4", channel_id=4, sent_by=4
     )
     message8 = Message(
-        message_body="Hello world!", channel_id=4, sent_by=2
+        message_body="Hello world!", channel_id=4, sent_by=1
     )
 
     db.session.add(message1)
