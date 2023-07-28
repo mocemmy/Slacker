@@ -1,11 +1,11 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class ChannelMembers(db.Model):
-    __tablename__ = 'channel_members'
+channel_members = db.Table(
+    'channel_members',
+    db.Model.metadata,
+    db.Column('channel_id', db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id'), primary_key=True)),
+    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), primary_key=True))
+)
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
-    id = db.Column(db.Integer, primary_key=True)
-    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')))
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+if environment == "production":
+    channel_members.schema = SCHEMA

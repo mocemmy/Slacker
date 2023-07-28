@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from .channel_members import ChannelMembers
+from .channel_members import channel_members
 
 class Channel(db.Model):
     __tablename__ = 'channels'
@@ -22,7 +22,7 @@ class Channel(db.Model):
 
     messages = db.relationship('Message', back_populates='channel', cascade='all, delete-orphan')
 
-    members = db.relationship('User', secondary=ChannelMembers, back_populates='channels')
+    members = db.relationship('User', secondary=channel_members, back_populates='channels')
 
     owner = db.relationship('User', back_populates='owned_channels')
 

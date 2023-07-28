@@ -1,4 +1,4 @@
-from app.models import db, ChannelMembers, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want

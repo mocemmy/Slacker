@@ -1,12 +1,11 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class ServerMembers(db.Model):
-    __tablename__ = 'server_members'
+server_members = db.Table(
+    'server_members',
+    db.Model.metadata,
+    db.Column('server_id', db.Integer, db.ForeignKey(add_prefix_for_prod('servers.id'), primary_key=True)),
+    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), primary_key=True))
+)
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
-
-    id = db.Column(db.Integer, primary_key=True)
-    server_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('servers.id')))
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+if environment == "production":
+    server_members.schema = SCHEMA

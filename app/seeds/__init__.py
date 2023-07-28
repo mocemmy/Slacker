@@ -4,8 +4,8 @@ from .servers import seed_servers, undo_servers
 from .channels import seed_channels, undo_channels
 from .messages import seed_messages, undo_messages
 from .reactions import seed_reactions, undo_reactions
-from .server_members import seed_server_members, undo_server_members
-from .channel_members import seed_channel_members, undo_channel_members
+# from .server_members import seed_server_members, undo_server_members
+# from .channel_members import seed_channel_members, undo_channel_members
 
 from app.models.db import db, environment, SCHEMA
 
@@ -24,16 +24,16 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_reactions()
         undo_messages()
-        undo_channel_members()
-        undo_server_members()
+        # undo_channel_members()
+        # undo_server_members()
         undo_channels()
         undo_servers()
         undo_users()
     seed_users()
     seed_servers()
     seed_channels()
-    seed_server_members()
-    seed_channel_members()
+    # seed_server_members()
+    # seed_channel_members()
     seed_messages()
     seed_reactions()
     # Add other seed functions here
@@ -44,8 +44,8 @@ def seed():
 def undo():
     undo_reactions()
     undo_messages()
-    undo_channel_members()
-    undo_server_members()
+    # undo_channel_members()
+    # undo_server_members()
     undo_channels()
     undo_servers()
     undo_users()
