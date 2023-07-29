@@ -1,28 +1,30 @@
 from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
+from app.models.channel_members import channel_members
 
 # Adds a demo user, you can add other users here if you want
 def seed_channel_members():
+    connection = db.engine.connect()
 
-    member1 = ChannelMembers(channel_id=1, user_id=1)
-    member2 = ChannelMembers(channel_id=2, user_id=2)
-    member3 = ChannelMembers(channel_id=3, user_id=3)
-    member4 = ChannelMembers(channel_id=4, user_id=4)
-    member5 = ChannelMembers(channel_id=1, user_id=4)
-    member6 = ChannelMembers(channel_id=2, user_id=3)
-    member7 = ChannelMembers(channel_id=3, user_id=2)
-    member8 = ChannelMembers(channel_id=4, user_id=1)
+    data = [
+        {"channel_id":1, "user_id":1},
+        {"channel_id":2, "user_id":2},
+        {"channel_id":3, "user_id":3},
+        {"channel_id":4, "user_id":4},
+        {"channel_id":1, "user_id":4},
+        {"channel_id":2, "user_id":3},
+        {"channel_id":3, "user_id":2},
+        {"channel_id":4, "user_id":1},
+    ]
 
-    db.session.add(member1)
-    db.session.add(member2)
-    db.session.add(member2)
-    db.session.add(member3)
-    db.session.add(member4)
-    db.session.add(member5)
-    db.session.add(member6)
-    db.session.add(member7)
-    db.session.add(member8)
-    db.session.commit()
+    # for member in data:
+    #     query = text(f'INSERT INTO channel_members (channel_id, user_id) VALUES ({member["channel_id"]}, {member["user_id"]})')
+    #     connection.execute(query)
+
+    for member in data:
+        connection.execute(channel_members.insert(), member)
+
+    connection.close()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -33,8 +35,8 @@ def seed_channel_members():
 # it will reset the primary keys for you as well.
 def undo_channel_members():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.channelmembers RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.channel_members RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM channelmembers"))
+        db.session.execute(text("DELETE FROM channel_members"))
 
     db.session.commit()
