@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './signUpBlock.css'
 import './advertisingBlock.css'
 import './securityBlock.css'
+import './footer.css'
 
 const LandingPage = () => {
 
@@ -113,6 +114,13 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
+
+            <footer id='landingFooter'>
+                <div id='footerContainer'>
+                    <h1 id='footerHeader'>See all you can accomplis with Slacker</h1>
+                    <a id='footerLink'>TRY FOR FREE</a>
+                </div>
+            </footer>
         </>
     )
 }
