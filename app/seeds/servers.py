@@ -4,19 +4,19 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_servers():
-    north = Server(
-        name='North', created_by=1, is_public=True, description='Server for the North Side')
-    south = Server(
-        name='South', created_by=2, is_public=True, description='Server for the South Side')
-    east = Server(
-        name='East', created_by=3, is_public=True, description='Server for the East Side')
-    west = Server(
-        name='West', created_by=4, is_public=True, description='Server for the West Side')
+    corporate = Server(
+        name='Corporate', created_by=1, is_public=True, description='Server for Corporate')
+    scranton = Server(
+        name='Scranton', created_by=3, is_public=True, description='Server for Scranton')
+    stamford = Server(
+        name='Stamford', created_by=8, is_public=True, description='Server for Stamford')
+    utica = Server(
+        name='Utica', created_by=13, is_public=True, description='Server for Utica')
 
-    db.session.add(north)
-    db.session.add(south)
-    db.session.add(east)
-    db.session.add(west)
+    db.session.add(corporate)
+    db.session.add(scranton)
+    db.session.add(stamford)
+    db.session.add(utica)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

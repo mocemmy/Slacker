@@ -7,14 +7,26 @@ def seed_server_members():
     connection = db.engine.connect()
 
     data = [
-        {"server_id":2, "user_id":2},
-        {"server_id":3, "user_id":3},
         {"server_id":1, "user_id":1},
-        {"server_id":4, "user_id":4},
-        {"server_id":1, "user_id":4},
-        {"server_id":2, "user_id":3},
-        {"server_id":3, "user_id":2},
+        {"server_id":2, "user_id":1},
+        {"server_id":3, "user_id":1},
         {"server_id":4, "user_id":1},
+        {"server_id":1, "user_id":2},
+        {"server_id":2, "user_id":2},
+        {"server_id":3, "user_id":2},
+        {"server_id":4, "user_id":2},
+        {"server_id":2, "user_id":3},
+        {"server_id":2, "user_id":4},
+        {"server_id":2, "user_id":5},
+        {"server_id":2, "user_id":6},
+        {"server_id":2, "user_id":7},
+        {"server_id":2, "user_id":8},
+        {"server_id":2, "user_id":9},
+        {"server_id":2, "user_id":10},
+        {"server_id":3, "user_id":11},
+        {"server_id":3, "user_id":12},
+        {"server_id":4, "user_id":13},
+        {"server_id":4, "user_id":14},
     ]
 
     for member in data:
