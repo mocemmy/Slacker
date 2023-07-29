@@ -8,15 +8,74 @@
 
 .nav-container{
   width: 100%;
-  border: 1px solid red;
   box-sizing: border-box;
   margin: 0;
   display: flex;
   justify-content: space-between;
   padding: 0.25rem;
+  background-color: #541554;
+  height: 5rem;
+  align-items: center;
+  /* padding: 0rem 4rem */
 }
 
-.navlinks {
-  text-decoration: none;
+.nav-content-container{
+  max-width: 76rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem;
+  background-color: #541554;
+  height: 5rem;
+  align-items: center;
+  border: 1px solid white;
+}
+
+.navlinks{
   list-style-type: none;
+  text-decoration: none;
+  color: #fff;
+  font-size: large;
+  font-weight: bold;
+  padding: 0.25rem;
+}
+
+.home-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nav-links-container {
+  display: flex;
+  width: fit-content;
+  padding: 0.25rem;
+  list-style-type: none;
+  align-items: center;
+}
+
+.nav-button {
+  box-sizing: border-box;
+  background-color: #541554;
+  color: #fff;
+  font-size: large;
+  font-weight: 500;
+  padding: 0.75rem 0;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  width: 8rem;
+}
+
+.user-info {
+  font-weight: 100;
+  padding: 0.5rem;
+}
+
+.nav-button:hover{
+  border: 2px solid #fff;
+}
+
+#login:hover,
+#signup:hover{
+  text-decoration: underline;
 }
