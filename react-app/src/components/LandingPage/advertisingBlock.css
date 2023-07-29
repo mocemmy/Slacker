@@ -24,6 +24,10 @@
     width: 600px;
 }
 
+.advertisingVideo {
+    width: 500px;
+}
+
 .advertisingDescBlock {
     max-width: 30rem;
     height: 15rem;

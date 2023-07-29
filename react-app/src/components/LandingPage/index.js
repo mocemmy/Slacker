@@ -36,9 +36,9 @@ const LandingPage = () => {
                     </div>
 
                     <div id='signUpVideoContainer'>
-                        <div>
-                            <h1>Pretend there is a video here</h1>
-                        </div>
+                        <video id='signUpVideo' role='img' loop muted playsInline autoPlay>
+                            <source src='https://a.slack-edge.com/9689dea/marketing/img/homepage/e2e-prospects/animations/webm/hero-product-ui.webm'></source>
+                        </video>
                     </div>
                 </div>
             </section>
@@ -46,9 +46,9 @@ const LandingPage = () => {
             <section id='advertisingSection'>
                 <div id='advertisingContainer'>
                     <div className='advertisingBlock'>
-                        <div className='videoPlaceHolder'>
-                            <h1>Pretend there is a video here</h1>
-                        </div>
+                        <video className='advertisingVideo' role='img' loop muted playsInline autoPlay>
+                            <source src='https://a.slack-edge.com/9436a9f/marketing/img/homepage/e2e-prospects/animations/webm/connectedness.webm'></source>
+                        </video>
 
                         <div className='advertisingDescBlock'>
                             <h1 className='advertisingHeader'>Bring your team together</h1>
@@ -70,15 +70,15 @@ const LandingPage = () => {
                             <a className='advertisingLink'>Learn more about flexible communication</a>
                         </div>
 
-                        <div className='videoPlaceHolder'>
-                            <h1>Pretend there is a video here</h1>
-                        </div>
+                        <video className='advertisingVideo' role='img' loop muted playsInline autoPlay>
+                            <source src='https://a.slack-edge.com/9436a9f/marketing/img/homepage/e2e-prospects/animations/webm/flexibility.webm'></source>
+                        </video>
                     </div>
 
                     <div className='advertisingBlock'>
-                        <div className='videoPlaceHolder'>
-                            <h1>Pretend there is a video here</h1>
-                        </div>
+                        <video className='advertisingVideo' role='img' loop muted playsInline autoPlay>
+                            <source src='https://a.slack-edge.com/221d25b/marketing/img/homepage/e2e-prospects/animations/webm/speed.webm'></source>
+                        </video>
 
                         <div className='advertisingDescBlock'>
                             <h1 className='advertisingHeader'>Move faster with your tools in one place</h1>
