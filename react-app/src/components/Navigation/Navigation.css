@@ -36,6 +36,14 @@
   font-weight: bold;
 }
 
+.login-home-link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black !important;
+  margin-top: 2rem;
+}
+
 .nav-links-container {
   display: flex;
   width: fit-content;
