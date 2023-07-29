@@ -28,51 +28,52 @@ function SignupFormPage() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="login-page-container">
+      <h1>Welcome to Slacker</h1>
+      <p className="sub-heading">We suggest using the <span>email address you use at work</span></p>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
-          Email
+        <label for="email">Email</label>
           <input
+          className="form-input"
+          placeholder="email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Username
+        <label for="username">Username</label>
           <input
+          className="form-input"
+          placeholder="username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password
+        <label for="password">Password</label>
           <input
+          className="form-input"
+          placeholder="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Confirm Password
+        <label for="confirm-password">Confirm Password</label>
           <input
+          className="form-input"
+          placeholder="confirm password"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="submit-button">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
