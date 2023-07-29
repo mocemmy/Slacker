@@ -1,0 +1,30 @@
+#landingFooter {
+    display: flex;
+    align-items: center;
+
+    background-color: #541554;
+    height: 30rem;
+}
+
+#footerContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    max-width: 76rem;
+    margin: auto;
+}
+
+#footerHeader {
+    color: white;
+    font-size: 3rem;
+}
+
+#footerContainer>a {
+    background-color: white;
+    border-radius: 5px;
+    padding: 19px 40px 20px;
+    color: #541554;
+    font-weight: bold;
+    text-decoration: none;
+}

@@ -1,0 +1,47 @@
+#advertisingSection {
+    background-color: #F4EDE4;
+}
+
+#advertisingContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 76rem;
+    margin: auto;
+}
+
+.advertisingBlock {
+    display: flex;
+    justify-content: space-between;
+    margin: 5rem 0;
+}
+
+.videoPlaceHolder {
+    background-color: #f5e3cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+}
+
+.advertisingVideo {
+    width: 500px;
+}
+
+.advertisingDescBlock {
+    max-width: 30rem;
+    height: 15rem;
+}
+
+.advertisingHeader {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.advertisingDesc {
+    font-size: 1rem;
+}
+
+.advertisingLink {
+    color: #4285f4;
+}

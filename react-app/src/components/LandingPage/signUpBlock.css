@@ -9,8 +9,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3rem;
-    max-width: 100rem;
+    padding-left: 3rem;
+    max-width: 76rem;
     margin: auto;
 }
 
@@ -36,28 +36,34 @@
 #signUpGoogleLogo {
     width: 3rem;
     border-radius: 5px;
+    margin-right: 5px;
 }
 
 #signUpButtonContainer {
     display: flex;
+    align-items: center;
 }
 
-#signUpButton {
+#signUpButton>a {
     background-color: white;
-    color: black;
+    color: #541554;
     margin-right: 20px;
     padding: 19px 40px 20px;
     border-radius: 3px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-#signUpGoogle {
+#signUpGoogle>a {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #4285f4;
     color: white;
-    padding: 0 10px;
+    padding: 4px 10px;
     border-radius: 3px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #signUpGoogleLogoContainer {
@@ -65,10 +71,21 @@
 }
 
 #signUpVideoContainer {
-    background-color: #381b38;
     height: 400px;
     width: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    object-fit: contain;
+    /* overflow-clip-margin: content-box; */
+    overflow: hidden;
+    z-index: 1;
+}
+
+#signUpVideo {
+    width: 600px;
+    position: absolute;
+    left: 0;
+    right: 0;
 }
