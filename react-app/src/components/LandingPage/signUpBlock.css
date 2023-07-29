@@ -44,10 +44,11 @@
 
 #signUpButton {
     background-color: white;
-    color: black;
+    color: #541554;
     margin-right: 20px;
     padding: 19px 40px 20px;
     border-radius: 3px;
+    font-weight: bold;
 }
 
 #signUpGoogle {
@@ -58,6 +59,7 @@
     color: white;
     padding: 0 10px;
     border-radius: 3px;
+    font-weight: bold;
 }
 
 #signUpGoogleLogoContainer {
