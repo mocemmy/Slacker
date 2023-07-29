@@ -16,16 +16,16 @@ function ProfileButton({ user }) {
   return (
     <>
       <ul ref={ulRef}>
-        {/* {user ? (
+        {user ? (
           <ul className="nav-links-container">
-            <li className="user-info">{user.username}</li>
-            <li className="user-info">{user.email}</li>
+            {/* <li className="user-info">{user.username}</li>
+            <li className="user-info">{user.email}</li> */}
             <li className="navlinks">
               <button className="nav-button" onClick={handleLogout}>Log Out</button>
             </li>
           </ul>
         ) :
-         ( */}
+         (
           <ul className="nav-links-container">
             <li className="navlinks">
             <Link className="navlinks" id="login" to="/login">Login</Link>
@@ -34,8 +34,8 @@ function ProfileButton({ user }) {
             <Link className="navlinks" id="signup" to="/signup">Sign Up</Link>
             </li>
           </ul>
-        {/* )
-        } */}
+        )
+        }
       </ul>
     </>
   );
