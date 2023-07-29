@@ -4,7 +4,7 @@ import './landingPage.css'
 const LandingPage = () => {
 
     return (
-        <div id=''>
+        <section id='signUpInfoSection'>
             <div id='signUpContainer'>
                 <div id='signUpInfoContainer'>
                     <h1 id='signUpInfoHeader'>Made for people. <span>Built for productivity.</span></h1>
@@ -12,10 +12,15 @@ const LandingPage = () => {
                         your productivity platform.
                     </p>
                     <div id='signUpButtonContainer'>
-                        <button>SIGN UP WITH EMAIL</button>
-                        <button id='signUpGoogle'> <img id='signUpGoogleLogo' src='https://static.vecteezy.com/system/resources/previews/013/948/549/original/google-logo-on-transparent-white-background-free-vector.jpg'></img>
-                            SIGN UP WITH GOOGLE
-                        </button>
+                        <a id='signUpButton'>SIGN UP WITH EMAIL</a>
+                        <a id='signUpGoogle'>
+                            <div id='signUpGoogleLogoContainer'>
+                                <img id='signUpGoogleLogo' src='https://static.vecteezy.com/system/resources/previews/013/948/549/original/google-logo-on-transparent-white-background-free-vector.jpg'></img>
+                            </div>
+                            <div>
+                                SIGN UP WITH GOOGLE
+                            </div>
+                        </a>
                     </div>
                     <p className='signUpInfoDesc'>
                         Slacker is free to try for as long as you'd like
@@ -28,7 +33,7 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
