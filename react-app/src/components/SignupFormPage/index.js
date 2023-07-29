@@ -29,7 +29,7 @@ function SignupFormPage() {
 
   return (
     <div className="login-page-container">
-      <h1>Welcome to Slacker</h1>
+      <h1 className="form-header">Welcome to Slacker</h1>
       <p className="sub-heading">We suggest using the <span>email address you use at work</span></p>
       <form onSubmit={handleSubmit}>
         <ul>

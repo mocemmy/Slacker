@@ -23,7 +23,7 @@ function LoginFormPage() {
 
   return (
     <div className="login-page-container">
-      <h1>Sign in to Slacker</h1>
+      <h1 className="form-header">Sign in to Slacker</h1>
       <p className="sub-heading">We suggest using the <span>email address you use at work</span></p>
       <form onSubmit={handleSubmit}>
         <ul className="errors">
