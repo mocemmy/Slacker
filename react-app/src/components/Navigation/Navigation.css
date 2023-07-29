@@ -1,33 +1,23 @@
-.profile-dropdown {
-  /* position: absolute; */
-}
-
 .hidden {
   display: none;
 }
 
 .nav-container{
-  width: 100%;
+  padding: 0.25rem 0;
+  max-width: 76rem;
   box-sizing: border-box;
-  margin: 0;
+  margin: auto;
   display: flex;
   justify-content: space-between;
-  padding: 0.25rem;
+  align-items: center;
   background-color: #541554;
   height: 5rem;
-  align-items: center;
   /* padding: 0rem 4rem */
 }
 
 .nav-content-container{
-  max-width: 76rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.25rem;
   background-color: #541554;
-  height: 5rem;
-  align-items: center;
-  border: 1px solid white;
+  padding: 0 3rem;
 }
 
 .navlinks{
