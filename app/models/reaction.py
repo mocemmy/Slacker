@@ -17,7 +17,7 @@ class Reaction(db.Model):
     user = db.relationship('User', back_populates='reactions')
 
     def to_dict(self):
-          return {
+        return {
             'id': self.id,
             'message_id': self.message_id,
             'user_id': self.user_id,

@@ -4,23 +4,6 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_reactions():
 
-    user_num = 4
-
-    message_num = 8
-
-    reaction_types = [
-      "&#128507",
-      "&#128508",
-      "&#128509",
-      "&#128510",
-      "&#128511",
-      "&#128512",
-      "&#128513",
-      "&#128514",
-      "&#128515",
-      "&#128516",
-      "&#128517",
-    ]
 
     reaction1 = Reaction(message_id=1, user_id=1, reaction_type='&#128507')
     reaction2 = Reaction(message_id=2, user_id=4, reaction_type='&#128508')
