@@ -27,6 +27,10 @@
 
 .securityPercentage {
     max-width: 190px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .securityDataHeader {
@@ -35,4 +39,8 @@
     margin-top: 3rem;
     margin-bottom: 0;
     color: #541554;
+}
+
+.securityDataDesc {
+    padding-left: 5px;
 }
