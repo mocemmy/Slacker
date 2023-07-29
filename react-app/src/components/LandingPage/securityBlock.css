@@ -1,0 +1,38 @@
+#securityContainer {
+    max-width: 76rem;
+    margin: auto;
+    padding: 5rem 0;
+}
+
+#securityHeaderContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#securityHeader {
+    font-size: 3rem;
+    margin: 0;
+}
+
+#securityDesc {
+    font-size: 1.1rem;
+}
+
+#securityData {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.securityPercentage {
+    max-width: 190px;
+}
+
+.securityDataHeader {
+    font-size: 4rem;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 0;
+    color: #541554;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './signUpBlock.css'
-import './advertising.css'
+import './advertisingBlock.css'
+import './securityBlock.css'
 
 const LandingPage = () => {
 
@@ -82,6 +83,32 @@ const LandingPage = () => {
                                 And with powerful tools like Workflow Builder, you can automate away routine tasks.
                             </p>
                             <a className='advertisingLink'>Learn more about the Slacker platform</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id='securitySection'>
+                <div id='securityContainer'>
+                    <div id='securityHeaderContainer'>
+                        <h1 id='securityHeader'>Teams large and small rely on Slacker</h1>
+                        <p id='securityDesc'>Slacker securely scales up to support collaboration at the world's biggest companies</p>
+                    </div>
+
+                    <div id='securityData'>
+                        <div className='securityPercentage'>
+                            <h1 className='securityDataHeader'>85%</h1>
+                            <p className='securityDataDesc'>of users say Slacker has Improved communication*</p>
+                        </div>
+
+                        <div className='securityPercentage'>
+                            <h1 className='securityDataHeader'>86%</h1>
+                            <p className='securityDataDesc'>feel their ability to work remotely has improved*</p>
+                        </div>
+
+                        <div className='securityPercentage'>
+                            <h1 className='securityDataHeader'>88%</h1>
+                            <p className='securityDataDesc'>feel more connected to their teams*</p>
                         </div>
                     </div>
                 </div>
