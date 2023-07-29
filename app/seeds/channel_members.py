@@ -17,10 +17,6 @@ def seed_channel_members():
         {"channel_id":4, "user_id":1},
     ]
 
-    # for member in data:
-    #     query = text(f'INSERT INTO channel_members (channel_id, user_id) VALUES ({member["channel_id"]}, {member["user_id"]})')
-    #     connection.execute(query)
-
     for member in data:
         connection.execute(channel_members.insert(), member)
 

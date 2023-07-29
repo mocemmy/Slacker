@@ -17,10 +17,6 @@ def seed_server_members():
         {"server_id":4, "user_id":1},
     ]
 
-    # for member in data:
-    #     query = text(f'INSERT INTO server_members (server_id, user_id) VALUES ({member["server_id"]}, {member["user_id"]})')
-    #     connection.execute(query)
-
     for member in data:
         connection.execute(server_members.insert(), member)
 
