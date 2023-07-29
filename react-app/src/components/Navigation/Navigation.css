@@ -1,7 +1,22 @@
 .profile-dropdown {
-  position: absolute;
+  /* position: absolute; */
 }
 
 .hidden {
   display: none;
+}
+
+.nav-container{
+  width: 100%;
+  border: 1px solid red;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem;
+}
+
+.navlinks {
+  text-decoration: none;
+  list-style-type: none;
 }
