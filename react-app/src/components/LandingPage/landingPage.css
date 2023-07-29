@@ -1,3 +1,7 @@
+#signUpInfoSection {
+    background-color: #541554;
+}
+
 #signUpContainer {
     background-color: #541554;
     height: 30rem;
@@ -6,6 +10,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
+    max-width: 100rem;
+    margin: auto;
 }
 
 #signUpInfoContainer {
@@ -30,6 +36,32 @@
 #signUpGoogleLogo {
     width: 3rem;
     border-radius: 5px;
+}
+
+#signUpButtonContainer {
+    display: flex;
+}
+
+#signUpButton {
+    background-color: white;
+    color: black;
+    margin-right: 20px;
+    padding: 19px 40px 20px;
+    border-radius: 3px;
+}
+
+#signUpGoogle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4285f4;
+    color: white;
+    padding: 0 10px;
+    border-radius: 3px;
+}
+
+#signUpGoogleLogoContainer {
+    margin-right: 10px;
 }
 
 #signUpVideoContainer {
