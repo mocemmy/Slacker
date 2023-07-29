@@ -45,9 +45,10 @@ label{
     border-radius: 0.25rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    border: none;
 }
 .submit-button:hover{
-    background-color: #460f48;
+    background-color: #631f65;
 }
 
 .form-input:focus {

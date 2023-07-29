@@ -9,9 +9,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 3rem;
     max-width: 76rem;
     margin: auto;
+}
+
+@media screen and (max-width: 1280px) {
+    #signUpContainer {
+        padding-left: 3rem;
+    }
 }
 
 #signUpInfoContainer {

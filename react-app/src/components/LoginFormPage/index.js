@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -23,6 +23,7 @@ function LoginFormPage() {
 
   return (
     <div className="login-page-container">
+      <Link className="login-home-link" to="/">slacker</Link>
       <h1 className="form-header">Sign in to Slacker</h1>
       <p className="sub-heading">We suggest using the <span>email address you use at work</span></p>
       <form onSubmit={handleSubmit}>

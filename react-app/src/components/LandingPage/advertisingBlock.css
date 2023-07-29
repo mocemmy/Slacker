@@ -11,7 +11,7 @@
 }
 
 .advertisingBlock {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     margin: 5rem 0;
 }

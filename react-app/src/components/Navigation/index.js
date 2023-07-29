@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
       <ul className="nav-container">
         <li className="navlinks">
           <NavLink className="home-link" exact to="/">
-            Slacker
+            slacker
           </NavLink>
         </li>
         {isLoaded && (
