@@ -28,3 +28,16 @@
     max-width: 30rem;
     height: 15rem;
 }
+
+.advertisingHeader {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.advertisingDesc {
+    font-size: 1rem;
+}
+
+.advertisingLink {
+    color: #4285f4;
+}
