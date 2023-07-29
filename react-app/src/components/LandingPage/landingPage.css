@@ -4,6 +4,7 @@
     color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 3rem;
 }
 
@@ -13,6 +14,17 @@
 
 #signUpInfoHeader {
     font-size: 4rem;
+    margin: 0;
+}
+
+#signUpInfoHeader>span {
+    color: #ecb22e;
+}
+
+.signUpInfoDesc {
+    max-width: 35rem;
+    font-size: 1.25rem;
+    margin: 1rem 0;
 }
 
 #signUpGoogleLogo {
