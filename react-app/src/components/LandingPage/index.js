@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { NavLink } from 'react-router-dom';
 import './signUpBlock.css'
 import './advertisingBlock.css'
 import './securityBlock.css'
@@ -17,15 +18,17 @@ const LandingPage = () => {
                             your productivity platform.
                         </p>
                         <div id='signUpButtonContainer'>
-                            <a id='signUpButton'>SIGN UP WITH EMAIL</a>
-                            <a id='signUpGoogle'>
-                                <div id='signUpGoogleLogoContainer'>
+                            <div id='signUpButton'>
+                                <NavLink to='/signup'>SIGN UP WITH EMAIL</NavLink>
+                            </div>
+                            <div id='signUpGoogle'>
+                                <NavLink to='/signup'>
                                     <img id='signUpGoogleLogo' src='https://static.vecteezy.com/system/resources/previews/013/948/549/original/google-logo-on-transparent-white-background-free-vector.jpg'></img>
-                                </div>
-                                <div>
-                                    SIGN UP WITH GOOGLE
-                                </div>
-                            </a>
+                                    <div>
+                                        SIGN UP WITH GOOGLE
+                                    </div>
+                                </NavLink>
+                            </div>
                         </div>
                         <p className='signUpInfoDesc'>
                             Slacker is free to try for as long as you'd like
@@ -118,7 +121,7 @@ const LandingPage = () => {
             <footer id='landingFooter'>
                 <div id='footerContainer'>
                     <h1 id='footerHeader'>See all you can accomplis with Slacker</h1>
-                    <a id='footerLink'>TRY FOR FREE</a>
+                    <NavLink to='/signup'>TRY FOR FREE</NavLink>
                 </div>
             </footer>
         </>
