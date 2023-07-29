@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './signUpBlock.css'
+import './advertising.css'
 
 const LandingPage = () => {
 
@@ -44,13 +45,28 @@ const LandingPage = () => {
                             <h1>Pretend there is a video here</h1>
                         </div>
 
-                        <div className='advertisingDesc'>
-                            <h1>Bring your team together</h1>
-                            <p>
+                        <div className='advertisingDescBlock'>
+                            <h1 className='advertisingHeader'>Bring your team together</h1>
+                            <p className='advertisingDesc'>
                                 At the heart of Slacker are channels: organized spaces for everyone and everything you need for work.
                                 In channels, it’s easier to connect across departments, offices, time zones and even other companies.
                             </p>
-                            <a>Learn more about channels</a>
+                            <a className='advertisingLink'>Learn more about channels</a>
+                        </div>
+                    </div>
+
+                    <div className='advertisingBlock'>
+                        <div className='advertisingDescBlock'>
+                            <h1 className='advertisingHeader'>Choose how you want to work</h1>
+                            <p className='advertisingDesc'>
+                                In Slacker, you’ve got all the flexibility to work when, where and how it’s best for you.
+                                You can easily chat, send audio and video clips, or hop on a huddle to talk things out live.
+                            </p>
+                            <a className='advertisingLink'>Learn more about flexible communication</a>
+                        </div>
+
+                        <div className='videoPlaceHolder'>
+                            <h1>Pretend there is a video here</h1>
                         </div>
                     </div>
 
@@ -59,13 +75,13 @@ const LandingPage = () => {
                             <h1>Pretend there is a video here</h1>
                         </div>
 
-                        <div className='advertisingDesc'>
-                            <h1>Choose how you want to work</h1>
-                            <p>
-                                In Slack, you’ve got all the flexibility to work when, where and how it’s best for you.
-                                You can easily chat, send audio and video clips, or hop on a huddle to talk things out live.
+                        <div className='advertisingDescBlock'>
+                            <h1 className='advertisingHeader'>Move faster with your tools in one place</h1>
+                            <p className='advertisingDesc'>
+                                With your other work apps connected to Slacker, you can work faster by switching tabs less.
+                                And with powerful tools like Workflow Builder, you can automate away routine tasks.
                             </p>
-                            <a>Learn more about flexible communication</a>
+                            <a className='advertisingLink'>Learn more about the Slacker platform</a>
                         </div>
                     </div>
                 </div>
