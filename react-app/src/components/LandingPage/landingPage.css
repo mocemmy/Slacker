@@ -1,0 +1,74 @@
+#signUpInfoSection {
+    background-color: #541554;
+}
+
+#signUpContainer {
+    background-color: #541554;
+    height: 30rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    max-width: 100rem;
+    margin: auto;
+}
+
+#signUpInfoContainer {
+    max-width: 38rem;
+}
+
+#signUpInfoHeader {
+    font-size: 4rem;
+    margin: 0;
+}
+
+#signUpInfoHeader>span {
+    color: #ecb22e;
+}
+
+.signUpInfoDesc {
+    max-width: 35rem;
+    font-size: 1.25rem;
+    margin: 1rem 0;
+}
+
+#signUpGoogleLogo {
+    width: 3rem;
+    border-radius: 5px;
+}
+
+#signUpButtonContainer {
+    display: flex;
+}
+
+#signUpButton {
+    background-color: white;
+    color: black;
+    margin-right: 20px;
+    padding: 19px 40px 20px;
+    border-radius: 3px;
+}
+
+#signUpGoogle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4285f4;
+    color: white;
+    padding: 0 10px;
+    border-radius: 3px;
+}
+
+#signUpGoogleLogoContainer {
+    margin-right: 10px;
+}
+
+#signUpVideoContainer {
+    background-color: #381b38;
+    height: 400px;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
