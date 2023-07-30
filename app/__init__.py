@@ -46,8 +46,8 @@ socketio = SocketIO(app, cors_allowed_origins=origins)
 
 @socketio.on('my_message')
 def handle_message(data):
-    print(data)
-    emit(data)
+    print('recevied at server', data)
+    emit('my_message', data, broadcast=True)
 
 
 db.init_app(app)

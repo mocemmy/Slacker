@@ -17,7 +17,7 @@ const SocketTesting = () => {
         if (!message) {
             return;
         }
-        console.log("submit handler in button", message)
+        console.log("Submit handler: ", message)
         socketInstance.emit("my_message", message);
         setMessage("");
     };
@@ -30,8 +30,9 @@ const SocketTesting = () => {
     useEffect(() => {
         if (socketInstance) {
             socketInstance.on('my_message', (data) => {
-                console.log(data)
-                setMessageArr([...messageArr, message])
+                console.log("Received from socket: ", data)
+                setMessageArr([...messageArr, data])
+                console.log(messageArr)
             });
 
             return () => {
@@ -40,14 +41,14 @@ const SocketTesting = () => {
                 });
             };
         }
-    }, [socketInstance])
+    }, [socketInstance, messageArr])
 
     return (
         <>
             <h1>Testing</h1>
             <ul>
-                {messageArr.map(message => {
-                    return (<li>{message}</li>)
+                {messageArr.map(item => {
+                    return (<li >{item}</li>)
                 })}
             </ul>
             <input type='text' value={message} onChange={(handleText)}></input>
