@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask_login import login_required, current_user
-from flask_socketio import join_room, leave_room
+from flask_socketio import join_room as join_channel, leave_room as leave_channel, send
+from app import socketio
 from app.models import db, User, Server, Channel, Message
 
 test_routes = Blueprint('test', __name__)
@@ -23,6 +24,22 @@ def test_get_servers_and_channels():
 @test_routes.route('/channel/<int:channel_id>/messages')
 @login_required
 def test_get_messages_in_channel(channel_id):
-  messages = Message.query.filter(Message.channel_id == channel_id).order_by(Message.created_at)
-  return {"messages": [message.to_dict() for message in messages]}
+    messages = Message.query.filter(Message.channel_id == channel_id).order_by(Message.created_at)
+    return {"messages": [message.to_dict() for message in messages]}
 
+@socketio.on('join')
+@login_required
+def on_join(data):
+    print('server data', data)
+    user = data['user_id']
+    channel = data['channel_id']
+    join_channel(channel)
+    send(user + ' has entered the channel.', to=channel)
+
+@socketio.on('leave')
+@login_required
+def on_leave(data):
+    user = data['user_id']
+    channel = data['channel_id']
+    leave_channel(channel)
+    send(user + ' has left the channel.', to=channel)
