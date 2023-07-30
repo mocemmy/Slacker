@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_login import login_required, current_user
+from flask_socketio import join_room, leave_room
 from app.models import db, User, Server, Channel, Message
 
 test_routes = Blueprint('test', __name__)
@@ -24,3 +25,4 @@ def test_get_servers_and_channels():
 def test_get_messages_in_channel(channel_id):
   messages = Message.query.filter(Message.channel_id == channel_id).order_by(Message.created_at)
   return {"messages": [message.to_dict() for message in messages]}
+

@@ -24,7 +24,10 @@ const SocketTesting = () => {
         socket.on("chat", (chat) => {
             // let msg = fetch('/api/channel/1/messages')
             // console.log(chat)
+        })
 
+        return (() => {
+            socket.disconnect();
         })
     }, [])
 
