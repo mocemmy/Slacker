@@ -27,8 +27,12 @@ def test_get_messages_in_channel(channel_id):
     messages = Message.query.filter(Message.channel_id == channel_id).order_by(Message.created_at)
     return {"messages": [message.to_dict() for message in messages]}
 
+@socketio.on('message')
+def handle_message(message):
+    print(message)
+    send(message)
+
 @socketio.on('join')
-@login_required
 def on_join(data):
     print('server data', data)
     user = data['user_id']
@@ -37,7 +41,6 @@ def on_join(data):
     send(user + ' has entered the channel.', to=channel)
 
 @socketio.on('leave')
-@login_required
 def on_leave(data):
     user = data['user_id']
     channel = data['channel_id']
