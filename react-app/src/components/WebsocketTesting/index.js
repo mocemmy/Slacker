@@ -18,24 +18,24 @@ const SocketTesting = () => {
             return;
         }
         console.log("submit handler in button", message)
-        socketInstance.send("message", message);
+        socketInstance.emit("my_message", message);
         setMessage("");
     };
 
     useEffect(() => {
-        const socket = io('http://localhost:5000')
+        const socket = io('localhost:5000')
         setSocketInstance(socket)
     }, []);
 
     useEffect(() => {
         if (socketInstance) {
-            socketInstance.on('message', (data) => {
+            socketInstance.on('my_message', (data) => {
                 console.log(data)
                 setMessageArr([...messageArr, message])
             });
 
             return () => {
-                socketInstance.off("message", () => {
+                socketInstance.off("my_message", () => {
                     console.log("off message listener");
                 });
             };

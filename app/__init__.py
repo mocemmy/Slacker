@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, emit
 from app.models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
@@ -44,10 +44,10 @@ else:
 
 socketio = SocketIO(app, cors_allowed_origins=origins)
 
-@socketio.on('message')
-def handle_message(message):
-    print(message)
-    send(message)
+@socketio.on('my_message')
+def handle_message(data):
+    print(data)
+    emit(data)
 
 
 db.init_app(app)
