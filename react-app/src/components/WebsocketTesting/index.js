@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client'
 
 const SocketTesting = () => {
-    const [socketInstance, setSocketInstance] = useState("")
+    const [socketInstance, setSocketInstance] = useState(null)
     const [message, setMessage] = useState("");
     const [messageArr, setMessageArr] = useState([])
     const [isSending, setIsSending] = useState('');
@@ -18,41 +18,29 @@ const SocketTesting = () => {
             return;
         }
         console.log("submit handler in button", message)
-        socketInstance.emit("message", message);
+        socketInstance.send("message", message);
         setMessage("");
     };
 
     useEffect(() => {
-        const socket = io('http://localhost:5000', {
-            transports: ["websocket"],
-            cors: {
-                origin: "http://localhost:3000/",
-            },
-        })
+        const socket = io('http://localhost:5000')
         setSocketInstance(socket)
-
-        // socket.on("data", (data) => {
-        //     setMessageArr([...messageArr, data.data]);
-        // });
-
-        // socket.on('join', (data) => {
-        //     console.log('data', data)
-        //     setMessageArr([...messageArr, data.data]);
-        // })
     }, []);
 
     useEffect(() => {
-        socketInstance.on('message', (data) => {
-            console.log(data)
-            setMessageArr([...messageArr, message])
-        })
-
-        return () => {
-            socketInstance.off("message", () => {
-                console.log("off message listener");
+        if (socketInstance) {
+            socketInstance.on('message', (data) => {
+                console.log(data)
+                setMessageArr([...messageArr, message])
             });
-        };
-    }, [socketInstance, messageArr])
+
+            return () => {
+                socketInstance.off("message", () => {
+                    console.log("off message listener");
+                });
+            };
+        }
+    }, [socketInstance])
 
     return (
         <>
