@@ -4,34 +4,38 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import LandingPage from "./components/LandingPage";
+import SocketTesting from "./components/WebsocketTesting";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+    const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState(false);
+    useEffect(() => {
+        dispatch(authenticate()).then(() => setIsLoaded(true));
+    }, [dispatch]);
 
-  return (
-    <>
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <Navigation isLoaded={isLoaded} />
-            <LandingPage />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
-  );
+    return (
+        <>
+            {isLoaded && (
+                <Switch>
+                    <Route exact path="/">
+                        <Navigation isLoaded={isLoaded} />
+                        <LandingPage />
+                    </Route>
+                    <Route path="/login">
+                        <LoginFormPage />
+                    </Route>
+                    <Route path="/signup">
+                        <SignupFormPage />
+                    </Route>
+                    <Route path='/sockets'>
+                        <SocketTesting />
+                    </Route>
+                </Switch>
+            )}
+        </>
+    );
 }
 
 export default App;
