@@ -1,28 +1,41 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client'
 
 
 
 const SocketTesting = () => {
-    const [socket, setSocket] = useState('')
+    const [message, setMessage] = useState([]);
+    const [isSending, setIsSending] = useState('');
+    const user = useSelector(state => state.session.user);
+
+    const handleText = (e) => {
+        return;
+    }
+
+    const handleSubmit = () => {
+        return;
+    }
 
     useEffect(() => {
-        const newSocket = io.connect('https://localhost:5000')
+        const socket = io();
 
-        setSocket(newSocket)
-    }, [setSocket])
+        socket.emit("chat", { user: user.username, msg: 'has connected', recipient_id: 5, sender_id: user.id })
+        socket.on("chat", (chat) => {
+            // let msg = fetch('/api/channel/1/messages')
+            // console.log(chat)
+
+        })
+    }, [])
 
     return (
         <>
             <h1>Testing</h1>
             <ul>
-                <li></li>
             </ul>
 
-            <form>
-                <textarea placeholder='Message'></textarea>
-                <button type='submit'></button>
-            </form>
+            <input type='text' value={message} onChange={(handleText)}></input>
+            <button onClick={handleSubmit}></button>
         </>
     )
 }
