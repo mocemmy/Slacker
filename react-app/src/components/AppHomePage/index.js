@@ -3,12 +3,15 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './AppHomePage.css'
 //import other components here
+import Channels from "../Channels";
 
 function AppHomePage() {
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
 
   //redirect to home if not logged in
+  //trash channel list:
+  const channels = [{id: 1, name: "channel-1"}, {id: 2, name: "channel-2"}, {id: 3, name: "channel-3"}]
   if (!sessionUser) history.push("/");
 
   return (
@@ -24,13 +27,8 @@ function AppHomePage() {
       <div className="channel-container">
         <h1>Channels</h1>
         <ul>
-          <li>channel 1</li>
-          <li>channel 2</li>
-          <li>channel 3</li>
+            <Channels channels={channels} />
         </ul>
-      </div>
-      <div className="message-container">
-        <h1>Messages</h1>
       </div>
     </div>
   );
