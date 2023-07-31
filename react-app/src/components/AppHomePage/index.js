@@ -1,0 +1,32 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import './AppHomePage.css'
+//import other components here
+import Channels from "../Channels";
+import ServerList from '../ServerList'
+import Messages from '../Messages';
+
+function AppHomePage() {
+  const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
+
+  //redirect to home if not logged in
+  if (!sessionUser) history.push("/");
+
+  return (
+    <div className="home-page-container">
+      <div className="server-container">
+        <ServerList />
+      </div>
+      <div className="channel-container">
+            <Channels />
+      </div>
+      <div className="message-container">
+            <Messages />
+      </div>
+    </div>
+  );
+}
+
+export default AppHomePage;
