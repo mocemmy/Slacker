@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(255))
-    profile_pic = db.Column(db.String, default='/public/userpic.png')
+    profile_pic = db.Column(db.String, default='/userpic.png')
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
 
