@@ -13,7 +13,7 @@ class Server(db.Model):
     name = db.Column(db.String(50), nullable=False)
     created_by = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     is_public = db.Column(db.Boolean, default=True)
-    profile_pic = db.Column(db.String, default='/public/serverpic.png')
+    profile_pic = db.Column(db.String, default='/serverpic.png')
     description = db.Column(db.String(255))
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
