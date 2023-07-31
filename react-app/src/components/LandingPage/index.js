@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import './signUpBlock.css'
-import './advertisingBlock.css'
+import './mainBlock.css'
 import './securityBlock.css'
 import './footer.css'
 
@@ -43,50 +43,50 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section id='advertisingSection'>
-                <div id='advertisingContainer'>
-                    <div className='advertisingBlock'>
-                        <video className='advertisingVideo' role='img' loop muted playsInline autoPlay>
+            <section id='mainSection'>
+                <div id='mainContainer'>
+                    <div className='mainBlock'>
+                        <video className='mainVideo' role='img' loop muted playsInline autoPlay>
                             <source src='https://a.slack-edge.com/9436a9f/marketing/img/homepage/e2e-prospects/animations/webm/connectedness.webm'></source>
                         </video>
 
-                        <div className='advertisingDescBlock'>
-                            <h1 className='advertisingHeader'>Bring your team together</h1>
-                            <p className='advertisingDesc'>
+                        <div className='mainDescBlock'>
+                            <h1 className='mainHeader'>Bring your team together</h1>
+                            <p className='mainDesc'>
                                 At the heart of Slacker are channels: organized spaces for everyone and everything you need for work.
                                 In channels, it’s easier to connect across departments, offices, time zones and even other companies.
                             </p>
-                            <a className='advertisingLink'>Learn more about channels</a>
+                            <a className='mainLink'>Learn more about channels</a>
                         </div>
                     </div>
 
-                    <div className='advertisingBlock'>
-                        <div className='advertisingDescBlock'>
-                            <h1 className='advertisingHeader'>Choose how you want to work</h1>
-                            <p className='advertisingDesc'>
+                    <div className='mainBlock'>
+                        <div className='mainDescBlock'>
+                            <h1 className='mainHeader'>Choose how you want to work</h1>
+                            <p className='mainDesc'>
                                 In Slacker, you’ve got all the flexibility to work when, where and how it’s best for you.
                                 You can easily chat, send audio and video clips, or hop on a huddle to talk things out live.
                             </p>
-                            <a className='advertisingLink'>Learn more about flexible communication</a>
+                            <a className='mainLink'>Learn more about flexible communication</a>
                         </div>
 
-                        <video className='advertisingVideo' role='img' loop muted playsInline autoPlay>
+                        <video className='mainVideo' role='img' loop muted playsInline autoPlay>
                             <source src='https://a.slack-edge.com/9436a9f/marketing/img/homepage/e2e-prospects/animations/webm/flexibility.webm'></source>
                         </video>
                     </div>
 
-                    <div className='advertisingBlock'>
-                        <video className='advertisingVideo' role='img' loop muted playsInline autoPlay>
+                    <div className='mainBlock'>
+                        <video className='mainVideo' role='img' loop muted playsInline autoPlay>
                             <source src='https://a.slack-edge.com/221d25b/marketing/img/homepage/e2e-prospects/animations/webm/speed.webm'></source>
                         </video>
 
-                        <div className='advertisingDescBlock'>
-                            <h1 className='advertisingHeader'>Move faster with your tools in one place</h1>
-                            <p className='advertisingDesc'>
+                        <div className='mainDescBlock'>
+                            <h1 className='mainHeader'>Move faster with your tools in one place</h1>
+                            <p className='mainDesc'>
                                 With your other work apps connected to Slacker, you can work faster by switching tabs less.
                                 And with powerful tools like Workflow Builder, you can automate away routine tasks.
                             </p>
-                            <a className='advertisingLink'>Learn more about the Slacker platform</a>
+                            <a className='mainLink'>Learn more about the Slacker platform</a>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ const LandingPage = () => {
 
             <footer id='landingFooter'>
                 <div id='footerContainer'>
-                    <h1 id='footerHeader'>See all you can accomplis with Slacker</h1>
+                    <h1 id='footerHeader'>See all you can accomplish with Slacker</h1>
                     <NavLink to='/signup'>TRY FOR FREE</NavLink>
                 </div>
             </footer>

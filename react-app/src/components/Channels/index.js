@@ -1,24 +1,22 @@
 import React from "react"
 import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux";
 import Messages from "../Messages"
+import Loading from '../Loading';
 
-function Channels({channels}) {
-//channels: array of channel objects with id and name keys
-    const [channel, setChannel] = useState([channels[0]])
+function Channels() {
+    const channels = useSelector(state => state.channels.channelList)
 
     const changeChannel = (e, currChannel) => {
-        setChannel(e)
-        console.log(channel)
     }
+
+    if(!channels) return <Loading />
 
     return (
         <>
             {channels.map(currChannel => (
                 <li key={currChannel.id} onClick={(e) => changeChannel(e, currChannel)}>{currChannel.name}</li>
             ))}
-            <div className="messages-container">
-                <Messages channel={channel} />
-            </div>
         </>
     )
 }
