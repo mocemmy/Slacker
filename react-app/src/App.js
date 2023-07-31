@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import LandingPage from "./components/LandingPage";
+import AppHomePage from './components/AppHomePage';
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -21,6 +22,9 @@ function App() {
           <Route exact path="/">
             <Navigation isLoaded={isLoaded} />
             <LandingPage />
+          </Route>
+          <Route path='/app'>
+            <AppHomePage />
           </Route>
           <Route path="/login">
             <LoginFormPage />
