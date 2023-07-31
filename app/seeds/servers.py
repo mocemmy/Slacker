@@ -5,9 +5,9 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_servers():
     corporate = Server(
-        name='Corporate', created_by=1, is_public=True, description='Server for Corporate')
+        name='Corporate', created_by=1, is_public=True, description='Server for Corporate', profile_pic='/public/logopic.png')
     scranton = Server(
-        name='Scranton', created_by=3, is_public=True, description='Server for Scranton')
+        name='Scranton', created_by=3, is_public=True, description='Server for Scranton', profile_pic='/public/logopic.png')
     stamford = Server(
         name='Stamford', created_by=8, is_public=True, description='Server for Stamford')
     utica = Server(
