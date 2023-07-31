@@ -1,6 +1,6 @@
 import React from "react"
 import { useState } from "react"
-import Messages from "./components/Messages"
+import Messages from "../Messages"
 
 function Channels({channels}) {
 //channels: array of channel objects with id and name keys
