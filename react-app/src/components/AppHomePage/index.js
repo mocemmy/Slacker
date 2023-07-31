@@ -19,12 +19,7 @@ function AppHomePage() {
       <div className="server-container">
         <ServerList />
       </div>
-      <div className="channel-container">
-            <Channels />
-      </div>
-      <div className="message-container">
-            <Messages />
-      </div>
+      <Channels />
     </div>
   );
 }
