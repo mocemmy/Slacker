@@ -21,10 +21,9 @@ const ServerList = () => {
     }, [dispatch])
     
     if (!isLoaded) return <Loading />
-    
+
     if(servers[0]) {
         const defaultServer = servers[0].id
-        console.log(defaultServer)
         dispatch(thunkGetAllChannels(defaultServer))
     }
 

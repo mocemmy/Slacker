@@ -1,6 +1,6 @@
 const SET_SERVERS = 'servers/ALL'
 
-const setServers = (servers) => ({
+const actionSetServers = (servers) => ({
     type: SET_SERVERS,
     servers
 });
@@ -11,7 +11,7 @@ export const thunkGetAllServers = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(setServers(data.servers))
+        dispatch(actionSetServers(data.servers))
         return data
     } else {
         return response

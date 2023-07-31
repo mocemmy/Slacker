@@ -6,12 +6,12 @@
 }
 
 .server-container {
-    width: 5rem;
+    width: fit-content;
     height: 100%;
 }
 
 .channel-container {
-    width: 15rem;
+    width: fit-content;
     height: 100%;
 }
 
