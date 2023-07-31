@@ -12,6 +12,7 @@ export const thunkGetAllChannels = (serverId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(actionGetChannels(data.channels))
+        return data
     } else {
         return response
     }

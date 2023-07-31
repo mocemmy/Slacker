@@ -1,14 +1,19 @@
 import React, { useEffect } from "react"
+import { useSelector } from "react-redux";
+import Loading from '../Loading'
 
 
-function Messages({channelId}) {
-    
+function Messages() {
+    const messages = useSelector(state => state.messages.messageList)
+    console.error('messages', messages)
+    if(!messages) return <Loading />
 
-    useEffect(() => {
-
-    }, [channelId])
     return (
-        <h1>{channelId}</h1>
+        <ul>
+            {messages.map(message => (
+                <li key={message.id}>{message.message_body}</li>
+            ))}
+        </ul>
     )
 }
 

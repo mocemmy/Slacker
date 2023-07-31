@@ -5,14 +5,13 @@ import './AppHomePage.css'
 //import other components here
 import Channels from "../Channels";
 import ServerList from '../ServerList'
+import Messages from '../Messages';
 
 function AppHomePage() {
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
 
   //redirect to home if not logged in
-  //trash channel list:
-  const channels = [{id: 1, name: "channel-1"}, {id: 2, name: "channel-2"}, {id: 3, name: "channel-3"}]
   if (!sessionUser) history.push("/");
 
   return (
@@ -21,10 +20,10 @@ function AppHomePage() {
         <ServerList />
       </div>
       <div className="channel-container">
-        <h1>Channels</h1>
-        <ul>
-            <Channels channels={channels} />
-        </ul>
+            <Channels />
+      </div>
+      <div className="message-container">
+            <Messages />
       </div>
     </div>
   );
