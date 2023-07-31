@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import './AppHomePage.css'
 //import other components here
 import Channels from "../Channels";
+import ServerList from '../ServerList'
 
 function AppHomePage() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -17,12 +18,7 @@ function AppHomePage() {
   return (
     <div className="home-page-container">
       <div className="server-container">
-        <h1>Servers</h1>
-        <ul>
-          <li>server 1</li>
-          <li>server 2</li>
-          <li>server 3</li>
-        </ul>
+        <ServerList />
       </div>
       <div className="channel-container">
         <h1>Channels</h1>

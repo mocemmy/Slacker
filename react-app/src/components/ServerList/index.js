@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { thunkGetAllServers } from "../../store/servers";
+import { thunkGetAllChannels } from "../../store/channels";
+import Loading from '../Loading';
 
 
 
@@ -17,17 +19,18 @@ const ServerList = () => {
         }
         data()
     }, [dispatch])
-
-
-
-    if (!isLoaded) {
-        return (
-            <div>
-                Loading...
-            </div>
-        )
+    
+    if (!isLoaded) return <Loading />
+    
+    if(servers[0]) {
+        const defaultServer = servers[0].id
+        console.log(defaultServer)
+        dispatch(thunkGetAllChannels(defaultServer))
     }
 
+    const changeServer = (e, serverId) => {
+        dispatch(thunkGetAllChannels(serverId))
+    }
 
     return (
         <div>
@@ -35,7 +38,10 @@ const ServerList = () => {
                 {servers.map(server => {
                     return (
                         <li key={server.id}>
-                            <img src={server.profile_pic} alt={server.name}></img>
+                            <img 
+                                src={server.profile_pic} 
+                                alt={server.name}
+                                onClick={e => changeServer(e, server.id)}></img>
                         </li>
                     )
                 })}

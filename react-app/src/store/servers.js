@@ -6,17 +6,19 @@ const setServers = (servers) => ({
 });
 
 export const thunkGetAllServers = () => async (dispatch) => {
+    //get list of user's servers
     const response = await fetch('/api/servers/')
 
     if (response.ok) {
         const data = await response.json();
         dispatch(setServers(data.servers))
+        return data
     } else {
         return response
     }
 }
 
-const initialState = { serverList: null }
+const initialState = { serverList: null}
 
 
 export default function serverReducer(state = initialState, action) {

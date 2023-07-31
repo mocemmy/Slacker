@@ -1,8 +1,8 @@
-#advertisingSection {
+#mainSection {
     background-color: #F4EDE4;
 }
 
-#advertisingContainer {
+#mainContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,7 +10,7 @@
     margin: auto;
 }
 
-.advertisingBlock {
+.mainBlock {
     display: flex !important;
     justify-content: space-between;
     margin: 5rem 0;
@@ -24,24 +24,24 @@
     width: 600px;
 }
 
-.advertisingVideo {
+.mainVideo {
     width: 500px;
 }
 
-.advertisingDescBlock {
+.mainDescBlock {
     max-width: 30rem;
     height: 15rem;
 }
 
-.advertisingHeader {
+.mainHeader {
     font-size: 3rem;
     margin: 0;
 }
 
-.advertisingDesc {
+.mainDesc {
     font-size: 1rem;
 }
 
-.advertisingLink {
+.mainLink {
     color: #4285f4;
 }
