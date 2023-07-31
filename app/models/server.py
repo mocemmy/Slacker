@@ -31,6 +31,7 @@ class Server(db.Model):
             'name': self.name,
             'created_by': self.created_by,
             'is_public': self.is_public,
+            'profile_pic': self.profile_pic,
             'description': self.description,
             'created_at': self.created_at,
             'updated_at': self.updated_at
