@@ -48,11 +48,6 @@ function Messages() {
         }
     }, [socketInstance])
 
-    useEffect(() => {
-        console.log(messageArr)
-    }, [messageArr])
-
-
 
     if (!messages) return <Loading />
 
@@ -62,8 +57,8 @@ function Messages() {
                 {messages.map(message => (
                     <li key={message.id}>{message.message_body}</li>
                 ))}
-                {messageArr.map(message => (
-                    <li key={message.id}>{message}</li>
+                {messageArr.map((message, index) => (
+                    <li key={index}>{message}</li>
                 ))}
             </ul>
             <input type='text' value={message} onChange={(handleText)}></input>

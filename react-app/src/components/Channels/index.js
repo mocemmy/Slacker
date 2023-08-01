@@ -16,11 +16,12 @@ function Channels() {
     }
 
     useEffect(() => {
-        if (channels && channels[0]) {
-            setDefaultChannel(channels[0].id)
-            dispatch(thunkGetAllMessages(defaultChannel))
-        }
-    }, [channels, dispatch, defaultChannel])
+            if (channels && channels[0].id) {
+                setDefaultChannel(channels[0].id)
+                dispatch(thunkGetAllMessages(channels[0].id))
+            }
+
+    }, [channels, dispatch])
 
     if (!channels) return <Loading />
 
