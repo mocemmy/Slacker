@@ -10,6 +10,7 @@ import './serverList.css'
 const ServerList = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const servers = useSelector(state => state.server.serverList)
+    const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -33,6 +34,10 @@ const ServerList = () => {
 
     return (
         <div id="serverList-container">
+            <img
+                src={user.profile_pic}
+                className="serverListImg"
+            ></img>
 
             <ul id="serverList">
                 {servers.map(server => {
