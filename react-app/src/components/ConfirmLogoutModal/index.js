@@ -1,15 +1,19 @@
 import React from 'react'
-import { logout } from '../../store/session'
 import { useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom";
 import { useModal } from '../../context/Modal'
+import { logout } from '../../store/session'
 
 const ConfirmLogout = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
     const handleClick = (e) => {
         if (e.target.value === 'yes') {
             dispatch(logout())
+            history.push('/')
+            closeModal()
         } else {
             closeModal()
         }
