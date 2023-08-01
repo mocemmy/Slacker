@@ -5,6 +5,7 @@ import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
 import ConfirmLogout from "../ConfirmLogoutModal";
 import OpenModalButton from '../OpenModalButton'
+import ProfileListModalButton from './ProfileListModalButton';
 import Loading from '../Loading';
 import './serverList.css'
 
@@ -35,8 +36,12 @@ const ServerList = () => {
         dispatch(thunkGetAllChannels(serverId))
     }
 
-    const closeMenu = () => {
-        setUserMenu(false)
+    // const closeMenu = () => {
+    //     setUserMenu(true)
+    // }
+
+    const toggleMenu = () => {
+        showUserMenu ? setUserMenu(false) : setUserMenu(true)
     }
 
     return (
@@ -44,7 +49,7 @@ const ServerList = () => {
             <img
                 src={user.profile_pic}
                 className="serverListImg"
-                onClick={() => showUserMenu ? setUserMenu(false) : setUserMenu(true)}
+                onClick={toggleMenu}
             ></img>
 
             <ul id="userDropdown" className={showUserMenu ? "hidden" : ""}>
@@ -53,9 +58,9 @@ const ServerList = () => {
                 < OpenModalButton
                     buttonText='Change Profile pic'
                 />
-                < OpenModalButton
+                < ProfileListModalButton
                     buttonText='Logout'
-                    onButtonClick={closeMenu()}
+                    onButtonClick={toggleMenu}
                     modalComponent={ConfirmLogout()}
                 />
             </ul>
