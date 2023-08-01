@@ -5,6 +5,7 @@ import { io } from 'socket.io-client';
 
 function Messages({ channel }) {
   const messages = useSelector(state => state.messages.messageList);
+  const user = useSelector(state => state.session.user);
 
   const [socketInstance, setSocketInstance] = useState(null);
   const [message, setMessage] = useState("");
@@ -17,8 +18,17 @@ function Messages({ channel }) {
 
   const handleSubmit = () => {
     if (!message || !channel) return;
+    const date = new Date()
+    const data = {
+      channel: channel.toString(),
+      message,
+      sent_by: user.id,
+      created_at: date.toLocaleTimeString('en-US'),
+      firstName: user.first_name,
+      lastName: user.last_name
+    }
 
-    socketInstance.emit("my_message", { channel: channel.toString(), message: message });
+    socketInstance.emit("my_message", data);
 
     setMessage("");
   };
@@ -56,8 +66,6 @@ function Messages({ channel }) {
   }, [socketInstance]);
 
   if (!messages) return <Loading />;
-
-  console.log('MESSAGEARRAY', messageArr)
 
 
   return (
