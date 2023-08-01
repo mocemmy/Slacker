@@ -28,3 +28,11 @@ border color: #3a3a3ad3
     width: 3rem;
     border-radius: 5px;
 }
+
+#userDropdown {
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
