@@ -20,7 +20,7 @@ function Channels() {
             setDefaultChannel(channels[0].id)
             dispatch(thunkGetAllMessages(defaultChannel))
         }
-    }, [channels, dispatch])
+    }, [channels, dispatch, defaultChannel])
 
     if (!channels) return <Loading />
 

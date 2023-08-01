@@ -5,7 +5,6 @@ import './AppHomePage.css'
 //import other components here
 import Channels from "../Channels";
 import ServerList from '../ServerList'
-import Messages from '../Messages';
 
 function AppHomePage() {
     const sessionUser = useSelector((state) => state.session.user);

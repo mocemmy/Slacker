@@ -5,15 +5,12 @@ import { io } from 'socket.io-client'
 
 
 
-function Messages({ }) {
+function Messages() {
     const messages = useSelector(state => state.messages.messageList)
 
     const [socketInstance, setSocketInstance] = useState(null)
     const [message, setMessage] = useState("");
     const [messageArr, setMessageArr] = useState([])
-    const [isSending, setIsSending] = useState('');
-    const user = useSelector(state => state.session.user);
-
 
     const handleText = (e) => {
         const inputMessage = e.target.value;
