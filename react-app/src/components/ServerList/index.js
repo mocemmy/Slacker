@@ -55,7 +55,7 @@ const ServerList = () => {
                 />
                 < OpenModalButton
                     buttonText='Logout'
-                    onButtonClick={closeMenu}
+                    onButtonClick={closeMenu()}
                     modalComponent={ConfirmLogout()}
                 />
             </ul>
