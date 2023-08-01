@@ -1,0 +1,36 @@
+#channel-container {
+    background-color: #1d1c1d;
+    color: #D1D2D3D3;
+    border: 1px solid #3a3a3ad3;
+    border-width: thin;
+    width: fit-content;
+    min-width: 10rem;
+}
+
+#channelList-header {
+    margin: 0;
+    margin-left: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+#channelList {
+    padding: 0;
+}
+
+.channelListItem {
+    display: flex;
+    list-style: none;
+    margin-bottom: .4rem;
+    margin-left: .5rem;
+    padding: .2rem 1rem;
+    border-radius: 5px;
+}
+
+.channelListItem:hover {
+    cursor: pointer;
+    background-color: #484949d3;
+}
+
+.channelHashtag {
+    margin-right: .8rem;
+}

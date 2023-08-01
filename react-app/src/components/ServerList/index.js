@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
 import Loading from '../Loading';
-
+import './serverList.css'
 
 
 const ServerList = () => {
@@ -12,17 +12,17 @@ const ServerList = () => {
     const servers = useSelector(state => state.server.serverList)
     const dispatch = useDispatch()
 
-    useEffect(() =>{
+    useEffect(() => {
         const data = async () => {
             await dispatch(thunkGetAllServers())
             setIsLoaded(true)
         }
         data()
     }, [dispatch])
-    
+
     if (!isLoaded) return <Loading />
 
-    if(servers[0]) {
+    if (servers[0]) {
         const defaultServer = servers[0].id
         dispatch(thunkGetAllChannels(defaultServer))
     }
@@ -32,15 +32,16 @@ const ServerList = () => {
     }
 
     return (
-        <div>
-            <ul>
+        <div id="serverList-container">
+            <ul id="serverList">
                 {servers.map(server => {
                     return (
-                        <li key={server.id}>
-                            <img 
-                                src={server.profile_pic} 
+                        <li key={server.id} className="serverListItem">
+                            <img
+                                src={server.profile_pic}
                                 alt={server.name}
-                                onClick={e => changeServer(e, server.id)}></img>
+                                onClick={e => changeServer(e, server.id)}
+                                className="serverListImg"></img>
                         </li>
                     )
                 })}

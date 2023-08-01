@@ -4,6 +4,11 @@ body {
     font-family: sans-serif;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
+}
+
+html,
+body {
+    height: 100vh;
 }

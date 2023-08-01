@@ -1,4 +1,4 @@
-.home-page-container{
+.home-page-container {
     display: flex;
     box-sizing: border-box;
     width: 100%;
@@ -6,11 +6,6 @@
 }
 
 .server-container {
-    width: fit-content;
-    height: 100%;
-}
-
-.channel-container {
     width: fit-content;
     height: 100%;
 }

@@ -23,7 +23,7 @@ const LandingPage = () => {
                             </div>
                             <div id='signUpGoogle'>
                                 <NavLink to='/signup'>
-                                    <img id='signUpGoogleLogo' src='https://static.vecteezy.com/system/resources/previews/013/948/549/original/google-logo-on-transparent-white-background-free-vector.jpg'></img>
+                                    <img id='signUpGoogleLogo' src='/googleLogo.jpg' alt='Google Logo'></img>
                                     <div>
                                         SIGN UP WITH GOOGLE
                                     </div>
@@ -56,7 +56,7 @@ const LandingPage = () => {
                                 At the heart of Slacker are channels: organized spaces for everyone and everything you need for work.
                                 In channels, it’s easier to connect across departments, offices, time zones and even other companies.
                             </p>
-                            <a className='mainLink'>Learn more about channels</a>
+                            <a href='/' className='mainLink'>Learn more about channels</a>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@ const LandingPage = () => {
                                 In Slacker, you’ve got all the flexibility to work when, where and how it’s best for you.
                                 You can easily chat, send audio and video clips, or hop on a huddle to talk things out live.
                             </p>
-                            <a className='mainLink'>Learn more about flexible communication</a>
+                            <a href='/' className='mainLink'>Learn more about flexible communication</a>
                         </div>
 
                         <video className='mainVideo' role='img' loop muted playsInline autoPlay>
@@ -86,7 +86,7 @@ const LandingPage = () => {
                                 With your other work apps connected to Slacker, you can work faster by switching tabs less.
                                 And with powerful tools like Workflow Builder, you can automate away routine tasks.
                             </p>
-                            <a className='mainLink'>Learn more about the Slacker platform</a>
+                            <a href='/' className='mainLink'>Learn more about the Slacker platform</a>
                         </div>
                     </div>
                 </div>
