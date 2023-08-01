@@ -33,6 +33,7 @@ const ServerList = () => {
 
     return (
         <div id="serverList-container">
+
             <ul id="serverList">
                 {servers.map(server => {
                     return (
