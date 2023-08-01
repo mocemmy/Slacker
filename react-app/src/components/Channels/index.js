@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loading from '../Loading';
 import { thunkGetAllMessages } from "../../store/messages";
 import Messages from "../Messages";
+import './channelList.css'
 
 function Channels() {
     const channels = useSelector(state => state.channels.channelList)
@@ -26,14 +27,16 @@ function Channels() {
 
     return (
         <>
-            <div className="channel-container">
-            <ul>
-                {channels.map(currChannel => (
-                    <li key={currChannel.id} onClick={(e) => changeChannel(e, currChannel.id)}>{currChannel.name}</li>
-                ))}
-            </ul>
+            <div id="channel-container">
+                <ul id="channelList">
+                    {channels.map(currChannel => (
+                        <li className="channelListItem"
+                            key={currChannel.id}
+                            onClick={(e) => changeChannel(e, currChannel.id)}>{currChannel.name}</li>
+                    ))}
+                </ul>
             </div>
-            <div className="message-container">
+            <div id="message-container">
                 <Messages channel={defaultChannel} />
             </div>
         </>

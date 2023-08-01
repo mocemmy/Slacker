@@ -1,0 +1,21 @@
+#channel-container {
+    background-color: #1d1c1d;
+    color: #D1D2D3D3;
+    border: 1px solid #3a3a3ad3;
+    border-width: thin;
+    width: fit-content;
+    min-width: 8rem;
+}
+
+#channelList {
+    padding: 0 1rem;
+}
+
+.channelListItem {
+    list-style: none;
+    margin-bottom: .4rem;
+}
+
+.channelListItem:hover {
+    cursor: pointer;
+}

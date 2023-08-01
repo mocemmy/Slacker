@@ -8,20 +8,19 @@ import ServerList from '../ServerList'
 import Messages from '../Messages';
 
 function AppHomePage() {
-  const sessionUser = useSelector((state) => state.session.user);
-  const history = useHistory();
+    const sessionUser = useSelector((state) => state.session.user);
+    const history = useHistory();
 
-  //redirect to home if not logged in
-  if (!sessionUser) history.push("/");
+    //redirect to home if not logged in
+    if (!sessionUser) history.push("/");
 
-  return (
-    <div className="home-page-container">
-      <div className="server-container">
-        <ServerList />
-      </div>
-      <Channels />
-    </div>
-  );
+    return (
+        <div className="home-page-container">
+            <ServerList />
+
+            <Channels />
+        </div>
+    );
 }
 
 export default AppHomePage;
