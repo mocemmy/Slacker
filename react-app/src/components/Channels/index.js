@@ -29,10 +29,16 @@ function Channels() {
         <>
             <div id="channel-container">
                 <ul id="channelList">
+                    <h4 id="channelList-header">Channels</h4>
                     {channels.map(currChannel => (
                         <li className="channelListItem"
                             key={currChannel.id}
-                            onClick={(e) => changeChannel(e, currChannel.id)}>{currChannel.name}</li>
+                            onClick={(e) => changeChannel(e, currChannel.id)}>
+                            <div className="channelHashtag">
+                                #
+                            </div>
+                            {currChannel.name}
+                        </li>
                     ))}
                 </ul>
             </div>
