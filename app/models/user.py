@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(255))
     profile_pic = db.Column(db.String, default='/userpic.png')
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now())
 
     owned_servers = db.relationship('Server', back_populates='owner', cascade='all, delete-orphan')
 

@@ -62,6 +62,7 @@ def handle_message(data):
     message = data['message']
     room = data['channel']
     sent_by = data['sent_by']
+    profile_pic = data['profile_pic']
     created_at = data['created_at']
     first_name = data['firstName']
     last_name = data['lastName']
@@ -69,7 +70,7 @@ def handle_message(data):
     db.session.add(newMessage)
     db.session.commit()
 
-    emit('my_message', {'message': message, 'firstName': first_name, 'lastName': last_name, 'created_at': created_at}, room=room)
+    emit('my_message', {'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at}, room=room)
 
 
 

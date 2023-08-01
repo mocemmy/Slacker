@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Loading from '../Loading';
-import { io } from 'socket.io-client';
+import Loading from "../Loading";
+import { io } from "socket.io-client";
+import MessageDisplay from "../MessageDisplay";
 
 function Messages({ channel }) {
-  const messages = useSelector(state => state.messages.messageList);
-  const user = useSelector(state => state.session.user);
+  const messages = useSelector((state) => state.messages.messageList);
+  const user = useSelector((state) => state.session.user);
 
   const [socketInstance, setSocketInstance] = useState(null);
   const [message, setMessage] = useState("");
@@ -18,15 +19,16 @@ function Messages({ channel }) {
 
   const handleSubmit = () => {
     if (!message || !channel) return;
-    const date = new Date()
+    const date = new Date();
     const data = {
       channel: channel.toString(),
       message,
       sent_by: user.id,
-      created_at: date.toLocaleTimeString('en-US'),
+      created_at: date,
+      profile_pic: user.profile_pic,
       firstName: user.first_name,
-      lastName: user.last_name
-    }
+      lastName: user.last_name,
+    };
 
     socketInstance.emit("my_message", data);
 
@@ -35,9 +37,10 @@ function Messages({ channel }) {
 
   useEffect(() => {
     // Establish socket connection when the component mounts
-    const socket = process.env.NODE_ENV !== 'production' ?
-      io('http://localhost:5000') :
-      io('https://slacker-chat-collab.onrender.com');
+    const socket =
+      process.env.NODE_ENV !== "production"
+        ? io("http://localhost:5000")
+        : io("https://slacker-chat-collab.onrender.com");
 
     setSocketInstance(socket);
 
@@ -57,29 +60,37 @@ function Messages({ channel }) {
 
   useEffect(() => {
     if (socketInstance) {
-      socketInstance.on('my_message', (data) => {
-        console.log("Received from socket: ", data)
-        const receivedMessage = data.message;
-        setMessageArr(prevArr => ([...prevArr, [channel, receivedMessage]]));
+      socketInstance.on("my_message", (data) => {
+        console.log("Received from socket: ", data);
+        const receivedMessage = data;
+        setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
       });
     }
   }, [socketInstance]);
 
   if (!messages) return <Loading />;
 
-
   return (
     <div>
       <ul>
-        {messages.map(message => (
-          <li key={message.id}>{message.message_body}</li>
+        {messages.map((message) => (
+          <MessageDisplay key={message.id} message={message} />
         ))}
-        {messageArr.map((message, index) => (
-          message[0] === channel ? <li key={index}>{message[1]}</li> : null
-        ))}
+        {messageArr.map((message, index) =>
+          message[0] === channel ? (
+            <MessageDisplay key={index} message={message[1]} />
+          ) : null
+        )}
       </ul>
-      <input type='text' value={message} onChange={handleText} />
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="input-container">
+        <input
+          className="message-input"
+          type="text"
+          value={message}
+          onChange={handleText}
+        />
+        <button className="message-submit-button" onClick={handleSubmit}><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
     </div>
   );
 }
