@@ -23,7 +23,7 @@ function Messages() {
     };
 
     useEffect(() => {
-        if (process.env.FLASK_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production') {
             const socket = io('localhost:5000')
             setSocketInstance(socket)
         } else {
