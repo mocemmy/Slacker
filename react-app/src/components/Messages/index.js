@@ -51,7 +51,6 @@ function Messages({ channel }) {
         console.log("Received from socket: ", data)
         const receivedMessage = data.message;
         setMessageArr(prevArr => ([...prevArr, [channel, receivedMessage]]));
-
       });
     }
   }, [socketInstance]);

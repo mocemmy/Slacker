@@ -5,13 +5,14 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from app.models import db, User
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.channel_routes import channel_routes
 from .seeds import seed_commands
 from .config import Config
+
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -45,10 +46,24 @@ else:
 
 socketio = SocketIO(app, cors_allowed_origins=origins)
 
+@socketio.on('join')
+def handle_join(data):
+    room = data['room']
+    join_room(room)
+    # emit('my_message', {'message': 'You joined the room: ' + room}, room=room)
+
+@socketio.on('leave')
+def handle_leave(data):
+    room = data['room']
+    leave_room(room)
+    # emit('my_message', {'message': 'You left the room: ' + room}, room=room)
 
 @socketio.on('my_message')
 def handle_message(data):
-    emit('my_message', data, broadcast=True)
+    message = data['message']
+    room = data['channel']
+    emit('my_message', {'message': message}, room=room)
+
 
 
 db.init_app(app)
