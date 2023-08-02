@@ -35,11 +35,14 @@ def updateServerById(id):
     print(dir(current_user))
     owned_servers = current_user.owned_servers
     server_id_list = [server.id for server in owned_servers]
-    print(server_id_list)
+    server = Server.query.get(id)
+
+    if server is None:
+        return {'errors': ['Resource not found']}, 404
+
     if id in server_id_list:
         data = request.json
         # update
-        server = Server.query.get(id)
         server.name = data["name"]
         #server.created_by = data["created_by"]
         server.is_public = data["is_public"]
@@ -49,6 +52,4 @@ def updateServerById(id):
         db.session.commit()
         return server.to_dict(), 200
     else:
-        # error, not authorized
-        pass
-    return {"message":"Update Done"}, 200
+        return {'errors': ['Unauthorized']}, 401
