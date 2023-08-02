@@ -5,6 +5,40 @@ const actionGetMessages = (messages) => ({
     messages
 })
 
+
+export const thunkDeleteMessages = (id, channelId) => async (dispatch) => {
+    const response = await fetch(`/api/messages/${id}/delete`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(thunkGetAllMessages(channelId))
+        return data
+    } else {
+        return response
+    }
+}
+
+export const thunkEditMessage = (id, channelId, message_body) => async (dispatch) => {
+    const response = await fetch(`api/messages/${id}/edit`, {
+        method: 'PUT',
+        headers: {
+			"Content-Type": "application/json",
+		},
+        body: JSON.stringify({message_body})
+    })
+
+    if (response.ok) {
+        const data = response.json()
+        dispatch(thunkGetAllMessages(channelId))
+        return data
+    } else {
+        return response
+    }
+}
+
+
 export const thunkGetAllMessages = (channelId) => async (dispatch) => {
     const response = await fetch(`/api/channels/${channelId}/messages`)
 

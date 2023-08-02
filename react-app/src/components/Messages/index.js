@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import Loading from "../Loading";
 import { io } from "socket.io-client";
 import MessageDisplay from "../MessageDisplay";
+import { thunkGetAllMessages } from "../../store/messages";
+import { useDispatch } from "react-redux";
+import './MessageList.css'
 
 function Messages({ channel }) {
   const messages = useSelector((state) => state.messages.messageList);
   const user = useSelector((state) => state.session.user);
-
+  const dispatch = useDispatch();
   const [socketInstance, setSocketInstance] = useState(null);
   const [message, setMessage] = useState("");
   const [messageArr, setMessageArr] = useState([]);
+  const messageEnd = useRef(null);
 
   const handleText = (e) => {
     const inputMessage = e.target.value;
@@ -21,6 +25,7 @@ function Messages({ channel }) {
     if (!message || !channel) return;
     const date = new Date();
     const data = {
+      type: "CREATE",
       channel: channel.toString(),
       message,
       sent_by: user.id,
@@ -61,35 +66,92 @@ function Messages({ channel }) {
   useEffect(() => {
     if (socketInstance) {
       socketInstance.on("my_message", (data) => {
-        console.log("Received from socket: ", data);
-        const receivedMessage = data;
-        setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
+        if (data.type === "CREATE") {
+          const receivedMessage = data;
+          setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
+        }
+        if (data.type === "UPDATE") {
+          if (messageArr.length) {
+            const index = messageArr.findIndex(
+              (subArr) => subArr[1].id === data.id
+            );
+            if (index > -1) {
+              messageArr[index][1].message_body = data.message_body;
+              setMessageArr([...messageArr]);
+            }
+          } else {
+            setMessageArr([]);
+            dispatch(thunkGetAllMessages(channel));
+          }
+        }
+        if (data.type === "DELETE") {
+          if (messageArr.length) {
+            const index = messageArr.findIndex(
+              (subArr) => subArr[1].id === data.id
+            );
+
+            if (index > -1) {
+              const updatedMessages = messageArr.slice(index, 1);
+              setMessageArr([...updatedMessages]);
+            }
+          } else {
+            setMessageArr([]);
+            dispatch(thunkGetAllMessages(channel));
+          }
+        }
       });
     }
   }, [socketInstance]);
 
+  const scrollToBottom = () => {
+    messageEnd.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, messageArr.length]);
+
   if (!messages) return <Loading />;
 
   return (
-    <div>
-      <ul>
+    <div className="message-list-container" id='message-list'>
+      <ul className="message-list">
         {messages.map((message) => (
-          <MessageDisplay key={message.id} message={message} />
+          <MessageDisplay
+            key={message.id}
+            channel_id={channel}
+            socketInstance={socketInstance}
+            message={message}
+            messageArr={messageArr}
+            setMessageArr={setMessageArr}
+          />
         ))}
         {messageArr.map((message, index) =>
           message[0] === channel ? (
-            <MessageDisplay key={index} message={message[1]} />
+            <MessageDisplay
+              key={index}
+              channel_id={channel}
+              socketInstance={socketInstance}
+              message={message[1]}
+              messageArr={messageArr}
+              setMessageArr={setMessageArr}
+            />
           ) : null
         )}
+        <div ref={messageEnd} className='scroll-to'></div>
       </ul>
-      <div className="input-container">
-        <input
-          className="message-input"
-          type="text"
-          value={message}
-          onChange={handleText}
-        />
-        <button className="message-submit-button" onClick={handleSubmit}><i class="fa-solid fa-paper-plane"></i></button>
+      <div className="message-input-footer">
+        <div className="input-container">
+          <input
+            className="message-input"
+            type="text"
+            value={message}
+            onChange={handleText}
+          />
+          <button className="message-submit-button" onClick={handleSubmit}>
+            <i className="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
       </div>
     </div>
   );

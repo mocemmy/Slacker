@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "f09da161-7e79-41a2-9ea4-07e3d2454891",
+		"name": "Group Project Slacker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "XSRF-TOKEN",
+						"value": "{{xsrftoken}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"password\",\n    \"email\": \"david@office.com\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Servers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "XSRF-TOKEN",
+						"value": "{{xsrftoken}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/servers/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"servers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Server by Id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "XSRF-TOKEN",
+						"value": "{{xsrftoken}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"server\": 1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/servers/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"servers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Channels of a Server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/servers/1/channels",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"servers",
+						"1",
+						"channels"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

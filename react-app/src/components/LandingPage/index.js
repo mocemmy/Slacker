@@ -10,8 +10,8 @@ const LandingPage = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const history = useHistory();
 
-    //redirect to app if logged in
-    // if (sessionUser) history.push("/app");
+    // redirect to app if logged in
+    if (sessionUser) history.push("/app");
     return (
         <>
             <section id='signUpInfoSection'>
