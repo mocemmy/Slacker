@@ -17,7 +17,14 @@ def servers():
 
 # Update Server PUT /api/servers/:serverId
 
-
+@server_routes.route('/current', methods=['GET'])
+@login_required
+def current_users_servers():
+    """
+    Query for all of the current user's servers
+    """
+    servers = current_user.owned_servers
+    return {"servers": [server.to_dict() for server in servers]}
 
 @server_routes.route('/<int:id>/channels')
 @login_required
