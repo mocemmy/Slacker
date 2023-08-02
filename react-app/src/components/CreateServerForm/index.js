@@ -25,7 +25,6 @@ const CreateServerForm = () => {
         };
 
         const response = await dispatch(thunkCreateNewServer(server));
-        // console.log("form", response)
         if (response.errors) {
             console.log(response.errors)
             setErrors(response.errors)

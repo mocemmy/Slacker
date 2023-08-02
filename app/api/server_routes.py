@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import ServerForm
-from app.models import db, Server
+from app.models import db, Server, Channel, Message
 
 server_routes = Blueprint('servers', __name__)
 
@@ -48,11 +48,27 @@ def create_new_server():
             description=form.data['description']
         )
         server.members.append(current_user)
-        print(server.to_dict())
         db.session.add(server)
         db.session.commit()
 
-        print(server.id)
+        default_chanel = Channel(
+            name='General',
+            server_id=server.id,
+            created_by=current_user.id,
+            is_public=True,
+            description='A general chat for everyone to use'
+        )
+        default_chanel.members.append(current_user)
+        db.session.add(default_chanel)
+        db.session.commit()
+
+        default_message = Message(
+            message_body='Server created - this is a default channel created for you!',
+            channel_id=default_chanel.id,
+            sent_by=current_user.id
+        )
+        db.session.add(default_message)
+        db.session.commit()
 
         return server.to_dict(), 201
     else:
