@@ -64,20 +64,17 @@ function Messages({ channel }) {
   useEffect(() => {
     if (socketInstance) {
       socketInstance.on("my_message", (data) => {
-        console.log("Received from socket: ", data);
         if (data.type === "CREATE") {
           const receivedMessage = data;
           setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
         }
         if (data.type === "UPDATE") {
-          console.error("UPDATE MESSAGE: ", data.id);
           if (messageArr.length) {
             const index = messageArr.findIndex(
               (subArr) => subArr[1].id === data.id
             );
             if (index > -1) {
               messageArr[index][1].message_body = data.message_body;
-              console.log("**************", messageArr[index][1]);
               setMessageArr([...messageArr]);
             }
           } else {

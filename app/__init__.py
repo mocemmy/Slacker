@@ -65,7 +65,6 @@ def handle_message(data):
     if type == "CREATE":
         message = data['message']
         room = data['channel']
-        print('****************',room)
         sent_by = data['sent_by']
         profile_pic = data['profile_pic']
         created_at = data['created_at']

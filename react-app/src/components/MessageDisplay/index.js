@@ -1,5 +1,5 @@
-import { thunkDeleteMessages, thunkGetAllMessages, thunkEditMessage } from '../../store/messages'
-import { useSelector, useDispatch } from 'react-redux'
+
+import { useSelector} from 'react-redux'
 import { useState } from 'react'
 import './MessageDisplay.css'
 
@@ -8,7 +8,6 @@ function MessageDisplay({socketInstance, channel_id, message, messageArr, setMes
     const [toggleEdit, setToggleEdit] = useState(false)
     const [userMessage, setUserMessage] = useState(message.message_body);
     const currentUser = useSelector(state => state.session.user)
-    const dispatch = useDispatch()
 
 
     const handleDelete = () => {
@@ -22,7 +21,6 @@ function MessageDisplay({socketInstance, channel_id, message, messageArr, setMes
                 room: channel_id.toString()
             }
             socketInstance.emit("my_message", data)
-            // dispatch(thunkDeleteMessages(message.id, message.channel_id))
         }
     }
 
@@ -47,7 +45,6 @@ function MessageDisplay({socketInstance, channel_id, message, messageArr, setMes
             room: message.channel_id.toString()
         }
         socketInstance.emit("my_message", data)
-        // dispatch(thunkEditMessage(message.id, message.channel_id, userMessage))
         setToggleEdit(false)
     }
 
