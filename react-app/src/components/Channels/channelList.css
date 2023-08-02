@@ -34,3 +34,37 @@
 .channelHashtag {
     margin-right: .8rem;
 }
+
+#message-container {
+    background-color: rgb(47, 46, 47);
+    width: 100%;
+}
+
+.message-input {
+    padding: 2rem;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 1.25rem;
+}
+
+.input-container {
+    display: flex;
+    background-color: #a2a0a0;
+    border-radius: 0.25rem;
+    margin: 1.5rem;
+}
+
+.input-container:focus-within {
+    outline: 3px solid #1d1c1d ;
+    /* border: 5px solid red ; */
+}
+
+.message-submit-button {
+    background-color: transparent;
+    border: none;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+}

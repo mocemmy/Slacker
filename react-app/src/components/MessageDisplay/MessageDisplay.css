@@ -1,0 +1,29 @@
+.message-display-container {
+    border: 1px solid gray;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    color: white;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info>img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.message-display-container:hover {
+    background-color: lightgray;
+}
