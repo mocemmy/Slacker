@@ -31,14 +31,16 @@ export const thunkCreateNewServer = (server) => async (dispatch) => {
         body: JSON.stringify(server)
     });
 
-    console.log('res', response)
+    //console.log('res', response)
     if (response.ok) {
         const data = await response.json();
         console.log('data', data)
         dispatch(actionSetSingleServer(data.server))
         return data
     } else {
-        return response
+        const errors = await response.json();
+        console.log('errors', errors)
+        return errors
     }
 }
 

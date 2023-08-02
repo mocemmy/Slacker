@@ -5,6 +5,6 @@ from app.models import User
 
 class ServerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    serverPic = StringField('Server pic', validators=[DataRequired()])
+    profilePic = StringField('Profile Picture', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     isPublic = BooleanField('Public', validators=[DataRequired()])

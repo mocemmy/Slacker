@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { thunkCreateNewServer } from '../../store/servers';
+import { thunkCreateNewServer, thunkGetAllServers } from '../../store/servers';
 import { useModal } from '../../context/Modal'
 
 const CreateServerForm = () => {
@@ -23,12 +23,15 @@ const CreateServerForm = () => {
             profilePic: pfpURL,
             description: description,
         };
+        console.log("submit new form", server)
         const response = await dispatch(thunkCreateNewServer(server));
-        if (!response.ok) {
-            const data = await response.json();
+        console.log("form", response)
+        if (response.errors) {
+            const data = await response.json;
             console.log(data.errors)
             setErrors(data.errors)
         } else {
+            await dispatch(thunkGetAllServers(server))
             closeModal();
         }
 
@@ -40,27 +43,26 @@ const CreateServerForm = () => {
     return (
         <form>
             <h1>Create a new server</h1>
-            {errors && <p>{errors.errors}</p>}
-
-            <label htmlFor='server-name' className='formLabel'>Name</label>
-            {errors.name && <p>{errors.name}</p>}
+            <h2>Name</h2>
+            {errors.name && <p className='new-server-form-error'> Name Error: {errors.name}</p>}
             <input
+                id='new-server-form-name'
                 placeholder='Server name'
                 type='text'
                 value={serverName}
                 onChange={(e) => setServerName(e.target.value)}
             />
 
-            <label htmlFor='server-pic' className='formLabel'>Server Picture</label>
-            {errors.serverPic && <p>{errors.serverPic}</p>}
+            <h2>Picture URL</h2>
+            {errors.serverPic && <p className='new-server-form-error'>Picture URL Error: {errors.serverPic}</p>}
             <input
                 placeholder='Server pic Example: https://funny-pic.png'
                 value={pfpURL}
                 onChange={(e) => setPfpURL(e.target.value)}
             />
 
-            <label htmlFor='description'></label>
-            {errors.description && <p>{errors.description}</p>}
+            <h2>Description</h2>
+            {errors.description && <p className='new-server-form-error'>Description Error: {errors.description}</p>}
             <input
                 placeholder='Server description'
                 value={description}
@@ -68,25 +70,29 @@ const CreateServerForm = () => {
             />
 
             <div>
-                <label htmlFor='public'>Public</label>
-                <input
-                    name='is-public'
-                    type='radio'
-                    id='public'
-                    value="public"
-                    onChange={() => setSelectedOption('public')}
-                    checked={selectedOption === 'public'}
-                />
-
-                <label htmlFor='private'>Private</label>
-                <input
-                    name='is-public'
-                    type='radio'
-                    id='private'
-                    value="private"
-                    onChange={() => setSelectedOption('private')}
-                    checked={selectedOption === 'private'}
-                />
+                <h2>Privacy</h2>
+                <div>
+                    <input
+                        name='is-public'
+                        type='radio'
+                        id='public'
+                        value="public"
+                        onChange={() => setSelectedOption('public')}
+                        checked={selectedOption === 'public'}
+                    />
+                    <label htmlFor='public'>Public</label>
+                </div>
+                <div>
+                    <input
+                        name='is-public'
+                        type='radio'
+                        id='private'
+                        value="private"
+                        onChange={() => setSelectedOption('private')}
+                        checked={selectedOption === 'private'}
+                    />
+                    <label htmlFor='private'>Private</label>
+                </div>
             </div>
 
             <button type='submit' onClick={handleSubmit}>Submit</button>

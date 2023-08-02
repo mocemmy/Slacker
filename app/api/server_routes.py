@@ -47,6 +47,7 @@ def create_new_server():
             profile_pic=form.data['profilePic'],
             description=form.data['description']
         )
+        server.members.append(current_user)
         print(server.to_dict())
         db.session.add(server)
         db.session.commit()
@@ -95,7 +96,7 @@ def delete_server_by_id(id):
 
     if server is None:
         return {'errors': ['Resource not found']}, 404
-    
+
     if id in server_id_list:
         db.session.delete(server)
         db.session.commit()
