@@ -1,4 +1,4 @@
-/* 
+/*
 Hover color:  #252425
 text color: #D1D2D3D3
 border color: #3a3a3ad3
@@ -27,4 +27,24 @@ border color: #3a3a3ad3
 .serverListImg {
     width: 3rem;
     border-radius: 5px;
+}
+
+#userDropdown {
+    color: white;
+
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    border: 0px solid black;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #636363;
+    box-shadow:
+        -10px -10px 30px rgba(0, 0, 0, 0.2),
+        10px 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
 }

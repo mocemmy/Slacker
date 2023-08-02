@@ -16,8 +16,8 @@ class Message(db.Model):
     sent_by = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     edited = db.Column(db.Boolean, default=False)
     parent_message_id = db.Column(db.Integer)
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now())
 
     sender = db.relationship('User', back_populates='sent_messages')
 
@@ -35,5 +35,8 @@ class Message(db.Model):
             'edited': self.edited,
             'parent_message_id': self.parent_message_id,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'first_name': self.sender.first_name,
+            'last_name': self.sender.last_name,
+            'profile_pic': self.sender.profile_pic
         }

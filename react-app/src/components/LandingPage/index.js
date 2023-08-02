@@ -1,12 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
 import './signUpBlock.css'
 import './mainBlock.css'
 import './securityBlock.css'
 import './footer.css'
 
 const LandingPage = () => {
+    const sessionUser = useSelector((state) => state.session.user);
+    const history = useHistory();
 
+    //redirect to app if logged in
+    // if (sessionUser) history.push("/app");
     return (
         <>
             <section id='signUpInfoSection'>
