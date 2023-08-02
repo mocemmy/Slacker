@@ -65,7 +65,7 @@ function Messages({ channel }) {
   useEffect(() => {
     if (socketInstance) {
       socketInstance.on("my_message", (data) => {
-        console.error("Received from socket: ", data);
+        console.log("Received from socket: ", data);
         if(data.type === "CREATE") {
           const receivedMessage = data;
           setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
@@ -73,22 +73,23 @@ function Messages({ channel }) {
         if(data.type === "UPDATE") {
           console.error("UPDATE MESSAGE: ", data.id)
           if(messageArr.length){
-
-            const index = messageArr.findIndex(subArr => subArr[0].id === data.id)
+            const index = messageArr.findIndex(subArr => subArr[1].id === data.id)
             if (index > -1){
               messageArr[index][1].message_body = data.message_body;
+              console.log('**************', messageArr[index][1])
               setMessageArr([...messageArr])
             }
+          } else {
+            setMessageArr([])
+            dispatch(thunkGetAllMessages(channel))
           }
         }
         if(data.type === "DELETE") {
-          console.log('************', messageArr.length)
           if(messageArr.length){
             const index = messageArr.findIndex(subArr => subArr[1].id === data.id)
 
             if(index > -1){
               const updatedMessages = messageArr.slice(index, 1)
-              console.log(messageArr, updatedMessages)
               setMessageArr([...updatedMessages]);
             }
           } else {
