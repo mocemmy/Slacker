@@ -36,33 +36,37 @@ const ServerList = () => {
         dispatch(thunkGetAllChannels(serverId))
     }
 
-    // const closeMenu = () => {
-    //     setUserMenu(true)
-    // }
-
     const toggleMenu = () => {
         showUserMenu ? setUserMenu(false) : setUserMenu(true)
     }
 
     return (
         <div id="serverList-container">
-            <img
-                src={user.profile_pic}
-                className="serverListImg"
-                onClick={toggleMenu}
-            ></img>
+            <div id="serverList-pfp-Container">
+                <img
+                    id="serverList-pfp"
+                    src={user.profile_pic}
+                    className="serverListImg"
+                    onClick={toggleMenu}
+                ></img>
+            </div>
 
             <ul id="userDropdown" className={showUserMenu ? "hidden" : ""}>
-                <li>{user.first_name} {user.last_name}</li>
-                <li>{user.email}</li>
-                < OpenModalButton
-                    buttonText='Change Profile pic'
-                />
-                < ProfileListModalButton
-                    buttonText='Logout'
-                    onButtonClick={toggleMenu}
-                    modalComponent={ConfirmLogout()}
-                />
+                <li className="userDropdown-li" id="user-first-lastName">{user.first_name} {user.last_name}</li>
+                <li className="userDropdown-li" id="user-email">{user.email}</li>
+                <li className="userDropdown-li pfpButton">
+                    < OpenModalButton
+                        buttonText='Change Profile pic'
+                    />
+                </li>
+                <li className="userDropdown-li logoutButton">
+                    < ProfileListModalButton
+                        buttonText='Logout'
+                        onButtonClick={toggleMenu}
+                        modalComponent={ConfirmLogout()}
+                    />
+                </li>
+
             </ul>
 
             <ul id="serverList">
