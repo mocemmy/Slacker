@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
-import './LoginForm.css';
+import "./LoginForm.css";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -23,9 +23,16 @@ function LoginFormPage() {
 
   return (
     <div className="login-page-container">
-      <Link className="login-home-link" to="/">slacker</Link>
+      <div className="slacker-logo">
+        <Link className="login-home-link" to="/">
+          <img src="/favicon.png" id="slacker-logo"/>
+          slacker
+        </Link>
+      </div>
       <h1 className="form-header">Sign in to Slacker</h1>
-      <p className="sub-heading">We suggest using the <span>email address you use at work</span></p>
+      <p className="sub-heading">
+        We suggest using the <span>email address you use at work</span>
+      </p>
       <form onSubmit={handleSubmit}>
         <ul className="errors">
           {errors.map((error, idx) => (
@@ -33,25 +40,27 @@ function LoginFormPage() {
           ))}
         </ul>
         <label for="email">Email</label>
-          <input 
-            className="form-input"
-            placeholder="name@work-email.com"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        
+        <input
+          className="form-input"
+          placeholder="name@work-email.com"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
         <label for="password">Password</label>
-          <input
-            className="form-input"
-            placeholder="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        <button type="submit" className="submit-button">Log In</button>
+        <input
+          className="form-input"
+          placeholder="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className="submit-button">
+          Log In
+        </button>
       </form>
     </div>
   );

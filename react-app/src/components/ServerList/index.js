@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { thunkGetAllServers } from "../../store/servers";
@@ -8,6 +8,8 @@ import OpenModalButton from '../OpenModalButton'
 import ProfileListModalButton from './ProfileListModalButton';
 import Loading from '../Loading';
 import './serverList.css'
+import * as sessionActions from '../../store/session'
+import { useHistory } from "react-router-dom";
 
 
 const ServerList = () => {
@@ -16,6 +18,8 @@ const ServerList = () => {
     const servers = useSelector(state => state.server.serverList)
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+    const ulRef = useRef();
+    const history = useHistory();
 
     useEffect(() => {
         const data = async () => {
@@ -25,6 +29,18 @@ const ServerList = () => {
         data()
     }, [dispatch])
 
+    useEffect(() => {
+        if (!showUserMenu) return;
+
+        const closeMenu = (e) => {
+            if(ulRef.current && !ulRef.current.contains(e.target)) setUserMenu(false)
+        }
+
+        document.addEventListener("click", closeMenu); //close menu on click anywhere on document exept menu or button
+
+        return () => document.removeEventListener("click", closeMenu);
+
+    }, [showUserMenu])
     if (!isLoaded) return <Loading />
 
     if (servers[0]) {
@@ -36,33 +52,46 @@ const ServerList = () => {
         dispatch(thunkGetAllChannels(serverId))
     }
 
-    // const closeMenu = () => {
-    //     setUserMenu(true)
+    // const toggleMenu = () => {
+    //     showUserMenu ? setUserMenu(false) : setUserMenu(true)
     // }
-
-    const toggleMenu = () => {
-        showUserMenu ? setUserMenu(false) : setUserMenu(true)
+    const openMenu = () => {
+        if (!showUserMenu) setUserMenu(true);
     }
+
+    const closeMenu = () => setUserMenu(false);
+
+    const logout = (e) => {
+        e.preventDefault();
+        dispatch(sessionActions.logout());
+        history.push('/');
+        closeMenu();
+    };
+
+    const ulClassName = "userDropdown-li" + (showUserMenu ? "" : " hidden");
+    
 
     return (
         <div id="serverList-container">
-            <img
-                src={user.profile_pic}
-                className="serverListImg"
-                onClick={toggleMenu}
-            ></img>
+            <div id="serverList-pfp-Container">
+                <img
+                    id="serverList-pfp"
+                    src={user.profile_pic}
+                    className="serverListImg"
+                    onClick={openMenu}
+                ></img>
+            </div>
 
-            <ul id="userDropdown" className={showUserMenu ? "hidden" : ""}>
-                <li>{user.first_name} {user.last_name}</li>
-                <li>{user.email}</li>
-                < OpenModalButton
-                    buttonText='Change Profile pic'
-                />
-                < ProfileListModalButton
-                    buttonText='Logout'
-                    onButtonClick={toggleMenu}
-                    modalComponent={ConfirmLogout()}
-                />
+            <ul id="userDropdown" className={ulClassName} ref={ulRef}>
+                <li className="userDropdown-li" id="user-first-lastName">{user.first_name} {user.last_name}</li>
+                <li className="userDropdown-li" id="user-email">{user.email}</li>
+                <li className="userDropdown-li pfpButton">
+                    < OpenModalButton
+                        buttonText='Change Profile pic'
+                    />
+                </li>
+                <button className="userDropdown-li logoutButton" onClick={e => logout(e)}>Logout</button>
+
             </ul>
 
             <ul id="serverList">

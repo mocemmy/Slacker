@@ -1,79 +1,86 @@
 .hidden {
-  display: none;
+    display: none;
 }
 
-.nav-container{
-  padding: 0.25rem 0;
-  max-width: 76rem;
-  box-sizing: border-box;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #541554;
-  height: 5rem;
-  /* padding: 0rem 4rem */
+.nav-container {
+    padding: 0.25rem 0;
+    max-width: 76rem;
+    box-sizing: border-box;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #541554;
+    height: 5rem;
+    /* padding: 0rem 4rem */
 }
 
-.nav-content-container{
-  background-color: #541554;
-  padding: 0 3rem;
+.nav-content-container {
+    background-color: #541554;
+    padding: 0 3rem;
 }
 
-.navlinks{
-  list-style-type: none;
-  text-decoration: none;
-  color: #fff;
-  font-size: large;
-  font-weight: bold;
-  padding: 0.25rem;
+#slacker-logo {
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.navlinks {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    text-decoration: none;
+    color: #fff;
+    font-size: large;
+    font-weight: bold;
+    padding: 0.25rem;
 }
 
 .home-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 2rem;
-  font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .login-home-link {
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: black !important;
-  margin-top: 2rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black !important;
+    margin-top: 2rem;
 }
 
 .nav-links-container {
-  display: flex;
-  width: fit-content;
-  padding: 0.25rem;
-  list-style-type: none;
-  align-items: center;
+    display: flex;
+    width: fit-content;
+    padding: 0.25rem;
+    list-style-type: none;
+    align-items: center;
 }
 
 .nav-button {
-  box-sizing: border-box;
-  background-color: #541554;
-  color: #fff;
-  font-size: large;
-  font-weight: 500;
-  padding: 0.75rem 0;
-  border: 1px solid #fff;
-  border-radius: 0.25rem;
-  width: 8rem;
+    box-sizing: border-box;
+    background-color: #541554;
+    color: #fff;
+    font-size: large;
+    font-weight: 500;
+    padding: 0.75rem 0;
+    border: 1px solid #fff;
+    border-radius: 0.25rem;
+    width: 8rem;
 }
 
 .user-info {
-  font-weight: 100;
-  padding: 0.5rem;
+    font-weight: 100;
+    padding: 0.5rem;
 }
 
-.nav-button:hover{
-  border: 2px solid #fff;
+.nav-button:hover {
+    border: 2px solid #fff;
 }
 
 #login:hover,
-#signup:hover{
-  text-decoration: underline;
+#signup:hover {
+    text-decoration: underline;
 }
