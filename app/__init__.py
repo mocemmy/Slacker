@@ -61,24 +61,31 @@ def handle_leave(data):
 
 @socketio.on('my_message')
 def handle_message(data):
-    message = data['message']
-    room = data['channel']
-    sent_by = data['sent_by']
-    profile_pic = data['profile_pic']
-    created_at = data['created_at']
-    first_name = data['firstName']
-    last_name = data['lastName']
-    newMessage = Message(message_body=message, channel_id=room, sent_by=sent_by)
+    type = data['type']
+    if type == "CREATE":
+        message = data['message']
+        room = data['channel']
+        print('****************',room)
+        sent_by = data['sent_by']
+        profile_pic = data['profile_pic']
+        created_at = data['created_at']
+        first_name = data['firstName']
+        last_name = data['lastName']
+        newMessage = Message(message_body=message, channel_id=room, sent_by=sent_by)
 
-    db.session.add(newMessage)
+        db.session.add(newMessage)
 
-    db.session.commit()
+        db.session.commit()
 
-    id = newMessage.id
+        id = newMessage.id
 
-    emit('my_message', {'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at, 'sent_by': sent_by, 'id': id, 'channel_id': room}, room=room)
-
-
+        emit('my_message', {'type': type, 'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at, 'sent_by': sent_by, 'id': id, 'channel_id': room}, room=room)
+    if type == "DELETE":
+        message_to_delete = Message.query.get(data['id'])
+        db.session.delete(message_to_delete)
+        db.session.commit()
+        room=data['room']
+        emit('my_message', {'type': type, 'id': data['id']}, room=room)
 
 db.init_app(app)
 Migrate(app, db)
