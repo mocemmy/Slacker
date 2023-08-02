@@ -1,13 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { thunkCreateNewServer } from '../../store/servers';
 
 const CreateServerForm = () => {
+    const dispatch = useDispatch();
     const [serverName, setServerName] = useState('');
     const [pfpURL, setPfpURL] = useState('');
     const [description, setDescription] = useState('');
     const [selectedOption, setSelectedOption] = useState("public");
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // validation
+
+        // end validation
+        server = {
+            name: serverName,
+            isPublic: selectedOption === "public",
+            profilePic: pfpURL,
+            description: description,
+        };
+        const response = await dispatch(thunkCreateNewServer(server));
+        // if error, display errors
+
+        // if no error, redirect to new server info page
 
 
     }
@@ -39,8 +55,6 @@ const CreateServerForm = () => {
             />
 
             <div>
-                {/* <button type='button' value={isPublic} onClick={() => setIsPublic(true)}>Public</button>
-                <button type='button' value={isPublic} onClick={() => setIsPublic(false)}>Private</button> */}
                 <label htmlFor='public'>Public</label>
                 <input
                     name='is-public'

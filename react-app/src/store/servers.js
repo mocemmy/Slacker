@@ -24,22 +24,26 @@ export const thunkGetAllServers = () => async (dispatch) => {
     }
 }
 
-export const thunkCreateNewServer = () => async (dispatch) => {
+export const thunkCreateNewServer = (server) => async (dispatch) => {
     const response = await fetch('/api/servers/new', {
         methods: 'POST',
-        headers: { 'Content=Type': 'application/json' }
+        headers: { 'Content=Type': 'application/json' },
+        body: JSON.stringify(server)
     });
 
-    const data = await response.json();
-
     if (response.ok) {
+        const data = await response.json();
         dispatch(actionSetSingleServer(data.server))
+        return data
     } else {
         return response
     }
 }
 
-const initialState = { serverList: null }
+const initialState = {
+    serverList: null,
+    singleServer: null,
+}
 
 
 export default function serverReducer(state = initialState, action) {
@@ -47,7 +51,7 @@ export default function serverReducer(state = initialState, action) {
         case SET_SERVERS:
             return { ...state, serverList: action.servers };
         case SET_SINGLE_SERVER:
-            return { ...state, serverList: { ...state.serverList }, singleServer: action.server }
+            return { ...state, singleServer: action.server }
         default:
             return state
     }
