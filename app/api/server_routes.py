@@ -29,10 +29,21 @@ def channels(id):
     return {"channels": [channel.to_dict() for channel in server.channels]}
 
 
+@server_routes.route('/new', methods=['POST'])
+@login_required
+def create_new_server():
+    """
+    Creates a new server
+    """
+    pass
+
+
 @server_routes.route('/<int:id>', methods=['PUT'])
 @login_required
-def updateServerById(id):
-    print(dir(current_user))
+def update_server_by_id(id):
+    """
+    Updates a server by Id
+    """
     owned_servers = current_user.owned_servers
     server_id_list = [server.id for server in owned_servers]
     server = Server.query.get(id)
@@ -51,5 +62,26 @@ def updateServerById(id):
         #db.session.add(server)
         db.session.commit()
         return server.to_dict(), 200
+    else:
+        return {'errors': ['Unauthorized']}, 401
+
+
+@server_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_server_by_id(id):
+    """
+    Deletes a server by Id
+    """
+    owned_servers = current_user.owned_servers
+    server_id_list = [server.id for server in owned_servers]
+    server = Server.query.get(id)
+
+    if server is None:
+        return {'errors': ['Resource not found']}, 404
+    
+    if id in server_id_list:
+        db.session.delete(server)
+        db.session.commit()
+        return {'message': 'Successfully deleted'}
     else:
         return {'errors': ['Unauthorized']}, 401
