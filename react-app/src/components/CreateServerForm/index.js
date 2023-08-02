@@ -5,9 +5,9 @@ import { useModal } from '../../context/Modal'
 
 const CreateServerForm = () => {
     const dispatch = useDispatch();
-    const [serverName, setServerName] = useState('');
-    const [pfpURL, setPfpURL] = useState('');
-    const [description, setDescription] = useState('');
+    const [serverName, setServerName] = useState(null);
+    const [pfpURL, setPfpURL] = useState(null);
+    const [description, setDescription] = useState(null);
     const [selectedOption, setSelectedOption] = useState("public");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
@@ -23,13 +23,12 @@ const CreateServerForm = () => {
             profilePic: pfpURL,
             description: description,
         };
-        console.log("submit new form", server)
+
         const response = await dispatch(thunkCreateNewServer(server));
-        console.log("form", response)
+        // console.log("form", response)
         if (response.errors) {
-            const data = await response.json;
-            console.log(data.errors)
-            setErrors(data.errors)
+            console.log(response.errors)
+            setErrors(response.errors)
         } else {
             await dispatch(thunkGetAllServers(server))
             closeModal();

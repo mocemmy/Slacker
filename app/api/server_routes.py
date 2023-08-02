@@ -51,6 +51,9 @@ def create_new_server():
         print(server.to_dict())
         db.session.add(server)
         db.session.commit()
+
+        print(server.id)
+
         return server.to_dict(), 201
     else:
         return {'errors': form.errors}, 400
