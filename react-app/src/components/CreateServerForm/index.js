@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkCreateNewServer } from '../../store/servers';
+import { useModal } from '../../context/Modal'
 
 const CreateServerForm = () => {
     const dispatch = useDispatch();
@@ -8,6 +9,8 @@ const CreateServerForm = () => {
     const [pfpURL, setPfpURL] = useState('');
     const [description, setDescription] = useState('');
     const [selectedOption, setSelectedOption] = useState("public");
+    const [errors, setErrors] = useState({});
+    const { closeModal } = useModal();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,7 +24,13 @@ const CreateServerForm = () => {
             description: description,
         };
         const response = await dispatch(thunkCreateNewServer(server));
-        // if error, display errors
+        if (!response.ok) {
+            const data = await response.json();
+            console.log(data.errors)
+            setErrors(data.errors)
+        } else {
+            closeModal();
+        }
 
         // if no error, redirect to new server info page
 
@@ -31,8 +40,10 @@ const CreateServerForm = () => {
     return (
         <form>
             <h1>Create a new server</h1>
+            {errors && <p>{errors.errors}</p>}
 
             <label htmlFor='server-name' className='formLabel'>Name</label>
+            {errors.name && <p>{errors.name}</p>}
             <input
                 placeholder='Server name'
                 type='text'
@@ -41,6 +52,7 @@ const CreateServerForm = () => {
             />
 
             <label htmlFor='server-pic' className='formLabel'>Server Picture</label>
+            {errors.serverPic && <p>{errors.serverPic}</p>}
             <input
                 placeholder='Server pic Example: https://funny-pic.png'
                 value={pfpURL}
@@ -48,6 +60,7 @@ const CreateServerForm = () => {
             />
 
             <label htmlFor='description'></label>
+            {errors.description && <p>{errors.description}</p>}
             <input
                 placeholder='Server description'
                 value={description}

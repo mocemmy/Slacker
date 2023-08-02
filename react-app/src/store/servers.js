@@ -26,13 +26,15 @@ export const thunkGetAllServers = () => async (dispatch) => {
 
 export const thunkCreateNewServer = (server) => async (dispatch) => {
     const response = await fetch('/api/servers/new', {
-        methods: 'POST',
-        headers: { 'Content=Type': 'application/json' },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(server)
     });
 
+    console.log('res', response)
     if (response.ok) {
         const data = await response.json();
+        console.log('data', data)
         dispatch(actionSetSingleServer(data.server))
         return data
     } else {

@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, ValidationError
 from app.models import User
 
 class ServerForm(FlaskForm):
-    name = StringField('Name', DataRequired())
-    serverPic = StringField('Server pic', DataRequired())
-    description = StringField('Description', DataRequired())
-    isPublic = BooleanField('Public', DataRequired())
+    name = StringField('Name', validators=[DataRequired()])
+    serverPic = StringField('Server pic', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    isPublic = BooleanField('Public', validators=[DataRequired()])

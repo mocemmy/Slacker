@@ -41,16 +41,18 @@ def create_new_server():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         server = Server(
-            name = data['name'],
-            created_by = current_user.id,
-            is_public = data['isPublic'],
-            profile_pic = data['profilePic'],
-            description = data['description']
+            name=form.data['name'],
+            created_by=current_user.id,
+            is_public=form.data['isPublic'],
+            profile_pic=form.data['profilePic'],
+            description=form.data['description']
         )
-        # db.session.add(server)
-        # db.session.commit()
+        print(server.to_dict())
+        db.session.add(server)
+        db.session.commit()
+        return server.to_dict(), 201
     else:
-        return {'errors': [form.errors]}
+        return {'errors': form.errors}, 400
 
 
 @server_routes.route('/<int:id>', methods=['PUT'])
