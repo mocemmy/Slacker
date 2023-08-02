@@ -25,5 +25,12 @@
 }
 
 .message-display-container:hover {
-    background-color: lightgray;
+    background-color: rgb(160, 160, 160);
+}
+
+.message-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -10,6 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.channel_routes import channel_routes
+from .api.message_routes import message_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -33,6 +34,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(server_routes, url_prefix='/api/servers')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
+app.register_blueprint(message_routes, url_prefix='/api/messages')
 
 origins = ""
 
@@ -67,10 +69,14 @@ def handle_message(data):
     first_name = data['firstName']
     last_name = data['lastName']
     newMessage = Message(message_body=message, channel_id=room, sent_by=sent_by)
+
     db.session.add(newMessage)
+
     db.session.commit()
 
-    emit('my_message', {'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at}, room=room)
+    id = newMessage.id
+
+    emit('my_message', {'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at, 'sent_by': sent_by, 'id': id, 'channel_id': room}, room=room)
 
 
 

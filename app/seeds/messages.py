@@ -14,7 +14,7 @@ def seed_messages():
         message_body="You smoke in your office and go to Scranton far too often, you're fired!!", channel_id=1, sent_by=1
     )
     message24 = Message(
-        message_body="If it's because of my enhancement I'll see you in court!", channel_id=1, sent_by=1
+        message_body="If it's because of my enhancement I'll see you in court!", channel_id=1, sent_by=2
     )
     message4 = Message(
         message_body="Goood morning Viet-Scranton!", channel_id=2, sent_by=3

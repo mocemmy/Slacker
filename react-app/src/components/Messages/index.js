@@ -4,6 +4,7 @@ import Loading from "../Loading";
 import { io } from "socket.io-client";
 import MessageDisplay from "../MessageDisplay";
 
+
 function Messages({ channel }) {
   const messages = useSelector((state) => state.messages.messageList);
   const user = useSelector((state) => state.session.user);
@@ -74,11 +75,11 @@ function Messages({ channel }) {
     <div>
       <ul>
         {messages.map((message) => (
-          <MessageDisplay key={message.id} message={message} />
+          <MessageDisplay key={message.id} message={message} messageArr={messageArr} setMessageArr={setMessageArr} />
         ))}
         {messageArr.map((message, index) =>
           message[0] === channel ? (
-            <MessageDisplay key={index} message={message[1]} />
+            <MessageDisplay key={index} message={message[1]} messageArr={messageArr} setMessageArr={setMessageArr} />
           ) : null
         )}
       </ul>
@@ -89,7 +90,7 @@ function Messages({ channel }) {
           value={message}
           onChange={handleText}
         />
-        <button className="message-submit-button" onClick={handleSubmit}><i class="fa-solid fa-paper-plane"></i></button>
+        <button className="message-submit-button" onClick={handleSubmit}><i className="fa-solid fa-paper-plane"></i></button>
       </div>
     </div>
   );
