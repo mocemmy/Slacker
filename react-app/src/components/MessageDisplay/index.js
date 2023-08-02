@@ -40,7 +40,14 @@ function MessageDisplay({socketInstance, channel_id, message, messageArr, setMes
         if (messageArr.length) {
             setMessageArr([])
         }
-        dispatch(thunkEditMessage(message.id, message.channel_id, userMessage))
+        const data = {
+            type: "UPDATE",
+            message_body: userMessage,
+            id: message.id,
+            room: message.channel_id.toString()
+        }
+        socketInstance.emit("my_message", data)
+        // dispatch(thunkEditMessage(message.id, message.channel_id, userMessage))
         setToggleEdit(false)
     }
 
