@@ -79,7 +79,7 @@ def handle_message(data):
 
         id = newMessage.id
 
-        emit('my_message', {'type': type, 'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at, 'sent_by': sent_by, 'id': id, 'channel_id': room}, room=room)
+        emit('my_message', {'type': type, 'message_body': message, 'first_name': first_name, 'last_name': last_name, 'profile_pic': profile_pic, 'created_at': created_at, 'sent_by': sent_by, 'id': id, 'channel_id': room, "edited": False}, room=room)
 
     if type == "DELETE":
         message_to_delete = Message.query.get(data['id'])
@@ -89,11 +89,13 @@ def handle_message(data):
         emit('my_message', {'type': type, 'id': data['id']}, room=room)
 
     if type == 'UPDATE':
-        message_to_update = Message.query.get(data['id'])
-        message_to_update.message_body = data['message_body']
-        db.session.commit()
-        room = data['room']
         message_body = data['message_body']
+        message_to_update = Message.query.get(data['id'])
+        if message_to_update.message_body != message_body:
+            message_to_update.message_body = message_body
+            message_to_update.edited = True
+            db.session.commit()
+        room = data['room']
         id = data['id']
 
         emit('my_message', {'type': type,'message_body': message_body, 'id': id}, room=room)

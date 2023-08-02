@@ -71,6 +71,7 @@ function MessageDisplay({socketInstance, channel_id, message, messageArr, setMes
                     <img src={message.profile_pic} alt="profile pic" />
                     <p>{`${message.first_name} ${message.last_name}`}</p>
                 </div>
+                {message.edited && <p>Edited</p>}
                 <p>{dispTime}</p>
             </div>
             <div className={`message-body ${notEditMessage}`}>

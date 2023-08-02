@@ -6,7 +6,6 @@ import MessageDisplay from "../MessageDisplay";
 import { thunkGetAllMessages } from "../../store/messages";
 import { useDispatch } from "react-redux";
 
-
 function Messages({ channel }) {
   const messages = useSelector((state) => state.messages.messageList);
   const user = useSelector((state) => state.session.user);
@@ -24,7 +23,7 @@ function Messages({ channel }) {
     if (!message || !channel) return;
     const date = new Date();
     const data = {
-      type: 'CREATE',
+      type: "CREATE",
       channel: channel.toString(),
       message,
       sent_by: user.id,
@@ -66,36 +65,40 @@ function Messages({ channel }) {
     if (socketInstance) {
       socketInstance.on("my_message", (data) => {
         console.log("Received from socket: ", data);
-        if(data.type === "CREATE") {
+        if (data.type === "CREATE") {
           const receivedMessage = data;
           setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
         }
-        if(data.type === "UPDATE") {
-          console.error("UPDATE MESSAGE: ", data.id)
-          if(messageArr.length){
-            const index = messageArr.findIndex(subArr => subArr[1].id === data.id)
-            if (index > -1){
+        if (data.type === "UPDATE") {
+          console.error("UPDATE MESSAGE: ", data.id);
+          if (messageArr.length) {
+            const index = messageArr.findIndex(
+              (subArr) => subArr[1].id === data.id
+            );
+            if (index > -1) {
               messageArr[index][1].message_body = data.message_body;
-              console.log('**************', messageArr[index][1])
-              setMessageArr([...messageArr])
+              console.log("**************", messageArr[index][1]);
+              setMessageArr([...messageArr]);
             }
           } else {
-            setMessageArr([])
-            dispatch(thunkGetAllMessages(channel))
+            setMessageArr([]);
+            dispatch(thunkGetAllMessages(channel));
           }
         }
-        if(data.type === "DELETE") {
-          if(messageArr.length){
-            const index = messageArr.findIndex(subArr => subArr[1].id === data.id)
+        if (data.type === "DELETE") {
+          if (messageArr.length) {
+            const index = messageArr.findIndex(
+              (subArr) => subArr[1].id === data.id
+            );
 
-            if(index > -1){
-              const updatedMessages = messageArr.slice(index, 1)
+            if (index > -1) {
+              const updatedMessages = messageArr.slice(index, 1);
               setMessageArr([...updatedMessages]);
             }
           } else {
-              dispatch(thunkGetAllMessages(channel))
+            setMessageArr([]);
+            dispatch(thunkGetAllMessages(channel));
           }
-
         }
       });
     }
@@ -107,11 +110,25 @@ function Messages({ channel }) {
     <div>
       <ul>
         {messages.map((message) => (
-          <MessageDisplay key={message.id} channel_id={channel} socketInstance={socketInstance} message={message} messageArr={messageArr} setMessageArr={setMessageArr} />
+          <MessageDisplay
+            key={message.id}
+            channel_id={channel}
+            socketInstance={socketInstance}
+            message={message}
+            messageArr={messageArr}
+            setMessageArr={setMessageArr}
+          />
         ))}
         {messageArr.map((message, index) =>
           message[0] === channel ? (
-            <MessageDisplay key={index} channel_id={channel} socketInstance={socketInstance} message={message[1]} messageArr={messageArr} setMessageArr={setMessageArr} />
+            <MessageDisplay
+              key={index}
+              channel_id={channel}
+              socketInstance={socketInstance}
+              message={message[1]}
+              messageArr={messageArr}
+              setMessageArr={setMessageArr}
+            />
           ) : null
         )}
       </ul>
@@ -122,7 +139,9 @@ function Messages({ channel }) {
           value={message}
           onChange={handleText}
         />
-        <button className="message-submit-button" onClick={handleSubmit}><i className="fa-solid fa-paper-plane"></i></button>
+        <button className="message-submit-button" onClick={handleSubmit}>
+          <i className="fa-solid fa-paper-plane"></i>
+        </button>
       </div>
     </div>
   );
