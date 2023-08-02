@@ -14,7 +14,7 @@ const CreateServerForm = () => {
         // validation
 
         // end validation
-        server = {
+        const server = {
             name: serverName,
             isPublic: selectedOption === "public",
             profilePic: pfpURL,
