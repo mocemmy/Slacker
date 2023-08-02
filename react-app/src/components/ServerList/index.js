@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
 import ConfirmLogout from "../ConfirmLogoutModal";
+import CreateServerForm from "../CreateServerForm";
 import OpenModalButton from '../OpenModalButton'
 import ProfileListModalButton from './ProfileListModalButton';
+import ServerListModalListItem from './ServerListModalListItem'
 import Loading from '../Loading';
 import './serverList.css'
 import * as sessionActions from '../../store/session'
@@ -33,7 +35,7 @@ const ServerList = () => {
         if (!showUserMenu) return;
 
         const closeMenu = (e) => {
-            if(ulRef.current && !ulRef.current.contains(e.target)) setUserMenu(false)
+            if (ulRef.current && !ulRef.current.contains(e.target)) setUserMenu(false)
         }
 
         document.addEventListener("click", closeMenu); //close menu on click anywhere on document exept menu or button
@@ -69,7 +71,7 @@ const ServerList = () => {
     };
 
     const ulClassName = "userDropdown-li" + (showUserMenu ? "" : " hidden");
-    
+
 
     return (
         <div id="serverList-container">
@@ -106,6 +108,7 @@ const ServerList = () => {
                         </li>
                     )
                 })}
+                <ServerListModalListItem modalComponent={<CreateServerForm />} />
             </ul>
         </div>
     )
