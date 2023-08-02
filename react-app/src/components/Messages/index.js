@@ -3,12 +3,14 @@ import { useSelector } from "react-redux";
 import Loading from "../Loading";
 import { io } from "socket.io-client";
 import MessageDisplay from "../MessageDisplay";
+import { thunkGetAllMessages } from "../../store/messages";
+import { useDispatch } from "react-redux";
 
 
 function Messages({ channel }) {
   const messages = useSelector((state) => state.messages.messageList);
   const user = useSelector((state) => state.session.user);
-
+  const dispatch = useDispatch();
   const [socketInstance, setSocketInstance] = useState(null);
   const [message, setMessage] = useState("");
   const [messageArr, setMessageArr] = useState([]);
@@ -22,6 +24,7 @@ function Messages({ channel }) {
     if (!message || !channel) return;
     const date = new Date();
     const data = {
+      type: 'CREATE',
       channel: channel.toString(),
       message,
       sent_by: user.id,
@@ -62,9 +65,37 @@ function Messages({ channel }) {
   useEffect(() => {
     if (socketInstance) {
       socketInstance.on("my_message", (data) => {
-        console.log("Received from socket: ", data);
-        const receivedMessage = data;
-        setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
+        console.error("Received from socket: ", data);
+        if(data.type === "CREATE") {
+          const receivedMessage = data;
+          setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
+        }
+        if(data.type === "UPDATE") {
+          console.error("UPDATE MESSAGE: ", data.id)
+          if(messageArr.length){
+
+            const index = messageArr.findIndex(subArr => subArr[0].id === data.id)
+            if (index > -1){
+              messageArr[index][1].message_body = data.message_body;
+              setMessageArr([...messageArr])
+            }
+          }
+        }
+        if(data.type === "DELETE") {
+          console.log('************', messageArr.length)
+          if(messageArr.length){
+            const index = messageArr.findIndex(subArr => subArr[1].id === data.id)
+
+            if(index > -1){
+              const updatedMessages = messageArr.slice(index, 1)
+              console.log(messageArr, updatedMessages)
+              setMessageArr([...updatedMessages]);
+            }
+          } else {
+              dispatch(thunkGetAllMessages(channel))
+          }
+
+        }
       });
     }
   }, [socketInstance]);
@@ -75,11 +106,11 @@ function Messages({ channel }) {
     <div>
       <ul>
         {messages.map((message) => (
-          <MessageDisplay key={message.id} message={message} messageArr={messageArr} setMessageArr={setMessageArr} />
+          <MessageDisplay key={message.id} channel_id={channel} socketInstance={socketInstance} message={message} messageArr={messageArr} setMessageArr={setMessageArr} />
         ))}
         {messageArr.map((message, index) =>
           message[0] === channel ? (
-            <MessageDisplay key={index} message={message[1]} messageArr={messageArr} setMessageArr={setMessageArr} />
+            <MessageDisplay key={index} channel_id={channel} socketInstance={socketInstance} message={message[1]} messageArr={messageArr} setMessageArr={setMessageArr} />
           ) : null
         )}
       </ul>

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import './MessageDisplay.css'
 
 
-function MessageDisplay({ message, messageArr, setMessageArr }) {
+function MessageDisplay({socketInstance, channel_id, message, messageArr, setMessageArr }) {
     const [toggleEdit, setToggleEdit] = useState(false)
     const [userMessage, setUserMessage] = useState(message.message_body);
     const currentUser = useSelector(state => state.session.user)
@@ -16,7 +16,13 @@ function MessageDisplay({ message, messageArr, setMessageArr }) {
             if (messageArr.length) {
                 setMessageArr([])
             }
-            dispatch(thunkDeleteMessages(message.id, message.channel_id))
+            const data = {
+                type: 'DELETE',
+                id: message.id,
+                room: channel_id.toString()
+            }
+            socketInstance.emit("my_message", data)
+            // dispatch(thunkDeleteMessages(message.id, message.channel_id))
         }
     }
 
