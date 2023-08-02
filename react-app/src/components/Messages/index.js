@@ -75,11 +75,11 @@ function Messages({ channel }) {
     <div>
       <ul>
         {messages.map((message) => (
-          <MessageDisplay key={message.id} message={message} messageArr={messageArr} setMessageArr={setMessageArr} />
+          <MessageDisplay key={message.id} message={message} messageArr={messageArr} setMessageArr={setMessageArr} channel={channel} />
         ))}
         {messageArr.map((message, index) =>
           message[0] === channel ? (
-            <MessageDisplay key={index} message={message[1]} messageArr={messageArr} setMessageArr={setMessageArr} />
+            <MessageDisplay key={index} message={message[1]} messageArr={messageArr} setMessageArr={setMessageArr} channel={channel}/>
           ) : null
         )}
       </ul>

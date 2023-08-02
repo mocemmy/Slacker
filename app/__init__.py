@@ -80,6 +80,34 @@ def handle_message(data):
 
 
 
+# Handle edit message event
+@socketio.on('edit_message')
+def handle_edit_message(data):
+    message_id = data['id']
+    edited_message = data['message']
+    room = data['channel']
+
+    # Update the message in the database
+    message = Message.query.get(message_id)
+    message.message_body = edited_message
+    db.session.commit()
+
+    # Emit the updated message to the connected clients in the room
+    emit('edited_message', {'id': message_id, 'message_body': edited_message}, room=room)
+
+# Handle delete message event
+@socketio.on('delete_message')
+def handle_delete_message(data):
+    message_id = data['id']
+    room = data['channel']
+    # Delete the message from the database
+    # message = Message.query.get(message_id)
+    # db.session.delete(message)
+    # db.session.commit()
+
+    emit('deleted_message', {'id': message_id, 'room': room})
+
+
 db.init_app(app)
 Migrate(app, db)
 

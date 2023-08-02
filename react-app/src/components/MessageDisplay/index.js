@@ -1,60 +1,76 @@
-import { thunkDeleteMessages, thunkGetAllMessages, thunkEditMessage } from '../../store/messages'
-import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
-import './MessageDisplay.css'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { thunkDeleteMessages, thunkEditMessage, thunkGetAllMessages } from '../../store/messages';
+import socket from './socket'
+import './MessageDisplay.css';
 
-
-function MessageDisplay({ message, messageArr, setMessageArr }) {
-    const [toggleEdit, setToggleEdit] = useState(false)
+function MessageDisplay({ message, messageArr, setMessageArr, channel }) {
+    const [toggleEdit, setToggleEdit] = useState(false);
     const [userMessage, setUserMessage] = useState(message.message_body);
-    const currentUser = useSelector(state => state.session.user)
-    const dispatch = useDispatch()
+    const currentUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
 
+
+    useEffect(() => {
+
+        // socket.on("edited_message", (data) => {
+        //   if (message.id === data.id) {
+        //     setUserMessage(data.message_body);
+        //   }
+        // });
+        socket.on("deleted_message", (data) => {
+            setMessageArr([]);
+            dispatch(thunkDeleteMessages(data.id, data.room));
+        });
+
+        return () => {
+
+            //   socket.off("edited_message");
+            socket.off("deleted_message");
+        };
+    }, [message]);
 
     const handleDelete = () => {
         if (message.sent_by === currentUser.id) {
-            if (messageArr.length) {
-                setMessageArr([])
-            }
-            dispatch(thunkDeleteMessages(message.id, message.channel_id))
+            socket.emit("delete_message", { id: message.id, channel: message.channel_id });
         }
-    }
+    };
 
     const handleUpdate = () => {
         if (message.sent_by === currentUser.id) {
-            setToggleEdit(true)
+            setToggleEdit(true);
         }
-    }
+    };
 
     const handleCancel = () => {
-        setToggleEdit(false)
-    }
+        setToggleEdit(false);
+    };
 
     const handleSave = () => {
         if (messageArr.length) {
-            setMessageArr([])
+            setMessageArr([]);
         }
-        dispatch(thunkEditMessage(message.id, message.channel_id, userMessage))
-        setToggleEdit(false)
-    }
+        socket.emit("edit_message", { id: message.id, channel: message.channel_id, message: userMessage });
+        dispatch(thunkEditMessage(message.id, message.channel_id, userMessage));
+        setToggleEdit(false);
+    };
 
     const handleText = (e) => {
         const inputMessage = e.target.value;
         setUserMessage(inputMessage);
     };
 
-    const editMessage = toggleEdit ? '' : 'hidden'
-    const notEditMessage = !toggleEdit ? '' : 'hidden'
+    const editMessage = toggleEdit ? '' : 'hidden';
+    const notEditMessage = !toggleEdit ? '' : 'hidden';
+    const ownedMessage = currentUser.id === message.sent_by ? '' : 'hidden';
 
-    const ownedMessage = currentUser.id === message.sent_by ? '' : 'hidden'
+    const time = new Date(message.created_at);
+    const dispTime = time.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
-    const time = new Date(message.created_at)
-    const dispTime = time.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
     return (
         <div className="message-display-container">
             <div className="message-header">
                 <div className='user-info'>
-
                     <img src={message.profile_pic} alt="profile pic" />
                     <p>{`${message.first_name} ${message.last_name}`}</p>
                 </div>
@@ -81,9 +97,8 @@ function MessageDisplay({ message, messageArr, setMessageArr }) {
                     </div>
                 </div>
             </div>
-
         </div>
-    )
+    );
 }
 
 export default MessageDisplay;
