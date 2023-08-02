@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from app.forms import ServerForm
 from app.models import db, Server
 
 server_routes = Blueprint('servers', __name__)
@@ -35,7 +36,21 @@ def create_new_server():
     """
     Creates a new server
     """
-    pass
+    data = request.json
+    form = ServerForm(data=data)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        server = Server(
+            name = data['name'],
+            created_by = current_user.id,
+            is_public = data['isPublic'],
+            profile_pic = data['profilePic'],
+            description = data['description']
+        )
+        # db.session.add(server)
+        # db.session.commit()
+    else:
+        return {'errors': [form.errors]}
 
 
 @server_routes.route('/<int:id>', methods=['PUT'])
