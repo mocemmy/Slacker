@@ -14,7 +14,7 @@ const CreateServerForm = () => {
         <form>
             <h1>Create a new server</h1>
 
-            <label for='server-name'>Name</label>
+            <label for='server-name' className='formLabel'>Name</label>
             <input
                 placeholder='Server name'
                 type='text'
@@ -22,7 +22,7 @@ const CreateServerForm = () => {
                 onChange={(e) => setServerName(e.target.value)}
             />
 
-            <label for='server-pic'>Server Picture</label>
+            <label for='server-pic' className='formLabel'>Server Picture</label>
             <input
                 placeholder='Server pic Example: https://funny-pic.png'
                 value={pfpURL}
@@ -37,8 +37,13 @@ const CreateServerForm = () => {
             />
 
             <div>
-                <button type='button' value={isPublic} onClick={() => setIsPublic(true)}>Public</button>
-                <button type='button' value={isPublic} onClick={() => setIsPublic(false)}>Private</button>
+                {/* <button type='button' value={isPublic} onClick={() => setIsPublic(true)}>Public</button>
+                <button type='button' value={isPublic} onClick={() => setIsPublic(false)}>Private</button> */}
+                <label for='public'>Public</label>
+                <input type='radio' id='public' value="public" />
+
+                <label for='private'>pPrivate</label>
+                <input type='radio' id='private' value="private" />
             </div>
 
             <button type='submit'>Submit</button>
