@@ -7,6 +7,8 @@ import "./SignupForm.css";
 function SignupFormPage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -18,7 +20,7 @@ function SignupFormPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
-            const data = await dispatch(signUp(username, email, password));
+            const data = await dispatch(signUp(username, first_name, last_name, email, password));
             if (data) {
                 setErrors(data);
             }
@@ -46,16 +48,25 @@ function SignupFormPage() {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                <label for="email" className='formLabel'>Email</label>
+                <label htmlFor="email" className='formLabel'>First Name</label>
                 <input
                     className="form-input"
-                    placeholder="email"
+                    placeholder="first name"
                     type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={first_name}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                 />
-                <label for="username" className='formLabel'>Username</label>
+                <label htmlFor="email" className='formLabel'>Last Name</label>
+                <input
+                    className="form-input"
+                    placeholder="last name"
+                    type="text"
+                    value={last_name}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                />
+                <label htmlFor="username" className='formLabel'>Username</label>
                 <input
                     className="form-input"
                     placeholder="username"
@@ -64,7 +75,16 @@ function SignupFormPage() {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
-                <label for="password" className='formLabel'>Password</label>
+                <label htmlFor="email" className='formLabel'>Email</label>
+                <input
+                    className="form-input"
+                    placeholder="email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <label htmlFor="password" className='formLabel'>Password</label>
                 <input
                     className="form-input"
                     placeholder="password"
@@ -73,7 +93,7 @@ function SignupFormPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <label for="confirm-password" className='formLabel'>Confirm Password</label>
+                <label htmlFor="confirm-password" className='formLabel'>Confirm Password</label>
                 <input
                     className="form-input"
                     placeholder="confirm password"

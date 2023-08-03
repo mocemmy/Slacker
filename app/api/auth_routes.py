@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Server, Channel, Message
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -61,14 +61,49 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('*********', form.data)
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
+            first_name=form.data['first_name'].title(),
+            last_name=form.data['last_name'].title(),
             email=form.data['email'],
             password=form.data['password']
         )
         db.session.add(user)
         db.session.commit()
+
+        default_server = Server(
+            name='General',
+            created_by=user.id,
+            is_public=True,
+            description='A general chat for everyone to use'
+        )
+
+        db.session.add(default_server)
+        db.session.commit()
+        default_server.members.append(user)
+
+        default_channel = Channel(
+            name='General',
+            server_id=default_server.id,
+            created_by=user.id,
+            is_public=True,
+            description='A general chat for everyone to use'
+        )
+
+        db.session.add(default_channel)
+        db.session.commit()
+        default_channel.members.append(user)
+
+        default_message = Message(
+            message_body='Server created - this is a default channel created for you!',
+            channel_id=default_channel.id,
+            sent_by=user.id
+        )
+        db.session.add(default_message)
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

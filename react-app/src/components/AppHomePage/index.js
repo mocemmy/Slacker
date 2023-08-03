@@ -16,8 +16,6 @@ function AppHomePage() {
     return (
         <div className="home-page-container">
             <ServerList />
-
-            {/* <Channels /> */}
         </div>
     );
 }
