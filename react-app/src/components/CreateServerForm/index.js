@@ -80,7 +80,7 @@ const CreateServerForm = () => {
                     />
                     <label htmlFor='public'>Public</label>
                 </div>
-                <div>
+                {/* <div>
                     <input
                         name='is-public'
                         type='radio'
@@ -90,7 +90,7 @@ const CreateServerForm = () => {
                         checked={selectedOption === 'private'}
                     />
                     <label htmlFor='private'>Private</label>
-                </div>
+                </div> */}
             </div>
 
             <button type='submit' onClick={handleSubmit}>Submit</button>

@@ -31,7 +31,7 @@ export const thunkCreateNewServer = (server) => async (dispatch) => {
         body: JSON.stringify(server)
     });
 
-    //console.log('res', response)
+
     if (response.ok) {
         const data = await response.json();
         console.log('data', data)
@@ -43,6 +43,20 @@ export const thunkCreateNewServer = (server) => async (dispatch) => {
         return errors
     }
 }
+
+export const thunkLeaveServer = (serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}/leave`);
+
+    if (response.ok) {
+        const data = await response.json()
+        await dispatch(thunkGetAllServers())
+        return data
+    } else {
+        const errors = await response.json();
+        return errors
+    }
+}
+
 
 const initialState = {
     serverList: null,

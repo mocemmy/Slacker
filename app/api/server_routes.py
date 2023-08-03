@@ -212,9 +212,9 @@ def request_join_server(id):
     db.session.commit()
     return {'message': f'User with ID {user.id} Successfully joined workspace with {server.id}'}
 
-# Leave a server POST /api/servers/:serverId/leave
+# Leave a server GET /api/servers/:serverId/leave
 
-@server_routes.route('/<int:id>/leave', methods=['POST'])
+@server_routes.route('/<int:id>/leave', methods=['GET'])
 @login_required
 def request_leave_server(id):
     """
