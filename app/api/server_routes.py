@@ -58,20 +58,20 @@ def create_new_server():
         db.session.add(server)
         db.session.commit()
 
-        default_chanel = Channel(
+        default_channel = Channel(
             name='General',
             server_id=server.id,
             created_by=current_user.id,
             is_public=True,
             description='A general chat for everyone to use'
         )
-        default_chanel.members.append(current_user)
-        db.session.add(default_chanel)
+        default_channel.members.append(current_user)
+        db.session.add(default_channel)
         db.session.commit()
 
         default_message = Message(
             message_body='Server created - this is a default channel created for you!',
-            channel_id=default_chanel.id,
+            channel_id=default_channel.id,
             sent_by=current_user.id
         )
         db.session.add(default_message)
@@ -172,3 +172,27 @@ def request_join_server(id):
         channel.members.append(user)
     db.session.commit()
     return {'message': f'User with id {user.id} Successfully joined workspace with {server.id}'}
+
+@server_routes.route('/<int:id>/leave', methods=['POST'])
+@login_required
+def request_leave_server(id):
+    """
+    leave a server by ID
+    """
+
+    # if server does not exist return error
+    server = Server.query.get(id)
+    if server is None:
+        return {'errors': ['Workspace not found']}, 404
+
+    # if you are owner of the server you cannot leave
+    if server.created_by == current_user.id:
+        return {'errors': ['Cannot leave server you own']}, 400
+
+    # if you are not a member of the server should return error
+    member_id_list = [member.id for member in server.members]
+    if current_user.id not in member_id_list:
+        return {"errors": ['User is not in workspace']}, 400
+
+# @server_routes.route('/<int:id>/removeUser', methods=['POST'])
+# @login_required
