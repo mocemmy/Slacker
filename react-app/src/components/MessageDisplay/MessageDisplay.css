@@ -2,10 +2,13 @@
     border: 1px solid gray;
     margin: 1.5rem;
     padding: 1.5rem;
-    margin-top: 5rem;
     box-sizing: border-box;
     border-radius: 0.25rem;
     color: white;
+}
+
+.message-list-container {
+    padding-top: 3rem;
 }
 
 .message-header {
