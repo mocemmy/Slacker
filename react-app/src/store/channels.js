@@ -6,6 +6,20 @@ const actionGetChannels = (channels) => ({
 })
 
 
+export const thunkLeaveChannel = (channelId, serverId) => async (dispatch) => {
+    const response = await fetch(`/api/channels/${channelId}/leave`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetAllChannels(serverId))
+        return data
+    } else {
+        return response
+    }
+}
+
+
 export const thunkGetAllChannels = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels`)
 

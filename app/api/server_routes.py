@@ -32,9 +32,15 @@ def channels(id):
     """
     Query for all channels belonging to a server
     """
-    server = Server.query.get(id)
+    all_channels = Channel.query.filter(Channel.server_id == id).all()
 
-    return {"channels": [channel.to_dict() for channel in server.channels]}
+    user_channels = []
+
+    for channel in all_channels:
+        if current_user in channel.members:
+            user_channels.append(channel.to_dict())
+
+    return {"channels": user_channels}
 
 
 @server_routes.route('/new', methods=['POST'])

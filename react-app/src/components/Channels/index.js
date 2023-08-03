@@ -5,6 +5,7 @@ import { thunkGetAllMessages } from "../../store/messages";
 import Messages from "../Messages";
 import "./channelList.css";
 import OpenModalButton from "../OpenModalButton";
+import { thunkLeaveChannel } from "../../store/channels";
 
 function Channels({ server }) {
   const channels = useSelector((state) => state.channels.channelList);
@@ -79,17 +80,21 @@ function Channels({ server }) {
       : "hidden";
 
   const ulClassName = showMenu ? "" : "hidden";
-  const ulChannelName = showChannelMenu ? "" : "hidden";
+  const ulChannelName = showChannelMenu ? "ul-dropdown" : "ul-dropdown hidden";
 
   const ownedChannel =
     currentUser && currChannel && currentUser.id === currChannel.created_by
-      ? ""
+      ? "ul-channel"
       : "hidden";
   const notOwnedChannel =
     currentUser && currChannel && currentUser.id !== currChannel.created_by
-      ? ""
+      ? "ul-channel"
       : "hidden";
-  console.error(ownedChannel);
+
+  const handleLeaveChannel = () => {
+    dispatch(thunkLeaveChannel(currChannel.id, server.id))
+  }
+
 
   return (
     <>
@@ -135,16 +140,16 @@ function Channels({ server }) {
           onClick={toggleChannelMenu}
         >
           <p>{currChannel.name}</p>
+        </div>
           <div className={ulChannelName}>
             <ul className={ownedChannel}>
               <li>Edit Channel</li>
               <li>Delete Channel</li>
             </ul>
             <ul className={notOwnedChannel}>
-              <li>Leave Channel</li>
+              <li onClick={handleLeaveChannel}>Leave Channel</li>
             </ul>
           </div>
-        </div>
         <Messages channel={defaultChannel} />
       </div>
     </>
