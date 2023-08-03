@@ -32,8 +32,6 @@ function ProfileButton({ user }) {
       <ul ref={ulRef}>
         {user ? (
           <ul className="nav-links-container">
-            {/* <li className="user-info">{user.username}</li>
-            <li className="user-info">{user.email}</li> */}
             <li className="navlinks">
               <button className="nav-button" onClick={handleLogout}>Log Out</button>
             </li>

@@ -32,9 +32,9 @@ function Channels() {
                 <ul id="channelList">
                     <h4 id="channelList-header">Channels</h4>
                     {channels.map(currChannel => (
-                        <li className="channelListItem"
+                        <li
                             key={currChannel.id}
-                            onClick={(e) => changeChannel(e, currChannel.id)}>
+                            onClick={(e) => changeChannel(e, currChannel.id)} className={currChannel.id == defaultChannel ? "channelListItem selected": "channelListItem"}>
                             <div className="channelHashtag">
                                 #
                             </div>

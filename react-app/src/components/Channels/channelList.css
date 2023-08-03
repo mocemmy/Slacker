@@ -22,6 +22,7 @@
     list-style: none;
     margin-bottom: .4rem;
     margin-left: .5rem;
+    margin-right: 0.4rem;
     padding: .2rem 1rem;
     border-radius: 5px;
 }
@@ -33,4 +34,8 @@
 
 .channelHashtag {
     margin-right: .8rem;
+}
+
+.selected {
+    outline: 2px solid gray;
 }
