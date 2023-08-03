@@ -40,6 +40,12 @@ function Messages({ channel }) {
         setMessage("");
     };
 
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+    }
+
     useEffect(() => {
         // Establish socket connection when the component mounts
         const socket =
@@ -147,6 +153,7 @@ function Messages({ channel }) {
                         type="text"
                         value={message}
                         onChange={handleText}
+                        onKeyDown={handleEnter}
                     />
                     <button className="message-submit-button" onClick={handleSubmit}>
                         <i className="fa-solid fa-paper-plane"></i>
