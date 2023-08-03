@@ -25,7 +25,7 @@ function LoginFormPage() {
         <div className="login-page-container">
             <div className="slacker-logo">
                 <Link className="login-home-link" to="/">
-                    <img src="/favicon.png" id="slacker-logo" />
+                    <img src="/favicon.png" alt="slacker logo" id="slacker-logo" />
                     slacker
                 </Link>
             </div>

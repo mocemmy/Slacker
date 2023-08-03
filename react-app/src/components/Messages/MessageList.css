@@ -1,10 +1,12 @@
 .message-list-container {
     overflow-y: scroll;
+    scrollbar-color: #1d1c1d #1d1c1d;
     height: 80vh;
 }
 
 .message-list {
     padding: 0;
+    margin-bottom: 5rem;
 }
 
 #message-container {
@@ -27,9 +29,11 @@
     background-color: rgb(47, 46, 47);
     position: fixed;
     box-sizing: border-box;
-    left: 16.5rem;
+    left: 15.25rem;
     right: 0;
     bottom: 0;
+    margin-right: 1.5rem;
+    padding-right: 0;
 }
 
 .input-container {
@@ -37,6 +41,7 @@
     background-color: #a2a0a0;
     border-radius: 0.25rem;
     margin: 1.5rem;
+    margin-right: 1rem;
 }
 
 .input-container:focus-within {

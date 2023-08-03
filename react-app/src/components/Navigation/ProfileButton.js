@@ -1,7 +1,7 @@
 import React, {useRef } from "react";
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
+import { logout, login } from "../../store/session";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -13,13 +13,25 @@ function ProfileButton({ user }) {
     dispatch(logout());
   };
 
+  const demoUser = (e, num) => {
+    let email, password;
+    if (num ===1){
+      //login as Stanley
+      email='stanley@office.com'
+      password='password'
+    } else {
+      email='robert@office.com'
+      password='password'
+      //login as Robert
+    }
+    dispatch(login(email, password))
+  }
+
   return (
     <>
       <ul ref={ulRef}>
         {user ? (
           <ul className="nav-links-container">
-            {/* <li className="user-info">{user.username}</li>
-            <li className="user-info">{user.email}</li> */}
             <li className="navlinks">
               <button className="nav-button" onClick={handleLogout}>Log Out</button>
             </li>
@@ -27,6 +39,8 @@ function ProfileButton({ user }) {
         ) :
          (
           <ul className="nav-links-container">
+            <li><button onClick={(e) => demoUser(e, 1)} className="demo-button">Log in as Demo User 1</button></li>
+            <li><button onClick={(e) => demoUser(e, 2)} className="demo-button">Log in as Demo User 2</button></li>
             <li className="navlinks">
             <Link className="navlinks" id="login" to="/login">Login</Link>
             </li>

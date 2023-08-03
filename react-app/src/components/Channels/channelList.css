@@ -3,7 +3,7 @@
     color: #D1D2D3D3;
     border: 1px solid #3a3a3ad3;
     border-width: thin;
-    width: fit-content;
+    width: 10rem;
     min-width: 10rem;
 }
 
@@ -22,6 +22,7 @@
     list-style: none;
     margin-bottom: .4rem;
     margin-left: .5rem;
+    margin-right: 0.4rem;
     padding: .2rem 1rem;
     border-radius: 5px;
 }
@@ -33,4 +34,17 @@
 
 .channelHashtag {
     margin-right: .8rem;
+}
+
+.selected {
+    outline: 2px solid gray;
+}
+
+.channel-title {
+    position: fixed;
+    color: white;
+    background-color: rgb(47, 46, 47);
+    padding: 1rem;
+    right: 1.5rem;
+    left: 15.25rem;
 }
