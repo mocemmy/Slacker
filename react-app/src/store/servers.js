@@ -75,6 +75,21 @@ export const thunkLeaveServer = (serverId) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteServer = (serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(thunkGetAllServers())
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
 
 const initialState = {
     serverList: null,

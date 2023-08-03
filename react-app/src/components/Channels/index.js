@@ -6,7 +6,7 @@ import Messages from "../Messages";
 import "./channelList.css";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmModal from "../ConfirmModal";
-import { thunkLeaveServer } from "../../store/servers";
+import { thunkDeleteServer, thunkLeaveServer } from "../../store/servers";
 import UpdateServerForm from "../UpdateServerForm";
 import { thunkLeaveChannel, thunkDeleteChannel } from "../../store/channels";
 import ChannelForm from "../ChannelForm";
@@ -25,6 +25,10 @@ function Channels({ server }) {
 
     const leaveServer = async () => {
         await dispatch(thunkLeaveServer(server.id));
+    }
+
+    const deleteServer = async () => {
+        await dispatch(thunkDeleteServer(server.id))
     }
 
     useEffect(() => {
@@ -120,20 +124,35 @@ function Channels({ server }) {
                     <p>{server.name}</p>
                     <div className={ulClassName}>
                         <ul className={ownedWorkspace}>
-                            <li><OpenModalButton
-                                buttonText={"Edit Workspace"}
-                                modalComponent={<UpdateServerForm currentServer={server} />}
-                            /></li>
+                            <li>
+                                <OpenModalButton
+                                    buttonText={"Edit Workspace"}
+                                    modalComponent={<UpdateServerForm currentServer={server} />}
+                                />
+                            </li>
 
-                            <li>Delete Workspace</li>
+                            <li>
+                                <OpenModalButton
+                                    buttonText={'Delete Workspace'}
+                                    modalComponent={
+                                        <ConfirmModal
+                                            modalTitle={`Are you sure you want to delete ${server.name}`}
+                                            yesHandler={deleteServer}
+                                        />}
+                                />
+                            </li>
                         </ul>
                         <ul className={notOwnedWorkspace}>
                             <li>
                                 <OpenModalButton
-                                    buttonText={"Leave workspace"}
-                                    modalComponent={<ConfirmModal
-                                        modalTitle={`Are you sure you want to leave ${server.name}?`}
-                                        yesHandler={() => leaveServer()} />} /></li>
+                                    buttonText={"Leave Workspace"}
+                                    modalComponent={
+                                        <ConfirmModal
+                                            modalTitle={`Are you sure you want to leave ${server.name}?`}
+                                            yesHandler={leaveServer}
+                                        />}
+                                />
+                            </li>
                         </ul>
                     </div>
                 </div>
