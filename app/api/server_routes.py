@@ -5,6 +5,8 @@ from app.models import db, Server, Channel, Message, User
 
 server_routes = Blueprint('servers', __name__)
 
+# Get list of servers GET /api/servers/
+
 @server_routes.route('/')
 @login_required
 def servers():
@@ -15,7 +17,7 @@ def servers():
 
     return {"servers": [server.to_dict() for server in servers]}
 
-# Update Server PUT /api/servers/:serverId
+# Get current user's servers GET /api/servers/current
 
 @server_routes.route('/current', methods=['GET'])
 @login_required
@@ -25,6 +27,8 @@ def current_users_servers():
     """
     servers = current_user.owned_servers
     return {"servers": [server.to_dict() for server in servers]}
+
+# Get channels in a server GET  /api/servers/:serverId/channels
 
 @server_routes.route('/<int:id>/channels')
 @login_required
@@ -36,6 +40,7 @@ def channels(id):
 
     return {"channels": [channel.to_dict() for channel in server.channels]}
 
+# Create server POST /api/servers/new
 
 @server_routes.route('/new', methods=['POST'])
 @login_required
@@ -81,6 +86,38 @@ def create_new_server():
     else:
         return {'errors': form.errors}, 400
 
+# Get info of a single server GET /api/servers/:serverId
+
+@server_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def get_server_by_id(id):
+    """
+    Get info of a single server
+    """
+    # Verify this server exists
+    server = Server.query.get(id)
+    if server is None:
+        return {'errors': ['Workspace not found']}, 404
+
+    # Verify the user is in this server
+    member_id_list = [member.id for member in server.members]
+    if current_user.id not in member_id_list:
+        return {'errors': ['Unauthorized']}, 401
+
+    # load owner, members, channels and send it
+    owner = server.owner
+    #del owner['email']
+    members = server.members
+    channels = server.channels
+    res = {
+        'server': server.to_dict(),
+        'owner': owner.to_dict_private(),
+        'members': [member.to_dict_private() for member in members],
+        'channels': [channel.to_dict() for channel in channels]
+    }
+    return res, 200
+
+# Update server PUT /api/servers/:serverId
 
 @server_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -115,7 +152,7 @@ def update_server_by_id(id):
     else:
         return {'errors': form.errors}, 400
 
-
+# Delete a server DELETE /api/servers/:serverId
 
 @server_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
@@ -136,6 +173,8 @@ def delete_server_by_id(id):
         return {'message': 'Successfully deleted'}
     else:
         return {'errors': ['Unauthorized']}, 401
+
+# Join a server POST /api/servers/:serverId/join
 
 @server_routes.route('/<int:id>/join', methods=['POST'])
 @login_required
@@ -173,6 +212,8 @@ def request_join_server(id):
     db.session.commit()
     return {'message': f'User with ID {user.id} Successfully joined workspace with {server.id}'}
 
+# Leave a server POST /api/servers/:serverId/leave
+
 @server_routes.route('/<int:id>/leave', methods=['POST'])
 @login_required
 def request_leave_server(id):
@@ -194,7 +235,7 @@ def request_leave_server(id):
     # if you are not a member of the server should return error
     if current_user.id not in member_id_list:
         return {"errors": ['User is not in workspace']}, 400
-    
+
     user = User.query.get(current_user.id)
 
     for channel in server.channels:
