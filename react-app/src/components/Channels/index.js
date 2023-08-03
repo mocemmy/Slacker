@@ -136,7 +136,7 @@ function Channels({ server }) {
                                     buttonText={'Delete Workspace'}
                                     modalComponent={
                                         <ConfirmModal
-                                            modalTitle={`Are you sure you want to delete ${server.name}`}
+                                            modalTitle={`Are you sure you want to delete ${server.name}?`}
                                             yesHandler={deleteServer}
                                         />}
                                 />
@@ -188,8 +188,12 @@ function Channels({ server }) {
                 </div>
                 <div className={ulChannelName}>
                     <ul className={ownedChannel}>
-                        <OpenModalButton modalComponent={<ChannelForm type="UPDATE" channel={currChannel} server={server} />} buttonText="Edit Channel" />
-                        <li onClick={handleDeleteChannel}>Delete Channel</li>
+                        <li>
+                            <OpenModalButton modalComponent={<ChannelForm type="UPDATE" channel={currChannel} server={server} />} buttonText="Edit Channel" />
+                        </li>
+                        <li>
+                            <OpenModalButton buttonText={'Delete Channel'} modalComponent={<ConfirmModal modalTitle={`Are you sure you want to delete the channel ${currChannel.name}`} yesHandler={handleDeleteChannel} />} />
+                        </li>
                     </ul>
                     <ul className={notOwnedChannel}>
                         <li onClick={handleLeaveChannel}>Leave Channel</li>
