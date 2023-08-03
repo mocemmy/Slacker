@@ -61,7 +61,6 @@ def create_new_server():
         server = Server(
             name=form.data['name'],
             created_by=current_user.id,
-            is_public=form.data['isPublic'],
             profile_pic=form.data['profilePic'],
             description=form.data['description']
         )
@@ -142,6 +141,7 @@ def update_server_by_id(id):
         return {'errors': ['Unauthorized']}, 401
 
     data = request.json
+    print("", data)
     # validation
     form = ServerForm(data=data)
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -149,7 +149,6 @@ def update_server_by_id(id):
         # update
         server.name = form.data["name"]
         #server.created_by = data["created_by"]
-        server.is_public = form.data["isPublic"]
         server.profile_pic = form.data["profilePic"]
         server.description = form.data["description"]
         #db.session.add(server)
@@ -218,9 +217,9 @@ def request_join_server(id):
     db.session.commit()
     return {'message': f'User with ID {user.id} Successfully joined workspace with {server.id}'}
 
-# Leave a server POST /api/servers/:serverId/leave
+# Leave a server GET /api/servers/:serverId/leave
 
-@server_routes.route('/<int:id>/leave', methods=['POST'])
+@server_routes.route('/<int:id>/leave', methods=['GET'])
 @login_required
 def request_leave_server(id):
     """
