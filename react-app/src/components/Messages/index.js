@@ -5,7 +5,6 @@ import { io } from "socket.io-client";
 import MessageDisplay from "../MessageDisplay";
 import { thunkGetAllMessages } from "../../store/messages";
 import { useDispatch } from "react-redux";
-import ConfirmModal from "../ConfirmModal";
 import './MessageList.css'
 
 function Messages({ channel }) {
