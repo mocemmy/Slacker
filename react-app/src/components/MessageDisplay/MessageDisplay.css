@@ -25,7 +25,7 @@
 }
 
 .message-display-container:hover {
-    background-color: rgb(160, 160, 160);
+    background-color: rgba(160, 160, 160, 0.25);
 }
 
 .message-body {

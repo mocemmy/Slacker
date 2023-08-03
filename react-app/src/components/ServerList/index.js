@@ -19,6 +19,7 @@ const ServerList = () => {
     const [showUserMenu, setUserMenu] = useState(false)
     const servers = useSelector(state => state.server.serverList)
     const user = useSelector(state => state.session.user)
+    const [defaultServer, setDefaultServer] = useState(servers[0].id || null)
     const dispatch = useDispatch()
     const ulRef = useRef();
     const history = useHistory();
@@ -46,11 +47,12 @@ const ServerList = () => {
     if (!isLoaded) return <Loading />
 
     if (servers[0]) {
-        const defaultServer = servers[0].id
+        // const defaultServer = servers[0].id
         dispatch(thunkGetAllChannels(defaultServer))
     }
 
     const changeServer = (e, serverId) => {
+        setDefaultServer(serverId)
         dispatch(thunkGetAllChannels(serverId))
     }
 
@@ -104,7 +106,7 @@ const ServerList = () => {
                                 src={server.profile_pic}
                                 alt={server.name}
                                 onClick={e => changeServer(e, server.id)}
-                                className="serverListImg"></img>
+                                className={server.id === defaultServer? "serverListImg selectedServer" : "serverListImg"}></img>
                         </li>
                     )
                 })}
