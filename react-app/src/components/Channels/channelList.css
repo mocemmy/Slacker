@@ -3,7 +3,7 @@
     color: #D1D2D3D3;
     border: 1px solid #3a3a3ad3;
     border-width: thin;
-    width: fit-content;
+    width: 10rem;
     min-width: 10rem;
 }
 
@@ -44,7 +44,7 @@
     position: fixed;
     color: white;
     background-color: rgb(47, 46, 47);
-    width: 100%;
     padding: 1rem;
-    
+    right: 1.5rem;
+    left: 15rem;
 }
