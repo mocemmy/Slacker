@@ -10,6 +10,7 @@ import { thunkLeaveServer } from "../../store/servers";
 import UpdateServerForm from "../UpdateServerForm";
 import { thunkLeaveChannel, thunkDeleteChannel } from "../../store/channels";
 import ChannelForm from "../ChannelForm";
+// import Loading from "../Loading";
 
 function Channels({ server }) {
     const channels = useSelector((state) => state.channels.channelList);
@@ -21,12 +22,6 @@ function Channels({ server }) {
     const [showChannelMenu, setShowChannelMenu] = useState(false);
     const ulRef = useRef();
     const channelRef = useRef();
-
-    const changeChannel = (e, currChannel) => {
-        dispatch(thunkGetAllMessages(currChannel.id));
-        setDefaultChannel(currChannel.id);
-        setCurrChannel(currChannel);
-    };
 
     const leaveServer = async () => {
         await dispatch(thunkLeaveServer(server.id));
@@ -83,8 +78,6 @@ function Channels({ server }) {
         if (!showChannelMenu) setShowChannelMenu(true);
         else setShowChannelMenu(false);
     };
-
-    if (!channels || !currChannel) return <Loading />;
 
     const ownedWorkspace =
         currentUser && server && currentUser.id === server.created_by
