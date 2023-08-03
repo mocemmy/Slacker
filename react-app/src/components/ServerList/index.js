@@ -1,6 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
 import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
 import ConfirmLogout from "../ConfirmLogoutModal";
@@ -19,7 +18,7 @@ const ServerList = () => {
     const [showUserMenu, setUserMenu] = useState(false)
     const servers = useSelector(state => state.server.serverList)
     const user = useSelector(state => state.session.user)
-    const [defaultServer, setDefaultServer] = useState(servers[0].id || null)
+    const [defaultServer, setDefaultServer] = useState(null)
     const dispatch = useDispatch()
     const ulRef = useRef();
     const history = useHistory();
@@ -44,21 +43,21 @@ const ServerList = () => {
         return () => document.removeEventListener("click", closeMenu);
 
     }, [showUserMenu])
+    
+    useEffect(() => {
+        if (servers && servers[0]) {
+            setDefaultServer(servers[0].id)
+            dispatch(thunkGetAllChannels(servers[0].id))
+        }
+    }, [servers, dispatch])
+    
     if (!isLoaded) return <Loading />
-
-    if (servers[0]) {
-        // const defaultServer = servers[0].id
-        dispatch(thunkGetAllChannels(defaultServer))
-    }
 
     const changeServer = (e, serverId) => {
         setDefaultServer(serverId)
         dispatch(thunkGetAllChannels(serverId))
     }
 
-    // const toggleMenu = () => {
-    //     showUserMenu ? setUserMenu(false) : setUserMenu(true)
-    // }
     const openMenu = () => {
         if (!showUserMenu) setUserMenu(true);
     }
@@ -101,7 +100,7 @@ const ServerList = () => {
             <ul id="serverList">
                 {servers.map(server => {
                     return (
-                        <li key={server.id} className="serverListItem">
+                        <li key={server.id} title={server.name} className="serverListItem">
                             <img
                                 src={server.profile_pic}
                                 alt={server.name}

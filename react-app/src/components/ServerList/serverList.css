@@ -68,3 +68,9 @@ border color: #3a3a3ad3
 .selectedServer {
     outline: 2px solid gray;
 }
+
+.serverListItem[title]:hover::after {
+    background-color: #1d1c1d;
+    color: white;
+    border-radius: 0.25rem;
+}
