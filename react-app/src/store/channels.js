@@ -38,12 +38,12 @@ export const thunkEditChannel = (channelId, serverId, data) => async (dispatch) 
         headers: {
             "Content-Type": "application/json"
         },
-        body: {
+        body: JSON.stringify({
             name: data.name,
+            server_id: data.server_id,
             created_by: data.created_by,
-            description: data.description,
-            server_id: data.server_id
-        }
+            description: data.description
+        })
     })
     if (response.ok) {
         const data = await response.json();
@@ -60,12 +60,12 @@ export const thunkCreateChannel = (serverId, data) => async dispatch => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: {
+        body: JSON.stringify({
             name: data.name,
             created_by: data.created_by,
             description: data.description,
             server_id: data.server_id
-        }
+        })
     })
     if (response.ok) {
         const data = await response.json();

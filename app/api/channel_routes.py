@@ -73,6 +73,7 @@ def edit_channel(id):
     channel = Channel.query.get(id)
 
     form = ChannelForm()
+    print('*******************', ChannelForm())
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']

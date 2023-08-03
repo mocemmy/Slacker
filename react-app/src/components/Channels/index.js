@@ -6,6 +6,7 @@ import Messages from "../Messages";
 import "./channelList.css";
 import OpenModalButton from "../OpenModalButton";
 import { thunkLeaveChannel, thunkDeleteChannel } from "../../store/channels";
+import ChannelForm from "../ChannelForm";
 
 function Channels({ server }) {
   const channels = useSelector((state) => state.channels.channelList);
@@ -105,10 +106,6 @@ function Channels({ server }) {
     dispatch(thunkDeleteChannel(currChannel.id, server.id))
   }
 
-  const handleEditChannel = () => {
-
-  }
-
 
   return (
     <>
@@ -143,7 +140,7 @@ function Channels({ server }) {
           ))}
           <li className="channelListItem">
             <i className="fa-solid fa-plus"></i>&nbsp;&nbsp;
-            <OpenModalButton buttonText="Add Channel" />
+            <OpenModalButton buttonText="Add Channel" modalComponent={<ChannelForm type="CREATE" server={server} />}/>
           </li>
         </ul>
       </div>
@@ -157,7 +154,7 @@ function Channels({ server }) {
         </div>
           <div className={ulChannelName}>
             <ul className={ownedChannel}>
-              <li onClick={handleEditChannel}>Edit Channel</li>
+              <OpenModalButton modalComponent={<ChannelForm type="UPDATE" channel={currChannel} server={server} />} buttonText="Edit Channel"/>
               <li onClick={handleDeleteChannel}>Delete Channel</li>
             </ul>
             <ul className={notOwnedChannel}>

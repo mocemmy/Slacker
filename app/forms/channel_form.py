@@ -7,4 +7,3 @@ class ChannelForm(FlaskForm):
     server_id = IntegerField('Server Id', validators=[DataRequired()])
     created_by = IntegerField('Created By', validators=[DataRequired()])
     description = StringField('Description')
-    is_public = BooleanField('Public', validators=[DataRequired()])

@@ -6,8 +6,8 @@ import { thunkEditChannel, thunkCreateChannel } from '../../store/channels';
 
 function ChannelForm ({channel, type, server}) {
     const dispatch = useDispatch();
-    const [name, setName] = useState(channel.name || '')
-    const [description, setDescription] = useState(channel.description || '')
+    const [name, setName] = useState(channel ? channel.name : "")
+    const [description, setDescription] = useState(channel ? channel.description : "")
     const [errors, setErrors] = useState({});
     const currentUser = useSelector(state => state.session.user);
     const { closeModal } = useModal();
@@ -25,7 +25,7 @@ function ChannelForm ({channel, type, server}) {
             name
         }
         let response;
-        if (type = "CREATE") {
+        if (type == "CREATE") {
             response = await dispatch(thunkCreateChannel(server.id, data));
         } else {
             response = await dispatch(thunkEditChannel(channel.id, server.id, data));
@@ -67,6 +67,7 @@ function ChannelForm ({channel, type, server}) {
                 <input
                     name='description'
                     type="text"
+                    value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder='description'
                 />
