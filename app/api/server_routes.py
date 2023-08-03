@@ -144,25 +144,25 @@ def request_join_server(id):
     Join a server
     request body:
     {
-        'id': 1
+        'userId': 1
     }
     """
     # check id of server exist, if not return 404
     server = Server.query.get(id)
     if server is None:
-        return {'errors': ['Resource not found']}, 404
+        return {'errors': ['Workspace not found']}, 404
     # check server is private, if the current_user is not the owner, return 401 unauthorized
     if server.is_public is False and server.created_by != current_user.id:
         return {'errors': ['Unauthorized']}, 401
     # check if the user exists
     data = request.json
-    user = User.query.get(data["id"])
+    user = User.query.get(data["userId"])
     if user is None:
-        return {"errors": [f'Bad request, user with {data["id"]} does not exits']}, 400
+        return {"errors": [f'Bad request, user with ID {data["userId"]} does not exits']}, 400
     # check if the user is already in the server
     member_id_list = [member.id for member in server.members]
     if user.id in member_id_list:
-        return {"errors": [f'Bad request, user with {data["id"]} is already in this workspace']}, 400
+        return {"errors": [f'Bad request, user with ID {data["userId"]} is already in this workspace']}, 400
     # we can add the user to the server
     server.members.append(user)
     db.session.commit()
@@ -171,7 +171,7 @@ def request_join_server(id):
     for channel in channels:
         channel.members.append(user)
     db.session.commit()
-    return {'message': f'User with id {user.id} Successfully joined workspace with {server.id}'}
+    return {'message': f'User with ID {user.id} Successfully joined workspace with {server.id}'}
 
 @server_routes.route('/<int:id>/leave', methods=['POST'])
 @login_required
@@ -187,12 +187,25 @@ def request_leave_server(id):
 
     # if you are owner of the server you cannot leave
     if server.created_by == current_user.id:
-        return {'errors': ['Cannot leave server you own']}, 400
+        return {'errors': ['Cannot leave a workspace you own']}, 400
+
+    member_id_list = [member.id for member in server.members]
 
     # if you are not a member of the server should return error
-    member_id_list = [member.id for member in server.members]
     if current_user.id not in member_id_list:
         return {"errors": ['User is not in workspace']}, 400
+    
+    user = User.query.get(current_user.id)
+
+    for channel in server.channels:
+        channel.members.remove(user)
+
+    # Deletes user from the server
+    server.members.remove(user)
+    db.session.commit()
+
+    return {'message': f"User with id {user.id} successfully left the workspace"}
+
 
 # @server_routes.route('/<int:id>/removeUser', methods=['POST'])
 # @login_required
