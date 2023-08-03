@@ -35,9 +35,8 @@ def create_channel():
         server_id = form.data['server_id']
         created_by = form.data['created_by']
         description = form.data['description']
-        is_public = form.data['is_public']
 
-        new_channel = Channel(name=name, server_id=server_id, created_by=created_by, description=description, is_public=is_public)
+        new_channel = Channel(name=name, server_id=server_id, created_by=created_by, description=description)
 
         new_channel.members.append(current_user)
         db.session.add(new_channel)
@@ -81,11 +80,9 @@ def edit_channel(id):
         # Add the user to the session, we are logged in!
         name = form.data['name']
         description = form.data['description']
-        is_public = form.data['is_public']
 
         channel.name = name
         channel.description = description
-        channel.is_public = is_public
         channel.updated_at = datetime.now()
 
         db.session.commit()

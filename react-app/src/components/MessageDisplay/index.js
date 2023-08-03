@@ -28,6 +28,8 @@ function MessageDisplay({
     return () => document.removeEventListener("click", closeMenu);
   }, [showMessageMenu]);
 
+  if (!message) return <h1>No Messages to Display</h1>
+
   const openMenu = () => {
     if (!showMessageMenu) setShowMessageMenu(true);
     else setShowMessageMenu(false)
