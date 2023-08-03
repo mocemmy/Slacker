@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loading from "../Loading";
+import EmptyChannels from "../Loading/EmptyChannels";
 import { thunkGetAllMessages } from "../../store/messages";
 import Messages from "../Messages";
 import "./channelList.css";
 import OpenModalButton from "../OpenModalButton";
+import { thunkLeaveChannel, thunkDeleteChannel } from "../../store/channels";
 
 function Channels({ server }) {
   const channels = useSelector((state) => state.channels.channelList);
@@ -17,14 +18,9 @@ function Channels({ server }) {
   const ulRef = useRef();
   const channelRef = useRef();
 
-  const changeChannel = (e, currChannel) => {
-    dispatch(thunkGetAllMessages(currChannel.id));
-    setDefaultChannel(currChannel.id);
-    setCurrChannel(currChannel);
-  };
-
+  
   useEffect(() => {
-    if (channels && channels[0].id) {
+    if (channels && channels[0]?.id) {
       setDefaultChannel(channels[0].id);
       setCurrChannel(channels[0]);
       dispatch(thunkGetAllMessages(channels[0].id));
@@ -33,12 +29,12 @@ function Channels({ server }) {
 
   useEffect(() => {
     if (!showMenu) return;
-
+    
     const closeMenu = (e) => {
       if (ulRef.current && !ulRef.current.contains(e.target))
         setShowMenu(false);
     };
-
+    
     document.addEventListener("click", closeMenu); //close menu on click anywhere on document exept menu or button
 
     return () => document.removeEventListener("click", closeMenu);
@@ -46,16 +42,24 @@ function Channels({ server }) {
 
   useEffect(() => {
     if (!showChannelMenu) return;
-
+    
     const closeMenu = (e) => {
       if (channelRef.current && !channelRef.current.contains(e.target))
-        setShowChannelMenu(false);
+      setShowChannelMenu(false);
     };
-
+    
     document.addEventListener("click", closeMenu); //close menu on click anywhere on document exept menu or button
-
+    
     return () => document.removeEventListener("click", closeMenu);
   }, [showChannelMenu]);
+  
+  if (!channels || !currChannel) return <EmptyChannels server={server} />;
+
+  const changeChannel = (e, currChannel) => {
+    dispatch(thunkGetAllMessages(currChannel.id));
+    setDefaultChannel(currChannel.id);
+    setCurrChannel(currChannel);
+  };
 
   const toggleMenu = () => {
     if (!showMenu) setShowMenu(true);
@@ -67,7 +71,6 @@ function Channels({ server }) {
     else setShowChannelMenu(false);
   };
 
-  if (!channels || !currChannel) return <Loading />;
 
   const ownedWorkspace =
     currentUser && server && currentUser.id === server.created_by
@@ -79,17 +82,33 @@ function Channels({ server }) {
       : "hidden";
 
   const ulClassName = showMenu ? "" : "hidden";
-  const ulChannelName = showChannelMenu ? "" : "hidden";
+  const ulChannelName = showChannelMenu ? "ul-dropdown" : "ul-dropdown hidden";
 
   const ownedChannel =
     currentUser && currChannel && currentUser.id === currChannel.created_by
-      ? ""
+      ? "ul-channel"
       : "hidden";
   const notOwnedChannel =
     currentUser && currChannel && currentUser.id !== currChannel.created_by
-      ? ""
+      ? "ul-channel"
       : "hidden";
-  console.error(ownedChannel);
+
+  const handleLeaveChannel = () => {
+    if(currentUser.id == 15 || currentUser.id == 16){
+      window.alert("Demo users can't leave channels")
+    } else {
+      dispatch(thunkLeaveChannel(currChannel.id, server.id))
+    }
+  }
+
+  const handleDeleteChannel = () => {
+    dispatch(thunkDeleteChannel(currChannel.id, server.id))
+  }
+
+  const handleEditChannel = () => {
+
+  }
+
 
   return (
     <>
@@ -135,16 +154,16 @@ function Channels({ server }) {
           onClick={toggleChannelMenu}
         >
           <p>{currChannel.name}</p>
+        </div>
           <div className={ulChannelName}>
             <ul className={ownedChannel}>
-              <li>Edit Channel</li>
-              <li>Delete Channel</li>
+              <li onClick={handleEditChannel}>Edit Channel</li>
+              <li onClick={handleDeleteChannel}>Delete Channel</li>
             </ul>
             <ul className={notOwnedChannel}>
-              <li>Leave Channel</li>
+              <li onClick={handleLeaveChannel}>Leave Channel</li>
             </ul>
           </div>
-        </div>
         <Messages channel={defaultChannel} />
       </div>
     </>

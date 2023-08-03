@@ -48,3 +48,21 @@
     right: 1.5rem;
     left: 18rem;
 }
+
+.ul-dropdown {
+    display: flex;
+    position: fixed;
+    top: 3rem;
+    left: 18rem;
+    background-color: rgb(112, 112, 112);
+    color: white;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.ul-dropdown li {
+    padding-left: 0;
+}
+.ul-channel {
+    padding: .2rem .5rem;
+}

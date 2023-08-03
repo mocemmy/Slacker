@@ -35,9 +35,8 @@ def create_channel():
         server_id = form.data['server_id']
         created_by = form.data['created_by']
         description = form.data['description']
-        is_public = form.data['is_public']
 
-        new_channel = Channel(name=name, server_id=server_id, created_by=created_by, description=description, is_public=is_public)
+        new_channel = Channel(name=name, server_id=server_id, created_by=created_by, description=description)
 
         new_channel.members.append(current_user)
         db.session.add(new_channel)
@@ -81,11 +80,9 @@ def edit_channel(id):
         # Add the user to the session, we are logged in!
         name = form.data['name']
         description = form.data['description']
-        is_public = form.data['is_public']
 
         channel.name = name
         channel.description = description
-        channel.is_public = is_public
         channel.updated_at = datetime.now()
 
         db.session.commit()
@@ -94,3 +91,22 @@ def edit_channel(id):
 
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@channel_routes.route('/<int:id>/leave', methods=['DELETE'])
+@login_required
+def leave_channel(id):
+    """
+    leave a channel by ID
+    """
+    channel = Channel.query.get(id)
+    if channel is None:
+        return {'errors': ['Channel not found']}, 404
+    if channel.created_by == current_user.id:
+        return {'errors': ['Cannot leave channel you own']}, 400
+    for member in channel.members:
+        if member.id == current_user.id:
+            channel.members.remove(current_user)
+            db.session.commit()
+            return {'message': 'You left the channel!'}
+
+    return {"errors": ['User is not in channel']}, 400
