@@ -55,7 +55,6 @@ def create_new_server():
         server = Server(
             name=form.data['name'],
             created_by=current_user.id,
-            is_public=form.data['isPublic'],
             profile_pic=form.data['profilePic'],
             description=form.data['description']
         )
@@ -136,6 +135,7 @@ def update_server_by_id(id):
         return {'errors': ['Unauthorized']}, 401
 
     data = request.json
+    print("", data)
     # validation
     form = ServerForm(data=data)
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -143,7 +143,6 @@ def update_server_by_id(id):
         # update
         server.name = form.data["name"]
         #server.created_by = data["created_by"]
-        server.is_public = form.data["isPublic"]
         server.profile_pic = form.data["profilePic"]
         server.description = form.data["description"]
         #db.session.add(server)

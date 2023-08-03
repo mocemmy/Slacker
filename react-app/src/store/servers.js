@@ -44,6 +44,24 @@ export const thunkCreateNewServer = (server) => async (dispatch) => {
     }
 }
 
+export const thunkUpdateServerById = (server, serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(server)
+    })
+    if (response.ok) {
+        const data = await response.json();
+        console.log('data', data)
+        dispatch(actionSetSingleServer(data.server))
+        return data
+    } else {
+        const errors = await response.json();
+        console.log('errors', errors)
+        return errors
+    }
+}
+
 export const thunkLeaveServer = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/leave`);
 

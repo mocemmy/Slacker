@@ -7,4 +7,3 @@ class ServerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     profilePic = StringField('Profile Picture')
     description = StringField('Description', validators=[DataRequired()])
-    isPublic = BooleanField('Public', validators=[DataRequired()])

@@ -7,6 +7,7 @@ import "./channelList.css";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmModal from "../ConfirmModal";
 import { thunkLeaveServer } from "../../store/servers";
+import UpdateServerForm from "../UpdateServerForm";
 
 function Channels({ server }) {
     const channels = useSelector((state) => state.channels.channelList);
@@ -104,12 +105,17 @@ function Channels({ server }) {
                     <p>{server.name}</p>
                     <div className={ulClassName}>
                         <ul className={ownedWorkspace}>
-                            <li>Edit Workspace</li>
+                            <li><OpenModalButton
+                                buttonText={"Edit Workspace"}
+                                modalComponent={<UpdateServerForm currentServer={server} />}
+                            /></li>
+
                             <li>Delete Workspace</li>
                         </ul>
                         <ul className={notOwnedWorkspace}>
                             <li>
-                                <OpenModalButton buttonText={"Leave workspace"}
+                                <OpenModalButton
+                                    buttonText={"Leave workspace"}
                                     modalComponent={<ConfirmModal
                                         modalTitle={`Are you sure you want to leave ${server.name}?`}
                                         yesHandler={() => leaveServer()} />} /></li>
