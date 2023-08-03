@@ -49,6 +49,27 @@ def seed_channel_members():
         {"channel_id":9, "user_id":13},
         {"channel_id":4, "user_id":14},
         {"channel_id":9, "user_id":14},
+        {"channel_id":1, "user_id":15},#demo user 1
+        {"channel_id":2, "user_id":15},
+        {"channel_id":3, "user_id":15},
+        {"channel_id":4, "user_id":15},
+        {"channel_id":5, "user_id":15},
+        {"channel_id":6, "user_id":15},
+        {"channel_id":7, "user_id":15},
+        {"channel_id":8, "user_id":15},
+        {"channel_id":9, "user_id":15},
+        {"channel_id":10, "user_id":15},
+        {"channel_id":1, "user_id":16}, #demo user 2
+        {"channel_id":2, "user_id":16},
+        {"channel_id":3, "user_id":16},
+        {"channel_id":4, "user_id":16},
+        {"channel_id":5, "user_id":16},
+        {"channel_id":6, "user_id":16},
+        {"channel_id":7, "user_id":16},
+        {"channel_id":8, "user_id":16},
+        {"channel_id":9, "user_id":16},
+        {"channel_id":10, "user_id":16},
+        
     ]
 
     for member in data:

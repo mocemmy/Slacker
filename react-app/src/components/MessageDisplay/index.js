@@ -79,7 +79,7 @@ function MessageDisplay({
   const editMessage = toggleEdit ? "" : "hidden";
   const notEditMessage = !toggleEdit ? "" : "hidden";
 
-  const ownedMessage = currentUser.id === message.sent_by ? "" : "hidden";
+  const ownedMessage = currentUser && currentUser.id === message.sent_by ? "" : "hidden";
   const menuHidden = showMessageMenu ? "" : "hidden";
 
   const time = new Date(message.created_at);

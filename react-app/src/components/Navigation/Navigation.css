@@ -59,7 +59,8 @@
     align-items: center;
 }
 
-.nav-button {
+.nav-button,
+.demo-button {
     box-sizing: border-box;
     background-color: #541554;
     color: #fff;
@@ -76,8 +77,14 @@
     padding: 0.5rem;
 }
 
-.nav-button:hover {
-    border: 2px solid #fff;
+.nav-button:hover,
+.demo-button:hover {
+    outline: 2px solid #fff;
+}
+.demo-button {
+    width: fit-content;
+    margin: 0 1rem;
+    padding: 1rem;
 }
 
 #login:hover,
