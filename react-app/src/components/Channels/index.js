@@ -9,15 +9,18 @@ function Channels() {
     const channels = useSelector(state => state.channels.channelList)
     const dispatch = useDispatch()
     const [defaultChannel, setDefaultChannel] = useState()
+    const [currChannelName, setCurrChannelName] = useState()
 
     const changeChannel = (e, currChannel) => {
-        dispatch(thunkGetAllMessages(currChannel))
-        setDefaultChannel(currChannel)
+        dispatch(thunkGetAllMessages(currChannel.id))
+        setDefaultChannel(currChannel.id)
+        setCurrChannelName(currChannel.name)
     }
 
     useEffect(() => {
             if (channels && channels[0].id) {
                 setDefaultChannel(channels[0].id)
+                setCurrChannelName(channels[0].name)
                 dispatch(thunkGetAllMessages(channels[0].id))
             }
 
@@ -34,7 +37,7 @@ function Channels() {
                     {channels.map(currChannel => (
                         <li
                             key={currChannel.id}
-                            onClick={(e) => changeChannel(e, currChannel.id)} className={currChannel.id == defaultChannel ? "channelListItem selected": "channelListItem"}>
+                            onClick={(e) => changeChannel(e, currChannel)} className={currChannel.id === defaultChannel ? "channelListItem selected": "channelListItem"}>
                             <div className="channelHashtag">
                                 #
                             </div>
@@ -44,6 +47,7 @@ function Channels() {
                 </ul>
             </div>
             <div id="message-container">
+                <div className="channel-title">{currChannelName}</div>
                 <Messages channel={defaultChannel} />
             </div>
         </>

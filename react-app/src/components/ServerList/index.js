@@ -79,6 +79,7 @@ const ServerList = () => {
             <div id="serverList-pfp-Container">
                 <img
                     id="serverList-pfp"
+                    alt="server pic"
                     src={user.profile_pic}
                     className="serverListImg"
                     onClick={openMenu}
