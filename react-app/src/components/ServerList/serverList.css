@@ -71,7 +71,7 @@ border color: #3a3a3ad3
 .serverListItem[title]:hover::after {
     content: attr(title);
     position: absolute;
-    left: 1rem;
+    left: 4rem;
     background-color: #1d1c1d;
     color: white;
     border-radius: 0.25rem;
