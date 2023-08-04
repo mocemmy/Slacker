@@ -32,7 +32,7 @@ This site was created by:
 ##### Users
 * Users should be able to create a profile
 * Users should be able to edit their profile
-* Users should be able to update their peofile
+* Users should be able to update their profile
 * Users should be able to delete their account
 ##### Servers
 * Users should be able to view all publicly created servers.
