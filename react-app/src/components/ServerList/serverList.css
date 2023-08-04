@@ -34,6 +34,14 @@ message-container bkc: #272627
     cursor: pointer;
 }
 
+#serverList-container > * > * >*:hover{
+    outline: 2px solid rgb(255, 255, 255);
+}
+
+#serverList-pfp:hover{
+    outline: 2px solid rgb(255, 255, 255);
+}
+
 .serverListImg {
     width: 3rem;
     margin: .2rem 0;

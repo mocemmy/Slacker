@@ -19,9 +19,9 @@ const ServerListModalListItem = ({
     return (
         <li key='new-Server' className="serverListItem" >
             <img
-            title="Add a Workspace" 
+            title="Add a Workspace"
                 onClick={handleOnClick}
-                src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-sign-vectors-photos-and-psd-files-download-3.png"
+                src="/plus.png"
                 alt="new-server"
                 className="serverListImg"
             >
