@@ -27,6 +27,27 @@ const ServerForm = ({ server, formType }) => {
     // const [errors, setErrors] = useState({});
     // const { closeModal } = useModal();
 
+    const validateData = () => {
+        const errorObj = {};
+
+        if (serverName.length === 0) errorObj.name = 'This field is required.'
+        if (serverName.length > 30) errorObj.name = 'Must be shorter than 30 characters.'
+        if (serverName.length <= 30) delete Object.name
+
+        if (pfpURL) {
+            const splitImg = pfpURL.split('.')
+            if (!(splitImg[splitImg.length - 1] === 'jpg' || splitImg[splitImg.length - 1] === 'png' || splitImg[splitImg.length - 1] === 'jpeg')) {
+                errorObj.serverPic = 'Must end in .png, .jpg or .jpeg.';
+            }
+        }
+
+        if (description.length > 255) errorObj.description = 'Must be shorter than 255 characters'
+        if (description.length <= 255) delete Object.description
+
+        if (Object.keys(errorObj).length > 0) return errorObj
+        else return false
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // validation
@@ -38,29 +59,6 @@ const ServerForm = ({ server, formType }) => {
             profilePic: pfpURL,
             description: description,
         };
-
-
-        const validateData = () => {
-            const errorObj = {};
-
-            if (serverName.length === 0) errorObj.name = 'This field is required.'
-            if (serverName.length > 30) errorObj.name = 'Must be shorter than 30 characters.'
-            if (serverName.length <= 30) delete Object.name
-
-            if (pfpURL) {
-                const splitImg = pfpURL.split('.')
-                if (!(splitImg[splitImg.length - 1] === 'jpg' || splitImg[splitImg.length - 1] === 'png' || splitImg[splitImg.length - 1] === 'jpeg')) {
-                    errorObj.serverPic = 'Must end in .png, .jpg or .jpeg.';
-                }
-            }
-
-            if (description.length === 0) errorObj.description = 'This field is required.'
-            if (description.length > 255) errorObj.description = 'Must be shorter than 255 characters'
-            if (description.length <= 255) delete Object.description
-
-            if (Object.keys(errorObj).length > 0) return errorObj
-            else return false
-        }
 
         if (formType === "create") {
             const newErrors = validateData();
