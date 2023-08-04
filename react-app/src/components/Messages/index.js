@@ -120,7 +120,6 @@ function Messages({ channel }) {
 
     return (
         <>
-
             <div className="message-list-container" id='message-list'>
                 <ul className="message-list">
                     {messages.map((message) => (
@@ -162,7 +161,6 @@ function Messages({ channel }) {
                     </button>
                 </div>
             </div>
-
         </>
     );
 }

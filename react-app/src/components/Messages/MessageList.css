@@ -1,8 +1,6 @@
 .message-list-container {
     overflow-y: scroll;
     scrollbar-color: #1d1c1d #1d1c1d;
-    /* height: 80vh; */
-    /* padding-top: 3rem; */
 }
 
 #message-container {
@@ -28,6 +26,7 @@
 .message-input {
     padding: 2rem;
     /* box-sizing: border-box; */
+    color: white;
     border: none;
     outline: none;
     background-color: transparent;
@@ -41,7 +40,6 @@
     right: 0;
     bottom: 0;
     margin: 1rem 1.5rem;
-    /* padding-right: 0; */
 }
 
 .input-container {
@@ -49,13 +47,11 @@
     background-color: #3d3c3d;
     border: 2px solid #4e4e4e;
     border-radius: 0.30rem;
-    /* margin: 1.5rem; */
     margin-right: 1rem;
 }
 
 .input-container:focus-within {
     outline: 3px solid #1d1c1d;
-    /* border: 5px solid red ; */
 }
 
 .message-submit-button {
