@@ -24,8 +24,6 @@
     align-items: center;
 }
 
-#serverName {}
-
 .channelListItem {
     display: flex;
     list-style: none;
