@@ -38,9 +38,11 @@ function EditUser({ user }) {
     setErrors(validationErrors);
   }, [first_name, last_name, bio, profile_pic, hasSubmitted]);
 
-  if (user.id === 15 || user.id === 16) {
-    window.alert("you can't edit the Demo User");
-  }
+  useEffect(() => {
+    if (user.id === 15 || user.id === 16) {
+      window.alert("you can't edit the Demo User");
+    }
+  }, [])
 
   const onClick = () => {
     setHasSubmitted(true);

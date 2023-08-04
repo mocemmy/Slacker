@@ -53,6 +53,7 @@ function Messages({ channel }) {
 
             setMessage("");
             setErrors({})
+            setCharactersLeft(500)
         }
     };
 
