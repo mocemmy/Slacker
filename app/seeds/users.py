@@ -4,22 +4,22 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    david = User(username='david', first_name='David', last_name='Wallace', email='david@office.com', password='Password1234!') #1
-    jan = User(username='jan', first_name='Jan', last_name='Levinson', email='jan@office.com', password='Password1234!') #2
-    michael = User(username='michael', first_name='Michael', last_name='Scott', email='michael@office.com', password='Password1234!') #3
-    dwight = User(username='dwight', first_name='Dwight', last_name='Schrute', email='dwight@office.com', password='Password1234!') #4
-    jim = User(username='jim', first_name='Jim', last_name='Halpert', email='jim@office.com', password='Password1234!') #5
-    pam = User(username='pam', first_name='Pam', last_name='Beesley', email='pam@office.com', password='Password1234!') #6
-    meredith = User(username='meredith', first_name='Meredith', last_name='Palmer', email='meredith@office.com', password='Password1234!') #7
-    oscar = User(username='oscar', first_name='Oscar', last_name='Martinez', email='oscar@office.com', password='Password1234!') #8
-    angela = User(username='angela', first_name='Angela', last_name='Martin', email='angela@office.com', password='Password1234!') #9
-    hank = User(username='hank', first_name='Hank', last_name='Security', email='hank@office.com', password='Password1234!') #10
-    karen = User(username='karen', first_name='Karen', last_name='Filippelli', email='karen@office.com', password='Password1234!') #11
-    andy = User(username='andy', first_name='Andy', last_name='Bernard', email='andy@office.com', password='Password1234!') #12
-    holly = User(username='holly', first_name='Holly', last_name='Flax', email='holly@office.com', password='Password1234!') #13
-    aj = User(username='aj', first_name='AJ', last_name='Sales', email='aj@office.com', password='Password1234!') #14   
-    stanley = User(username='stanley', first_name='Stanley', last_name='Hudson', email='stanley@office.com', password='Password1234!') #15
-    robert = User(username='robert', first_name='Robert', last_name='California', email='robert@office.com', password='Password1234!') #16
+    david = User(username='david', first_name='David', last_name='Wallace', email='david@office.com', password='Password1234!', profile_pic='/images/david.png') #1
+    jan = User(username='jan', first_name='Jan', last_name='Levinson', email='jan@office.com', password='Password1234!', profile_pic='/images/jan.png') #2
+    michael = User(username='michael', first_name='Michael', last_name='Scott', email='michael@office.com', password='Password1234!', profile_pic='/images/michael.png') #3
+    dwight = User(username='dwight', first_name='Dwight', last_name='Schrute', email='dwight@office.com', password='Password1234!', profile_pic='/images/dwight.png') #4
+    jim = User(username='jim', first_name='Jim', last_name='Halpert', email='jim@office.com', password='Password1234!', profile_pic='/images/jim.png') #5
+    pam = User(username='pam', first_name='Pam', last_name='Beesley', email='pam@office.com', password='Password1234!', profile_pic='/images/pam.png') #6
+    meredith = User(username='meredith', first_name='Meredith', last_name='Palmer', email='meredith@office.com', password='Password1234!', profile_pic='/images/meredith.png') #7
+    oscar = User(username='oscar', first_name='Oscar', last_name='Martinez', email='oscar@office.com', password='Password1234!', profile_pic='/images/oscar.png') #8
+    angela = User(username='angela', first_name='Angela', last_name='Martin', email='angela@office.com', password='Password1234!', profile_pic='/images/angela.png') #9
+    hank = User(username='hank', first_name='Hank', last_name='Security', email='hank@office.com', password='Password1234!', profile_pic='/images/hank.png') #10
+    karen = User(username='karen', first_name='Karen', last_name='Filippelli', email='karen@office.com', password='Password1234!', profile_pic='/images/karen.png') #11
+    andy = User(username='andy', first_name='Andy', last_name='Bernard', email='andy@office.com', password='Password1234!', profile_pic='/images/andy.png') #12
+    holly = User(username='holly', first_name='Holly', last_name='Flax', email='holly@office.com', password='Password1234!', profile_pic='/images/holly.png') #13
+    aj = User(username='aj', first_name='AJ', last_name='Sales', email='aj@office.com', password='Password1234!', profile_pic='/images/aj.png') #14
+    stanley = User(username='stanley', first_name='Stanley', last_name='Hudson', email='stanley@office.com', password='password', profile_pic='/images/stanley.png') #15
+    robert = User(username='robert', first_name='Robert', last_name='California', email='robert@office.com', password='password', profile_pic='/images/robert.png') #16
 
 
     db.session.add(david)
