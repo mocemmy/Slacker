@@ -71,7 +71,7 @@ const ServerForm = ({ server, formType }) => {
             <input
                 name='name'
                 id='new-server-form-name'
-                placeholder='Workspace name'
+                placeholder='workspace name'
                 type='text'
                 value={serverName}
                 onChange={(e) => setServerName(e.target.value)}
@@ -81,7 +81,7 @@ const ServerForm = ({ server, formType }) => {
             {errors.serverPic && <p className='new-server-form-error'>Picture URL Error: {errors.serverPic}</p>}
             <input
                 name='profile_pic'
-                placeholder='Workspace pic Example: https://funny-pic.png'
+                placeholder='example: https://funny-pic.png'
                 value={pfpURL}
                 onChange={(e) => setPfpURL(e.target.value)}
             />
@@ -90,7 +90,7 @@ const ServerForm = ({ server, formType }) => {
             {errors.description && <p className='new-server-form-error'>Description Error: {errors.description}</p>}
             <input
                 name='description'
-                placeholder='Workspace description'
+                placeholder='workspace description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
