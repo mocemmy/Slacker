@@ -129,6 +129,7 @@ def seed_messages():
         message_body="Maybe you should try selling...your butt", channel_id=10, sent_by=12, created_at=datetime.strptime("2023-08-04 11:38:26", date_format)
     )
 
+
     db.session.add(message1)
     db.session.add(message2)
     db.session.add(message3)

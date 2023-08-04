@@ -27,14 +27,30 @@ def seed_server_members():
         {"server_id":3, "user_id":12},
         {"server_id":4, "user_id":13},
         {"server_id":4, "user_id":14},
-        {"server_id":1, "user_id":15}, #demo user 1
+        {"server_id":1, "user_id":15},
         {"server_id":2, "user_id":15},
         {"server_id":3, "user_id":15},
-        {"server_id":4, "user_id":15}, #demo user 2
+        {"server_id":4, "user_id":15},
         {"server_id":1, "user_id":16},
         {"server_id":2, "user_id":16},
         {"server_id":3, "user_id":16},
-        {"server_id":4, "user_id":16}
+        {"server_id":4, "user_id":16},
+        {"server_id":1, "user_id":17},
+        {"server_id":2, "user_id":17},
+        {"server_id":3, "user_id":17},
+        {"server_id":4, "user_id":17},
+        {"server_id":1, "user_id":18},
+        {"server_id":2, "user_id":18},
+        {"server_id":3, "user_id":18},
+        {"server_id":4, "user_id":18},
+        {"server_id":1, "user_id":19},
+        {"server_id":2, "user_id":19},
+        {"server_id":3, "user_id":19},
+        {"server_id":4, "user_id":19},
+        {"server_id":1, "user_id":20},
+        {"server_id":2, "user_id":20},
+        {"server_id":3, "user_id":20},
+        {"server_id":4, "user_id":20}
     ]
 
     for member in data:

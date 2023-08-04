@@ -20,6 +20,10 @@ def seed_users():
     aj = User(username='aj', first_name='AJ', last_name='Sales', email='aj@office.com', password='Password1234!', profile_pic='/images/aj.png') #14
     stanley = User(username='stanley', first_name='Stanley', last_name='Hudson', email='stanley@office.com', password='password', profile_pic='/images/stanley.png') #15
     robert = User(username='robert', first_name='Robert', last_name='California', email='robert@office.com', password='password', profile_pic='/images/robert.png') #16
+    alex = User(username='alex', first_name='Alex', last_name='Breathwit', email='alex@aa.com', password='SuperSecret123!', profile_pic='/images/alex.png') #17
+    emily = User(username='emily', first_name='Emily', last_name='Morgan', email='emily@aa.com', password='SuperSecret123!', profile_pic='/images/emily.png') #18
+    james = User(username='james', first_name='James', last_name='Cao', email='james@aa.com', password='SuperSecret123!', profile_pic='/images/james.png') #19
+    ryan = User(username='ryan', first_name='Ryan', last_name='Erickson', email='ryan@aa.com', password='SuperSecret123!', profile_pic='/images/ryan.png') #20
 
 
     db.session.add(david)
@@ -38,6 +42,10 @@ def seed_users():
     db.session.add(aj)
     db.session.add(stanley)
     db.session.add(robert)
+    db.session.add(alex)
+    db.session.add(emily)
+    db.session.add(james)
+    db.session.add(ryan)
     db.session.commit()
 
 
