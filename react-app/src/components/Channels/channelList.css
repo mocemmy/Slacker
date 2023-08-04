@@ -17,6 +17,13 @@
     padding: 0;
 }
 
+#serverNameContainer {
+    border: 1px solid #3a3a3ad3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .channelListItem {
     display: flex;
     list-style: none;
@@ -43,10 +50,11 @@
 .channel-title {
     position: fixed;
     color: white;
-    background-color: rgb(47, 46, 47);
+    background-color: #1d1c1d;
     padding: 1rem;
     right: 1.5rem;
     left: 18rem;
+    border: 1px solid #3a3a3ad3;
 }
 
 .ul-dropdown {
@@ -60,9 +68,11 @@
     align-items: center;
     justify-content: center;
 }
+
 .ul-dropdown li {
     padding-left: 0;
 }
+
 .ul-channel {
     padding: .2rem .5rem;
 }

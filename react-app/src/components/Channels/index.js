@@ -24,7 +24,11 @@ function Channels({ server }) {
     const channelRef = useRef();
 
     const leaveServer = async () => {
-        await dispatch(thunkLeaveServer(server.id));
+        if (currentUser.id == 15 || currentUser.id == 16) {
+            window.alert("Demo users can't leave existing servers, Please create your own server.")
+        } else {
+            dispatch(thunkLeaveServer(server.id));
+        }
     }
 
     const deleteServer = async () => {
@@ -106,7 +110,7 @@ function Channels({ server }) {
 
     const handleLeaveChannel = () => {
         if (currentUser.id == 15 || currentUser.id == 16) {
-            window.alert("Demo users can't leave channels")
+            window.alert("Demo users can't leave existing channels, Please create your own channel.")
         } else {
             dispatch(thunkLeaveChannel(currChannel.id, server.id))
         }
@@ -121,7 +125,9 @@ function Channels({ server }) {
         <>
             <div id="channel-container">
                 <div className="server-title" ref={ulRef} onClick={toggleMenu}>
-                    <p>{server.name}&nbsp;<i class="fa-solid fa-arrow-down-short-wide"></i></p>
+                    <div id="serverNameContainer">
+                        <p id="serverName">{server.name}&nbsp;<i class="fa-solid fa-arrow-down-short-wide"></i></p>
+                    </div>
                     <div className={ulClassName}>
                         <ul className={ownedWorkspace}>
                             <li>
