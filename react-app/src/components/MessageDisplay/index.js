@@ -16,6 +16,7 @@ function MessageDisplay({
   const [showMessageMenu, setShowMessageMenu] = useState(false);
   const currentUser = useSelector((state) => state.session.user);
   const menuRef = useRef();
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (!showMessageMenu) return;
@@ -63,17 +64,21 @@ function MessageDisplay({
   };
 
   const handleSave = () => {
-    if (messageArr.length) {
-      setMessageArr([]);
+    if (!userMessage.length) {
+      setErrors({ message: "Message body required" });
+    } else {
+      if (messageArr.length) {
+        setMessageArr([]);
+      }
+      const data = {
+        type: "UPDATE",
+        message_body: userMessage,
+        id: message.id,
+        room: message.channel_id.toString(),
+      };
+      socketInstance.emit("my_message", data);
+      setToggleEdit(false);
     }
-    const data = {
-      type: "UPDATE",
-      message_body: userMessage,
-      id: message.id,
-      room: message.channel_id.toString(),
-    };
-    socketInstance.emit("my_message", data);
-    setToggleEdit(false);
   };
 
   const handleText = (e) => {
@@ -134,17 +139,18 @@ function MessageDisplay({
       </div>
       <div className={`message-edit ${editMessage}`}>
         <div className="input-container">
+          {errors.message && <p className="errors">{errors.message}</p>}
           <input
             className="message-input"
             type="text"
             value={userMessage}
             onChange={handleText}
           />
-          <div>
-            <button className="" onClick={handleCancel}>
+          <div className="menu-options-container options-container">
+            <button className="cancel-save-button" onClick={handleCancel}>
               Cancel
             </button>
-            <button className="" onClick={handleSave}>
+            <button className="cancel-save-button" onClick={handleSave}>
               Save
             </button>
           </div>

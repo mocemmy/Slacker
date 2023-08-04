@@ -70,3 +70,10 @@
     width: 4rem;
     text-align: center;
 }
+
+.cancel-save-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+}
