@@ -123,6 +123,7 @@ function EditUser({ user }) {
         <button className="form-button" type="submit" onClick={onClick}>
           Update User Information
         </button>
+        <button className="form-button" onClick={closeModal}>Cancel</button>
       </form>
     </div>
   );
