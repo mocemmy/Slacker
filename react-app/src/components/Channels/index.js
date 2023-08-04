@@ -202,7 +202,16 @@ function Channels({ server }) {
                         </li>
                     </ul>
                     <ul className={notOwnedChannel}>
-                        <li onClick={handleLeaveChannel}>Leave Channel</li>
+                    <li>
+                                <OpenModalButton
+                                    buttonText={"Leave Channel"}
+                                    modalComponent={
+                                        <ConfirmModal
+                                            modalTitle={`Are you sure you want to leave ${currChannel.name}?`}
+                                            yesHandler={handleLeaveChannel}
+                                        />}
+                                />
+                            </li>
                     </ul>
                 </div>
                 <Messages channel={defaultChannel} />
