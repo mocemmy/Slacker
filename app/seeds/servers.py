@@ -9,9 +9,9 @@ def seed_servers():
     scranton = Server(
         name='Scranton', created_by=3, is_public=True, description='Server for Scranton', profile_pic='/logopic.png')
     stamford = Server(
-        name='Stamford', created_by=8, is_public=True, description='Server for Stamford')
+        name='Stamford', created_by=8, is_public=True, description='Server for Stamford', profile_pic='/logopic.png')
     utica = Server(
-        name='Utica', created_by=13, is_public=True, description='Server for Utica')
+        name='Utica', created_by=13, is_public=True, description='Server for Utica', profile_pic='/logopic.png')
 
     db.session.add(corporate)
     db.session.add(scranton)

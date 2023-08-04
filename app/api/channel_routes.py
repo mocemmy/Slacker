@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Channel, db
+from app.models import Channel, db, Message
 import json
 from datetime import datetime
 from app.forms import ChannelForm
@@ -15,9 +15,9 @@ def messages(id):
     """
     Query for all messages for the current channel
     """
-    channel = Channel.query.get(id)
+    messages = Message.query.filter(Message.channel_id == id).order_by(Message.created_at).all()
 
-    return {"messages": [message.to_dict() for message in channel.messages]}
+    return {"messages": [message.to_dict() for message in messages]}
 
 @channel_routes.route('/new', methods=['POST'])
 @login_required
