@@ -26,14 +26,14 @@ const LandingPage = () => {
                             <div id='signUpButton'>
                                 <NavLink to='/signup'>SIGN UP WITH EMAIL</NavLink>
                             </div>
-                            <div id='signUpGoogle'>
+                            {/* <div id='signUpGoogle'>
                                 <NavLink to='/signup'>
                                     <img id='signUpGoogleLogo' src='/googleLogo.jpg' alt='Google Logo'></img>
                                     <div>
                                         SIGN UP WITH GOOGLE
                                     </div>
                                 </NavLink>
-                            </div>
+                            </div> */}
                         </div>
                         <p className='signUpInfoDesc'>
                             Slacker is free to try for as long as you'd like
