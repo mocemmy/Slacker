@@ -98,6 +98,7 @@ const ServerList = () => {
             src={user.profile_pic}
             className="serverListImg"
             onClick={openMenu}
+            title='Edit Profile'
           ></img>
         </div>
 
