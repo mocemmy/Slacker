@@ -201,19 +201,19 @@ function Channels({ server }) {
                         </li>
                     </ul>
                     <ul className={notOwnedChannel}>
-                    <li>
-                                <OpenModalButton
-                                    buttonText={"Leave Channel"}
-                                    modalComponent={
-                                        <ConfirmModal
-                                            modalTitle={`Are you sure you want to leave ${currChannel.name}?`}
-                                            yesHandler={handleLeaveChannel}
-                                        />}
-                                />
-                            </li>
+                        <li>
+                            <OpenModalButton
+                                buttonText={"Leave Channel"}
+                                modalComponent={
+                                    <ConfirmModal
+                                        modalTitle={`Are you sure you want to leave ${currChannel.name}?`}
+                                        yesHandler={handleLeaveChannel}
+                                    />}
+                            />
+                        </li>
                     </ul>
                 </div>
-                <Messages channel={defaultChannel} />
+                <Messages channel={defaultChannel} server={server} />
             </div>
         </>
     );

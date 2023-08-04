@@ -72,6 +72,13 @@ def seed_channels():
         is_public = True,
         description = 'This is the customer service channel for Stamford'
     )
+    channel11 = Channel(
+        name = 'Creators',
+        server_id = 1,
+        created_by = 20,
+        is_public = True,
+        description = 'This is the channel for the devs to display our info!'
+    )
 
     db.session.add(channel1)
     db.session.add(channel2)
@@ -83,6 +90,7 @@ def seed_channels():
     db.session.add(channel8)
     db.session.add(channel9)
     db.session.add(channel10)
+    db.session.add(channel11)
     db.session.commit()
 
 def undo_channels():

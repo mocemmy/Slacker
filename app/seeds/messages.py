@@ -128,6 +128,22 @@ def seed_messages():
     message39 = Message(
         message_body="Maybe you should try selling...your butt", channel_id=10, sent_by=12, created_at=datetime.strptime("2023-08-04 11:38:26", date_format)
     )
+    devmessage = Message(
+        message_body="Hello user! Thanks for checking out our project. We learned tons and had so much fun in the process. Below you'll find links to our profiles on GitHub and LinkedIn.", channel_id=11, sent_by=20, created_at=datetime.strptime("2023-08-04 12:43:26", date_format)
+    )
+    alexmessage = Message(
+        message_body="Check out Alex on GitHub: https://github.com/BadaBingBadaBo0m or Linkedin: https://www.linkedin.com/in/alex-breathwit-70a011272/", channel_id=11, sent_by=17, created_at=datetime.strptime("2023-08-04 12:44:26", date_format)
+    )
+    emilymessage = Message(
+        message_body="Check out Emily on GitHub: https://github.com/mocemmy or Linkedin: https://www.linkedin.com/in/emily-morgan-7761b1155", channel_id=11, sent_by=18, created_at=datetime.strptime("2023-08-04 12:45:26", date_format)
+    )
+    jamesmessage = Message(
+        message_body="Check out James on GitHub: https://github.com/jameslovescoding or Linkedin: https://www.linkedin.com/in/james-cao-15a0b477/", channel_id=11, sent_by=19, created_at=datetime.strptime("2023-08-04 12:46:26", date_format)
+    )
+    ryanmessage = Message(
+        message_body="Check out Ryan on GitHub: https://github.com/RyanFullStack or Linkedin: https://www.linkedin.com/in/ryan-erickson-dev/", channel_id=11, sent_by=20, created_at=datetime.strptime("2023-08-04 12:47:26", date_format)
+    )
+
 
     db.session.add(message1)
     db.session.add(message2)
@@ -168,6 +184,11 @@ def seed_messages():
     db.session.add(message37)
     db.session.add(message38)
     db.session.add(message39)
+    db.session.add(devmessage)
+    db.session.add(alexmessage)
+    db.session.add(emilymessage)
+    db.session.add(jamesmessage)
+    db.session.add(ryanmessage)
     db.session.commit()
 
 def undo_messages():

@@ -47,6 +47,7 @@
 #signUpButtonContainer {
     display: flex;
     align-items: center;
+    height: 3rem;
 }
 
 #signUpButton>a {

@@ -1,93 +1,95 @@
 #channel-container {
-  background-color: #1d1c1d;
-  color: #d1d2d3d3;
-  border: 1px solid #3a3a3ad3;
-  border-width: thin;
-  width: 15rem;
-  min-width: 10rem;
+    background-color: #1d1c1d;
+    color: #d1d2d3d3;
+    border: 1px solid #3a3a3ad3;
+    border-width: thin;
+    width: 15rem;
+    min-width: 10rem;
 }
 
 #channelList-header {
-  margin: 0;
-  margin-left: 1.3rem;
-  margin-bottom: 1rem;
+    margin: 0;
+    margin-left: 1.3rem;
+    margin-bottom: 1rem;
 }
 
 #channelList {
-  padding: 0;
+    padding: 0;
 }
 
 #serverNameContainer {
-  border: 1px solid #3a3a3ad3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    border-bottom: 1px solid #3a3a3ad3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .channelListItem {
-  display: flex;
-  list-style: none;
-  margin-bottom: 0.4rem;
-  margin-left: 0.5rem;
-  margin-right: 0.4rem;
-  padding: 0.2rem 1rem;
-  border-radius: 5px;
+    display: flex;
+    list-style: none;
+    margin-bottom: 0.4rem;
+    margin-left: 0.5rem;
+    margin-right: 0.4rem;
+    padding: 0.2rem 1rem;
+    border-radius: 5px;
 }
 
 .channelListItem:hover {
-  cursor: pointer;
-  background-color: #484949d3;
+    cursor: pointer;
+    background-color: #484949d3;
 }
 
 .channelHashtag {
-  margin-right: 0.8rem;
+    margin-right: 0.8rem;
 }
 
 .selected {
-  outline: 2px solid gray;
+    outline: 2px solid gray;
 }
 
 .channel-title {
-  position: fixed;
-  color: white;
-  background-color: #1d1c1d;
-  padding: 1rem;
-  right: 1.5rem;
-  left: 18rem;
-  border: 1px solid #3a3a3ad3;
+    color: white;
+    background-color: #1d1c1d;
+    padding: 1rem;
+    right: 1.5rem;
+    left: 18rem;
+    border-top: 1px solid #3a3a3ad3;
+    border-right: 1px solid #3a3a3ad3;
+    border-bottom: 1px solid #3a3a3ad3;
 }
 
 .ul-dropdown {
-  display: flex;
-  position: fixed;
-  top: 5rem;
-  left: 18rem;
-  background-color: rgb(112, 112, 112);
-  color: white;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    position: fixed;
+    top: 5rem;
+    left: 18rem;
+    background-color: rgb(112, 112, 112);
+    color: white;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .ul-dropdown li {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .ul-channel {
-  padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.5rem;
 }
 
 .server-title {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 #serverNameContainer:hover {
-  background-color: rgb(119, 119, 119);
+    background-color: rgb(119, 119, 119);
 }
 
 .channel-title {
-  cursor: pointer;
+    cursor: pointer;
 }
+
 .channel-title:hover {
-  background-color: rgb(119, 119, 119);
+    background-color: rgb(119, 119, 119);
 }
