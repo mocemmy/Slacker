@@ -40,7 +40,7 @@ function EditUser({ user }) {
 
   useEffect(() => {
     if (user.id === 15 || user.id === 16) {
-      window.alert("you can't edit the Demo User");
+      window.alert("You can't edit the Demo User");
     }
   }, [])
 
