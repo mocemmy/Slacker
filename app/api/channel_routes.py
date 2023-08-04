@@ -17,6 +17,9 @@ def messages(id):
     """
     messages = Message.query.filter(Message.channel_id == id).order_by(Message.created_at).all()
 
+    for message in messages:
+        print(message.created_at)
+
     return {"messages": [message.to_dict() for message in messages]}
 
 @channel_routes.route('/new', methods=['POST'])
