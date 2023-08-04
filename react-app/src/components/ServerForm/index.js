@@ -94,7 +94,7 @@ const ServerForm = ({ server, formType }) => {
         <div id='server-form-container'>
             <form>
                 <h1 className="modal-title" id='serverFormTitle'>{title}</h1>
-                <label htmlFor='name' className='form-label'>Name{errors.name && <span className='formErrors'>: {errors.name}</span>}</label>
+                <label htmlFor='name' className='form-label'>Name{errors.name && <span className='errors'>: {errors.name}</span>}</label>
                 {/* {errors.name && <p className='new-server-form-error'> Name Error: {errors.name}</p>} */}
                 <input
                     className='server-form-input'
@@ -106,7 +106,7 @@ const ServerForm = ({ server, formType }) => {
                     onChange={(e) => setServerName(e.target.value)}
                 />
 
-                <label htmlFor='profile_pic' className='form-label'>Picture URL{errors.serverPic && <span className='formErrors'>: {errors.serverPic}</span>}</label>
+                <label htmlFor='profile_pic' className='form-label'>Picture URL{errors.serverPic && <span className='errors'>: {errors.serverPic}</span>}</label>
                 {/* {errors.serverPic && <p className='new-server-form-error'>Picture URL Error: {errors.serverPic}</p>} */}
                 <input
                     className='server-form-input'
@@ -116,7 +116,7 @@ const ServerForm = ({ server, formType }) => {
                     onChange={(e) => setPfpURL(e.target.value)}
                 />
 
-                <label htmlFor='description' className='server-form-label'>Description{errors.description && <span className='formErrors'>: {errors.description}</span>}</label>
+                <label htmlFor='description' className='server-form-label'>Description{errors.description && <span className='errors'>: {errors.description}</span>}</label>
                 {/* {errors.description && <p className='new-server-form-error'>Description Error: {errors.description}</p>} */}
                 <textarea
                     contentEditable
