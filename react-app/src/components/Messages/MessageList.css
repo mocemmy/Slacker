@@ -7,6 +7,7 @@
 .message-list {
     padding: 0;
     margin-bottom: 5rem;
+    margin-top: 3rem;
 }
 
 #message-container {
@@ -29,7 +30,7 @@
     background-color: rgb(47, 46, 47);
     position: fixed;
     box-sizing: border-box;
-    left: 15.25rem;
+    left: 18rem;
     right: 0;
     bottom: 0;
     margin-right: 1.5rem;

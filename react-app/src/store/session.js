@@ -67,7 +67,7 @@ export const logout = () => async (dispatch) => {
 	}
 };
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (username, first_name, last_name, email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		headers: {
@@ -75,8 +75,10 @@ export const signUp = (username, email, password) => async (dispatch) => {
 		},
 		body: JSON.stringify({
 			username,
+			first_name,
+			last_name,
 			email,
-			password,
+			password
 		}),
 	});
 
@@ -93,6 +95,44 @@ export const signUp = (username, email, password) => async (dispatch) => {
 		return ["An error occurred. Please try again."];
 	}
 };
+
+export const thunkEditUser = (data, userId) => async dispatch => {
+	const response = await fetch(`/api/users/${userId}/edit`, {
+		method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            bio: data.bio,
+            profile_pic: data.profile_pic
+        })
+	})
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(authenticate())
+		return data
+	} else {
+		return response
+	}
+
+}
+
+export const thunkDeleteUser = (user) => async dispatch => {
+	const response = await fetch(`/api/users/${user.id}/delete`, {
+		method: "DELETE"
+	})
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(logout())
+		return data
+	} else {
+		return response
+	}
+}
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {

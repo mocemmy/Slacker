@@ -3,7 +3,7 @@
     color: #D1D2D3D3;
     border: 1px solid #3a3a3ad3;
     border-width: thin;
-    width: 10rem;
+    width: 15rem;
     min-width: 10rem;
 }
 
@@ -46,5 +46,23 @@
     background-color: rgb(47, 46, 47);
     padding: 1rem;
     right: 1.5rem;
-    left: 15.25rem;
+    left: 18rem;
+}
+
+.ul-dropdown {
+    display: flex;
+    position: fixed;
+    top: 3rem;
+    left: 18rem;
+    background-color: rgb(112, 112, 112);
+    color: white;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.ul-dropdown li {
+    padding-left: 0;
+}
+.ul-channel {
+    padding: .2rem .5rem;
 }

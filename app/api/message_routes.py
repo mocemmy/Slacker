@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Message, db
 import json
+from datetime import datetime
 
 message_routes = Blueprint('messages', __name__)
 
@@ -20,7 +21,7 @@ def delete_message(id):
         db.session.commit()
         return {"message": f"Message {id} successfully deleted"}
     else:
-        return {"message": 'Not your message!'}
+        return {"message": 'Not your message!'}, 403
 
 @message_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
@@ -32,6 +33,8 @@ def update_message(id):
     data = json.loads(request.data)
 
     message.message_body = data['message_body']
+    message.updated_at = datetime.now()
+    message.edited = True
 
     db.session.commit()
 
