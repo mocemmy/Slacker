@@ -17,6 +17,15 @@
     padding: 0;
 }
 
+#serverNameContainer {
+    border: 1px solid #3a3a3ad3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#serverName {}
+
 .channelListItem {
     display: flex;
     list-style: none;
@@ -60,9 +69,11 @@
     align-items: center;
     justify-content: center;
 }
+
 .ul-dropdown li {
     padding-left: 0;
 }
+
 .ul-channel {
     padding: .2rem .5rem;
 }
