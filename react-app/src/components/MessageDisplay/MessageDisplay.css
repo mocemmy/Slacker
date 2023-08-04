@@ -7,10 +7,6 @@
     color: white;
 }
 
-.message-list-container {
-    padding-top: 3rem;
-}
-
 .message-header {
     display: flex;
     justify-content: space-between;

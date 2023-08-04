@@ -119,32 +119,35 @@ function Messages({ channel }) {
     if (!messages) return <Loading />;
 
     return (
-        <div className="message-list-container" id='message-list'>
-            <ul className="message-list">
-                {messages.map((message) => (
-                    <MessageDisplay
-                        key={message.id}
-                        channel_id={channel}
-                        socketInstance={socketInstance}
-                        message={message}
-                        messageArr={messageArr}
-                        setMessageArr={setMessageArr}
-                    />
-                ))}
-                {messageArr.map((message, index) =>
-                    message[0] === channel ? (
+        <>
+
+            <div className="message-list-container" id='message-list'>
+                <ul className="message-list">
+                    {messages.map((message) => (
                         <MessageDisplay
-                            key={index}
+                            key={message.id}
                             channel_id={channel}
                             socketInstance={socketInstance}
-                            message={message[1]}
+                            message={message}
                             messageArr={messageArr}
                             setMessageArr={setMessageArr}
                         />
-                    ) : null
-                )}
-                <div ref={messageEnd} className='scroll-to'></div>
-            </ul>
+                    ))}
+                    {messageArr.map((message, index) =>
+                        message[0] === channel ? (
+                            <MessageDisplay
+                                key={index}
+                                channel_id={channel}
+                                socketInstance={socketInstance}
+                                message={message[1]}
+                                messageArr={messageArr}
+                                setMessageArr={setMessageArr}
+                            />
+                        ) : null
+                    )}
+                    <div ref={messageEnd} className='scroll-to'></div>
+                </ul>
+            </div>
             <div className="message-input-footer">
                 <div className="input-container">
                     <input
@@ -159,7 +162,8 @@ function Messages({ channel }) {
                     </button>
                 </div>
             </div>
-        </div>
+
+        </>
     );
 }
 

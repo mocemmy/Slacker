@@ -18,7 +18,7 @@
 }
 
 #serverNameContainer {
-    border: 1px solid #3a3a3ad3;
+    border-bottom: 1px solid #3a3a3ad3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,9 @@
     padding: 1rem;
     right: 1.5rem;
     left: 18rem;
-    border: 1px solid #3a3a3ad3;
+    border-top: 1px solid #3a3a3ad3;
+    border-right: 1px solid #3a3a3ad3;
+    border-bottom: 1px solid #3a3a3ad3;
 }
 
 .ul-dropdown {
