@@ -32,7 +32,7 @@ function Channels({ server }) {
     }
 
     useEffect(() => {
-        if (channels && channels[0].id) {
+        if (channels && channels[0]?.id) {
             setDefaultChannel(channels[0].id);
             setCurrChannel(channels[0]);
             dispatch(thunkGetAllMessages(channels[0].id));

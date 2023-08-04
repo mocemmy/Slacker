@@ -97,7 +97,7 @@ export const signUp = (username, first_name, last_name, email, password) => asyn
 };
 
 export const thunkEditUser = (data, userId) => async dispatch => {
-	const response = await fetch(`users/${userId}/edit`, {
+	const response = await fetch(`/api/users/${userId}/edit`, {
 		method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -118,6 +118,20 @@ export const thunkEditUser = (data, userId) => async dispatch => {
 		return response
 	}
 
+}
+
+export const thunkDeleteUser = (user) => async dispatch => {
+	const response = await fetch(`/api/users/${user.id}/delete`, {
+		method: "DELETE"
+	})
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(logout())
+		return data
+	} else {
+		return response
+	}
 }
 
 export default function reducer(state = initialState, action) {

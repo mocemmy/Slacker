@@ -12,6 +12,8 @@ import "./serverList.css";
 import * as sessionActions from "../../store/session";
 import { useHistory } from "react-router-dom";
 import Channels from "../Channels";
+import EditUser from "../EditUser";
+import ConfirmModal from "../ConfirmModal";
 
 const ServerList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -53,7 +55,8 @@ const ServerList = () => {
     }
   }, [servers, dispatch]);
 
-  if (!isLoaded) return <Loading />;
+
+  if (!isLoaded || !user) return <Loading />;
 
   const changeServer = (e, server) => {
     setDefaultServer(server.id);
@@ -73,6 +76,15 @@ const ServerList = () => {
     history.push("/");
     closeMenu();
   };
+
+  const handleDeleteUser = () => {
+    if ( user.id === 15 || user.id === 16) {
+      window.alert("You can't delete the demo user!")
+    } else {
+      dispatch(sessionActions.thunkDeleteUser(user));
+      history.push('/')
+    }
+  }
 
   const ulClassName = "userDropdown-li" + (showUserMenu ? "" : " hidden");
 
@@ -97,7 +109,10 @@ const ServerList = () => {
             {user.email}
           </li>
           <li className="userDropdown-li pfpButton">
-            <OpenModalButton buttonText="Change Profile pic" />
+            <OpenModalButton buttonText="Edit User Information" modalComponent={<EditUser user={user}/> } />
+          </li>
+          <li>
+            <OpenModalButton buttonText="Delete User" modalComponent={<ConfirmModal modalTitle="Are you sure you want to delete yourself?" yesHandler={handleDeleteUser}/>} />
           </li>
           <button
             className="userDropdown-li logoutButton"
