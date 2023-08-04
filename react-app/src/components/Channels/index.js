@@ -125,7 +125,9 @@ function Channels({ server }) {
         <>
             <div id="channel-container">
                 <div className="server-title" ref={ulRef} onClick={toggleMenu}>
-                    <p>{server.name}&nbsp;<i class="fa-solid fa-arrow-down-short-wide"></i></p>
+                    <div id="serverNameContainer">
+                        <p id="serverName">{server.name}&nbsp;<i class="fa-solid fa-arrow-down-short-wide"></i></p>
+                    </div>
                     <div className={ulClassName}>
                         <ul className={ownedWorkspace}>
                             <li>
