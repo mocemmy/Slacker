@@ -5,124 +5,124 @@ from sqlalchemy.sql import text
 #adds seed messages
 def seed_messages():
     message1 = Message(
-        message_body="Jan, did you get those reports done?", channel_id=1, sent_by=1
+        message_body="Jan, did you get those reports done?", channel_id=1, sent_by=1, created_at="2023-08-04 11:00:26.120349"
     )
     message2 = Message(
-        message_body="David, I told you my sister was in town!", channel_id=1, sent_by=2
+        message_body="David, I told you my sister was in town!", channel_id=1, sent_by=2, created_at="2023-08-04 11:01:26.120349"
     )
     message3 = Message(
-        message_body="You smoke in your office and go to Scranton far too often, you're fired!!", channel_id=1, sent_by=1
+        message_body="You smoke in your office and go to Scranton far too often, you're fired!!", channel_id=1, sent_by=1, created_at="2023-08-04 11:02:26.120349"
     )
     message24 = Message(
-        message_body="If it's because of my enhancement I'll see you in court!", channel_id=1, sent_by=2
+        message_body="If it's because of my enhancement I'll see you in court!", channel_id=1, sent_by=2, created_at="2023-08-04 11:23:26.120349"
     )
     message4 = Message(
-        message_body="Goood morning Viet-Scranton!", channel_id=2, sent_by=3
+        message_body="Goood morning Viet-Scranton!", channel_id=2, sent_by=3, created_at="2023-08-04 11:03:26.120349"
     )
     message5 = Message(
-        message_body="Good morning, Michael! I know you slept well, I saw you.", channel_id=2, sent_by=4
+        message_body="Good morning, Michael! I know you slept well, I saw you.", channel_id=2, sent_by=4, created_at="2023-08-04 11:04:26.120349"
     )
     message6 = Message(
-        message_body="...", channel_id=2, sent_by=5
+        message_body="...", channel_id=2, sent_by=5, created_at="2023-08-04 11:05:26.120349"
     )
     message7 = Message(
-        message_body="Ok Dwight", channel_id=2, sent_by=7
+        message_body="Ok Dwight", channel_id=2, sent_by=7, created_at="2023-08-04 11:06:26.120349"
     )
     message8 = Message(
-        message_body="Hey everyone, let's listen to Meredith because she's so innocent.", channel_id=2, sent_by=9
+        message_body="Hey everyone, let's listen to Meredith because she's so innocent.", channel_id=2, sent_by=9, created_at="2023-08-04 11:07:26.120349"
     )
     message9 = Message(
-        message_body="This is a work channel people.", channel_id=2, sent_by=1
+        message_body="This is a work channel people.", channel_id=2, sent_by=1, created_at="2023-08-04 11:08:26.120349"
     )
     message10 = Message(
-        message_body="Hi David, did you get a chance to look over my mockups yet?", channel_id=2, sent_by=6
+        message_body="Hi David, did you get a chance to look over my mockups yet?", channel_id=2, sent_by=6, created_at="2023-08-04 11:09:26.120349"
     )
     message11 = Message(
-        message_body="Call of Duty?", channel_id=3, sent_by=11
+        message_body="Call of Duty?", channel_id=3, sent_by=11, created_at="2023-08-04 11:10:26.120349"
     )
     message12 = Message(
-        message_body="Rit-Dit-Do-Do-Do you have to ask?!", channel_id=3, sent_by=12
+        message_body="Rit-Dit-Do-Do-Do you have to ask?!", channel_id=3, sent_by=12, created_at="2023-08-04 11:11:26.120349"
     )
     message25 = Message(
-        message_body="Don't go sniper in Carrington again, Andy.", channel_id=3, sent_by=11
+        message_body="Don't go sniper in Carentan again, Andy.", channel_id=3, sent_by=11, created_at="2023-08-04 11:24:26.120349"
     )
     message13 = Message(
-        message_body="Free for dinner tonight?", channel_id=4, sent_by=13
+        message_body="Free for dinner tonight?", channel_id=4, sent_by=13, created_at="2023-08-04 11:12:26.120349"
     )
     message14 = Message(
-        message_body="Always!", channel_id=4, sent_by=14
+        message_body="Always!", channel_id=4, sent_by=14, created_at="2023-08-04 11:13:26.120349"
     )
     message26 = Message(
-        message_body="Pick you up at 8?", channel_id=4, sent_by=13
+        message_body="Pick you up at 8?", channel_id=4, sent_by=13, created_at="2023-08-04 11:25:26.120349"
     )
     message27 = Message(
-        message_body="Great!", channel_id=4, sent_by=14
+        message_body="Great!", channel_id=4, sent_by=14, created_at="2023-08-04 11:26:26.120349"
     )
     message15 = Message(
-        message_body="Oscar, I need another advance on my paycheck.", channel_id=5, sent_by=3
+        message_body="Oscar, I need another advance on my paycheck.", channel_id=5, sent_by=3, created_at="2023-08-04 11:14:26.120349"
     )
     message16 = Message(
-        message_body="Michael, are you having money problems?", channel_id=5, sent_by=8
+        message_body="Michael, are you having money problems?", channel_id=5, sent_by=8, created_at="2023-08-04 11:15:26.120349"
     )
     message17 = Message(
-        message_body="Monkey problems?", channel_id=5, sent_by=9
+        message_body="Monkey problems?", channel_id=5, sent_by=9, created_at="2023-08-04 11:16:26.120349"
     )
     message18 = Message(
-        message_body="I know you saw that correctly.", channel_id=5, sent_by=8
+        message_body="I know you saw that correctly.", channel_id=5, sent_by=8, created_at="2023-08-04 11:17:26.120349"
     )
     message19 = Message(
-        message_body="Attention Sales Staff: The new website will be live today, good luck!", channel_id=6, sent_by=3
+        message_body="Attention Sales Staff: The new website will be live today, good luck!", channel_id=6, sent_by=3, created_at="2023-08-04 11:18:26.120349"
     )
     message20 = Message(
-        message_body="Do you really think a computer can beat me?", channel_id=6, sent_by=4
+        message_body="Do you really think a computer can beat me?", channel_id=6, sent_by=4, created_at="2023-08-04 11:19:26.120349"
     )
     message21 = Message(
-        message_body="It will, Dwight.", channel_id=6, sent_by=5
+        message_body="It will, Dwight.", channel_id=6, sent_by=5, created_at="2023-08-04 11:20:26.120349"
     )
     message28 = Message(
-        message_body="Andy, get the counter.", channel_id=6, sent_by=4
+        message_body="Andy, get the counter.", channel_id=6, sent_by=4, created_at="2023-08-04 11:27:26.120349"
     )
     message29 = Message(
-        message_body="Right-O boss-O!", channel_id=6, sent_by=12
+        message_body="Right-O boss-O!", channel_id=6, sent_by=12, created_at="2023-08-04 11:28:26.120349"
     )
     message22 = Message(
-        message_body="911", channel_id=7, sent_by=3
+        message_body="911", channel_id=7, sent_by=3, created_at="2023-08-04 11:21:26.120349"
     )
     message23 = Message(
-        message_body="You know I hustled up the stairs....", channel_id=7, sent_by=10
+        message_body="You know I hustled up the stairs....", channel_id=7, sent_by=10, created_at="2023-08-04 11:22:26.120349"
     )
     message29 = Message(
-        message_body="You could use it.", channel_id=7, sent_by=3
+        message_body="You could use it.", channel_id=7, sent_by=3, created_at="2023-08-04 11:28:26.120349"
     )
     message30 = Message(
-        message_body="Advertising team meeting in 10 minutes", channel_id=8, sent_by=2
+        message_body="Advertising team meeting in 10 minutes", channel_id=8, sent_by=2, created_at="2023-08-04 11:29:26.120349"
     )
     message31 = Message(
-        message_body="Make it 15, in a call.", channel_id=8, sent_by=1
+        message_body="Make it 15, in a call.", channel_id=8, sent_by=1, created_at="2023-08-04 11:30:26.120349"
     )
     message32 = Message(
-        message_body="Ok, David.", channel_id=8, sent_by=2
+        message_body="Ok, David.", channel_id=8, sent_by=2, created_at="2023-08-04 11:31:26.120349"
     )
     message33 = Message(
-        message_body="Scranton is trying to compete with us, lol", channel_id=9, sent_by=14
+        message_body="Scranton is trying to compete with us, lol", channel_id=9, sent_by=14, created_at="2023-08-04 11:32:26.120349"
     )
     message34 = Message(
-        message_body="Be nice...", channel_id=9, sent_by=13
+        message_body="Be nice...", channel_id=9, sent_by=13, created_at="2023-08-04 11:33:26.120349"
     )
     message35 = Message(
-        message_body="Scranton is trying very nicely to compete with us...", channel_id=9, sent_by=14
+        message_body="Scranton is trying very nicely to compete with us...", channel_id=9, sent_by=14, created_at="2023-08-04 11:34:26.120349"
     )
     message36 = Message(
-        message_body=":/", channel_id=9, sent_by=13
+        message_body=":/", channel_id=9, sent_by=13, created_at="2023-08-04 11:35:26.120349"
     )
     message37 = Message(
-        message_body="What's up with my report scores?", channel_id=10, sent_by=12
+        message_body="What's up with my report scores?", channel_id=10, sent_by=12, created_at="2023-08-04 11:36:26.120349"
     )
     message38 = Message(
-        message_body="Maybe you should try selling something, Andy.", channel_id=10, sent_by=11
+        message_body="Maybe you should try selling something, Andy.", channel_id=10, sent_by=11, created_at="2023-08-04 11:37:26.120349"
     )
     message39 = Message(
-        message_body="Maybe you should try selling...your butt", channel_id=10, sent_by=12
+        message_body="Maybe you should try selling...your butt", channel_id=10, sent_by=12, created_at="2023-08-04 11:38:26.120349"
     )
 
     db.session.add(message1)
