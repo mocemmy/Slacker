@@ -34,3 +34,39 @@
     justify-content: space-between;
     align-items: center;
 }
+
+#message-menu {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 1rem;
+    width: 3rem;
+    border-radius: 0.25rem;
+}
+
+.message-body button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    border-radius: 0.25rem;
+}
+
+#message-menu:hover,
+.menu-options-container button:hover {
+    outline: 2px solid #d1d2d3d3;
+    background-color: rgb(119, 119, 119);
+}
+
+.menu-options-container {
+    display: flex;
+
+}
+.options-container {
+    display: flex;
+    align-items: center;
+}
+.options-container button {
+    padding: 0.5rem 0;
+    width: 4rem;
+    text-align: center;
+}

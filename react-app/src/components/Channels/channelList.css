@@ -34,9 +34,7 @@
     border-radius: 5px;
 }
 
-.channelListItem:hover {
-    cursor: pointer;
-    background-color: #484949d3;
+
 .channelListItem:hover,
 .workspace-dropdown button:hover,
 .ul-dropdown button:hover {
