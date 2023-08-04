@@ -96,6 +96,30 @@ export const signUp = (username, first_name, last_name, email, password) => asyn
 	}
 };
 
+export const thunkEditUser = (data, userId) => async dispatch => {
+	const response = await fetch(`users/${userId}/edit`, {
+		method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            bio: data.bio,
+            profile_pic: data.profile_pic
+        })
+	})
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(authenticate())
+		return data
+	} else {
+		return response
+	}
+
+}
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
