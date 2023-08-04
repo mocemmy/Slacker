@@ -1,5 +1,7 @@
 import OpenModalButton from "../OpenModalButton";
 import MessageDisplay from "../MessageDisplay";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function EmptyChannels({ server }) {
   if (!server)
