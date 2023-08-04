@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkCreateNewServer, thunkGetAllServers, thunkUpdateServerById } from '../../store/servers';
 import { useModal } from '../../context/Modal'
+import './ServerForm.css'
 
 const ServerForm = ({ server, formType }) => {
     const dispatch = useDispatch();
@@ -11,6 +12,12 @@ const ServerForm = ({ server, formType }) => {
     const [selectedOption, setSelectedOption] = useState(server.isPublic ? "public" : "private");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
+    let title;
+    if (formType === 'create'){
+        title = "Create a Workspace"
+    } else {
+        title = "Update Workspace"
+    }
 
     // const dispatch = useDispatch();
     // const [serverName, setServerName] = useState(null);
@@ -57,10 +64,12 @@ const ServerForm = ({ server, formType }) => {
     }
 
     return (
-        <form>
-            <h2>Name</h2>
+        <form className='form-container'>
+            <h1 className="modal-title">{title}</h1>
+            <label htmlFor='name' className='form-label'>Name</label>
             {errors.name && <p className='new-server-form-error'> Name Error: {errors.name}</p>}
             <input
+                name='name'
                 id='new-server-form-name'
                 placeholder='Workspace name'
                 type='text'
@@ -68,24 +77,26 @@ const ServerForm = ({ server, formType }) => {
                 onChange={(e) => setServerName(e.target.value)}
             />
 
-            <h2>Picture URL</h2>
+            <label htmlFor='profile_pic' className='form-label'>Picture URL</label>
             {errors.serverPic && <p className='new-server-form-error'>Picture URL Error: {errors.serverPic}</p>}
             <input
+                name='profile_pic'
                 placeholder='Workspace pic Example: https://funny-pic.png'
                 value={pfpURL}
                 onChange={(e) => setPfpURL(e.target.value)}
             />
 
-            <h2>Description</h2>
+            <label htmlFor='description' className='form-label'>Description</label>
             {errors.description && <p className='new-server-form-error'>Description Error: {errors.description}</p>}
             <input
+                name='description'
                 placeholder='Workspace description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
 
             {/* <div>
-        <h2>Privacy</h2>
+        <label>Privacy</label>
         <div>
           <input
             name='is-public'
@@ -110,7 +121,7 @@ const ServerForm = ({ server, formType }) => {
                 </div>}
       </div> */}
 
-            <button type='submit' onClick={handleSubmit}>Submit</button>
+            <button className="form-button" type='submit' onClick={handleSubmit}>Submit</button>
 
         </form>
     )

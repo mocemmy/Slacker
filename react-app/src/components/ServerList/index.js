@@ -2,10 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
-import ConfirmLogout from "../ConfirmLogoutModal";
 import CreateServerForm from "../CreateServerForm";
 import OpenModalButton from "../OpenModalButton";
-import ProfileListModalButton from "./ProfileListModalButton";
 import ServerListModalListItem from "./ServerListModalListItem";
 import Loading from "../Loading";
 import "./serverList.css";
@@ -14,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import Channels from "../Channels";
 import EditUser from "../EditUser";
 import ConfirmModal from "../ConfirmModal";
+import EmptyChannels from "../Loading/EmptyChannels";
 
 const ServerList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -147,7 +146,8 @@ const ServerList = () => {
           <ServerListModalListItem modalComponent={<CreateServerForm />} />
         </ul>
       </div>
-      <Channels server={currServer} />
+      {!!servers.length && <Channels server={currServer} />}
+      {!servers.length && <EmptyChannels />}
     </>
   );
 };

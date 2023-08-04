@@ -1,24 +1,30 @@
-import React from 'react'
-import { useModal } from '../../context/Modal'
+import React from "react";
+import { useModal } from "../../context/Modal";
+import "./ConfirmModal.css";
 
 const ConfirmModal = ({ modalTitle, yesHandler }) => {
-    const { closeModal } = useModal();
+  const { closeModal } = useModal();
 
-    if (!modalTitle) return null
+  if (!modalTitle) return null;
 
-    const handleClick = async () => {
-        await yesHandler();
-        closeModal();
-    }
+  const handleClick = async () => {
+    await yesHandler();
+    closeModal();
+  };
 
-    return (
-        <>
-            <h1>{modalTitle}</h1>
+  return (
+    <div className="confirm-modal-container">
+      <h1 className="modal-title">{modalTitle}</h1>
+      <div className="button-container">
+        <button className="confirm-button" onClick={handleClick}>
+          Yes
+        </button>
+        <button className="cancel-button" onClick={closeModal}>
+          No
+        </button>
+      </div>
+    </div>
+  );
+};
 
-            <button onClick={handleClick}>Yes</button>
-            <button onClick={closeModal}>No</button>
-        </>
-    )
-}
-
-export default ConfirmModal
+export default ConfirmModal;

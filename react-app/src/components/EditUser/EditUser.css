@@ -1,0 +1,24 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.form-container input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.form-label {
+    width: 100%;
+    text-align: left;
+}
+.form-button {
+    background-color: #541554;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 0.25rem;
+    border: none;
+    margin-top: 1rem;
+}
