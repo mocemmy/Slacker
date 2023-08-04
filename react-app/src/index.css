@@ -12,10 +12,15 @@ html,
 body {
     height: 100vh;
 }
+
 ul>li {
     list-style-type: none;
 }
 
 .hidden {
     display: none !important;
+}
+
+.errors {
+    color: red;
 }
