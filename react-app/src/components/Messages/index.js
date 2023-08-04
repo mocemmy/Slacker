@@ -7,7 +7,7 @@ import { thunkGetAllMessages } from "../../store/messages";
 import { useDispatch } from "react-redux";
 import './MessageList.css'
 
-function Messages({ channel, currChannel }) {
+function Messages({ channel }) {
     const messages = useSelector((state) => state.messages.messageList);
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
