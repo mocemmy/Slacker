@@ -113,6 +113,8 @@ def seed_channel_members():
         {"channel_id":11, "user_id":18},
         {"channel_id":11, "user_id":19},
         {"channel_id":11, "user_id":20}
+        {"channel_id":11, "user_id":15}
+        {"channel_id":11, "user_id":16}
     ]
 
     for member in data:
