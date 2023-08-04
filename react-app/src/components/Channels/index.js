@@ -95,7 +95,7 @@ function Channels({ server }) {
             ? ""
             : "hidden";
 
-    const ulClassName = showMenu ? "" : "hidden";
+    const ulClassName = showMenu ? "workspace-dropdown" : "hidden";
     const ulChannelName = showChannelMenu ? "ul-dropdown" : "ul-dropdown hidden";
 
     const ownedChannel =

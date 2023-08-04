@@ -34,7 +34,7 @@ message-container bkc: #272627
     cursor: pointer;
 }
 
-#serverList-container > * > * >*:hover{
+#serverList-container > *>*>:hover{
     outline: 2px solid rgb(255, 255, 255);
 }
 
@@ -62,13 +62,34 @@ message-container bkc: #272627
     z-index: 10;
 }
 
-.userDropdown-li {
-    list-style: none;
+#user-first-lastName,
+#user-email {
+    padding: 1rem 0; 
 }
 
-.pfpButton>button {}
+.userDropdown-li {
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
 
-.logoutButton>button {}
+.pfpButton>button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: left;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.pfpButton>button:hover {
+    cursor: pointer;
+    background-color: #484949d3;
+    outline: none !important;
+}
 
 .hidden {
     display: none;
