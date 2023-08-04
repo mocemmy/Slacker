@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal'
 import { thunkEditChannel, thunkCreateChannel } from '../../store/channels';
+import './ChannelForm.css'
 
 
 function ChannelForm ({channel, type, server}) {
@@ -50,9 +51,9 @@ function ChannelForm ({channel, type, server}) {
     }
 
     return (
-        <div className='channel-form-container'>
-            <form method="post" onSubmit={handleSubmit}>
-                <h1>{title}</h1>
+        <div>
+            <form className='form-container' method="post" onSubmit={handleSubmit}>
+                <h1 className='modal-title'>{title}</h1>
                 {errors.name && <p className='errors'>{errors.name}</p>}
                 {errors.serverErrors && <p className='errors'>{errors.serverErrors}</p>}
                 <label htmlFor='name'>Channel Name</label>
@@ -71,7 +72,7 @@ function ChannelForm ({channel, type, server}) {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder='description'
                 />
-            <button type="submit" disabled={Object.keys(errors).length}>{buttonText}</button>
+            <button className='form-button' type="submit" disabled={Object.keys(errors).length}>{buttonText}</button>
             </form>
         </div>
     )

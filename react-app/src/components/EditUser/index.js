@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from '../../context/Modal'
 import { thunkEditUser } from "../../store/session";
+import './EditUser.css'
 
 
 function EditUser ({user}) {
@@ -38,9 +39,9 @@ function EditUser ({user}) {
     }
 
     return (
-        <div className='user-form-container'>
-            <form method="post" onSubmit={handleSubmit}>
-                <h1>Edit User Information</h1>
+        <div>
+            <form className='form-container' method="post" onSubmit={handleSubmit}>
+                <h1 className="modal-title">Edit User Information</h1>
                 {errors.name && <p className='errors'>{errors.name}</p>}
                 {errors.serverErrors && <p className='errors'>{errors.serverErrors}</p>}
                 <label htmlFor='first_name'>First Name</label>
@@ -75,7 +76,7 @@ function EditUser ({user}) {
                     onChange={(e) => setProfilePic(e.target.value)}
                     placeholder='profile_pic'
                 />
-            <button type="submit" disabled={Object.keys(errors).length}>Update User Information</button>
+            <button className='form-button' type="submit" disabled={Object.keys(errors).length}>Update User Information</button>
             </form>
         </div>
     )

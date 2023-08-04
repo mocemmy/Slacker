@@ -9,8 +9,8 @@ const CreateServerForm = () => {
         isPublic: true,
     }
 
-    return (<>
-        <h1>Create a New Workspace</h1>
+    return (
+    <>
         <ServerForm server={server} formType="create" />
     </>
     )
