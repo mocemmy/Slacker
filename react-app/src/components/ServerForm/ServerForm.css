@@ -1,16 +1,14 @@
-.form-container {
+#server-form-container {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    margin: 2rem;
 }
 
-.form-container input {
-    width: 100%;
-}
 .form-label {
     width: 100%;
     text-align: left;
 }
+
 .form-button {
     background-color: #541554;
     color: white;
@@ -19,4 +17,29 @@
     border-radius: 0.25rem;
     border: none;
     margin-top: 1rem;
+}
+
+#serverFormDescription {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 0.25rem;
+    height: 9rem;
+    overflow: auto;
+    resize: none;
+
+}
+
+.server-form-input {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 0.25rem;
+    /* width: 100; */
+}
+
+#serverFormTitle {
+    text-align: center;
 }
