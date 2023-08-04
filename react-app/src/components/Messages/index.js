@@ -15,29 +15,45 @@ function Messages({ channel }) {
     const [message, setMessage] = useState("");
     const [messageArr, setMessageArr] = useState([]);
     const messageEnd = useRef(null);
+    const [charactersLeft, setCharactersLeft] = useState(500)
+    const [errors, setErrors] = useState({})
 
     const handleText = (e) => {
         const inputMessage = e.target.value;
+
+        const characterCount = e.target.value.length;
+        setCharactersLeft(500 - characterCount);
+        if (characterCount > 500){
+            setErrors({characters: "Maximum of 500 characters allowed"})
+        } else {
+            setErrors({})
+        }
         setMessage(inputMessage);
     };
 
     const handleSubmit = () => {
         if (!message || !channel) return;
         const date = new Date();
-        const data = {
-            type: "CREATE",
-            channel: channel.toString(),
-            message,
-            sent_by: user.id,
-            created_at: date,
-            profile_pic: user.profile_pic,
-            firstName: user.first_name,
-            lastName: user.last_name,
-        };
+        if(charactersLeft < 0) {
+            setErrors({characters: "Maximum of 500 characters allowed"})
+        } else {
 
-        socketInstance.emit("my_message", data);
-
-        setMessage("");
+            const data = {
+                type: "CREATE",
+                channel: channel.toString(),
+                message,
+                sent_by: user.id,
+                created_at: date,
+                profile_pic: user.profile_pic,
+                firstName: user.first_name,
+                lastName: user.last_name,
+            };
+            
+            socketInstance.emit("my_message", data);
+            
+            setMessage("");
+            setErrors({})
+        }
     };
 
     const handleEnter = (e) => {
@@ -148,6 +164,7 @@ function Messages({ channel }) {
                 </ul>
             </div>
             <div className="message-input-footer">
+                    {errors.characters && <p className="errors">{errors.characters}</p>}
                 <div className="input-container">
                     <input
                         className="message-input"
@@ -156,6 +173,8 @@ function Messages({ channel }) {
                         onChange={handleText}
                         onKeyDown={handleEnter}
                     />
+                    {charactersLeft >= 0 && <p className="character-count">{charactersLeft}</p> }
+                    {charactersLeft < 0 && <p className="character-count-errors">{charactersLeft}</p>}
                     <button className="message-submit-button" onClick={handleSubmit}>
                         <i className="fa-solid fa-paper-plane"></i>
                     </button>
