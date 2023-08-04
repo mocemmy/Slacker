@@ -25,7 +25,7 @@ function Channels({ server }) {
 
     const leaveServer = async () => {
         if (currentUser.id == 15 || currentUser.id == 16) {
-            window.alert("Demo users can't leave existing servers, Please create your own server.")
+            window.alert("Demo users can't leave existing workspaces, Please create your own workspace.")
         } else {
             dispatch(thunkLeaveServer(server.id));
         }
