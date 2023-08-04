@@ -44,6 +44,7 @@
 
 .input-container {
     display: flex;
+    align-items: center;
     background-color: #3d3c3d;
     border: 2px solid #4e4e4e;
     border-radius: 0.30rem;
@@ -63,4 +64,20 @@
 
 .scroll-to {
     height: 0;
+}
+
+.character-count,
+.character-count-errors {
+    color: white;
+    border: 1px solid white;
+    height: fit-content;
+    width: fit-content;
+    padding: 0.25rem;
+    background-color: green;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.character-count-errors {
+    background-color: red;
 }
