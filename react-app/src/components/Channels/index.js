@@ -10,7 +10,6 @@ import { thunkDeleteServer, thunkLeaveServer } from "../../store/servers";
 import UpdateServerForm from "../UpdateServerForm";
 import { thunkLeaveChannel, thunkDeleteChannel } from "../../store/channels";
 import ChannelForm from "../ChannelForm";
-// import Loading from "../Loading";
 
 function Channels({ server }) {
     const channels = useSelector((state) => state.channels.channelList);

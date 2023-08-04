@@ -73,8 +73,7 @@ function Messages({ channel }) {
         if (socketInstance) {
             socketInstance.on("my_message", (data) => {
                 if (data.type === "CREATE") {
-                    const receivedMessage = data;
-                    setMessageArr((prevArr) => [...prevArr, [channel, receivedMessage]]);
+                    dispatch(thunkGetAllMessages(channel))
                 }
                 if (data.type === "UPDATE") {
                     if (messageArr.length) {
