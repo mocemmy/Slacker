@@ -2,6 +2,7 @@
 Hover color:  #252425
 text color: #D1D2D3D3
 border color: #3a3a3ad3
+message-container bkc: #272627
 */
 
 #serverList-container {
@@ -68,6 +69,7 @@ border color: #3a3a3ad3
 .selectedServer {
     outline: 2px solid gray;
 }
+
 .serverListItem[title]:hover::after {
     content: attr(title);
     position: absolute;
