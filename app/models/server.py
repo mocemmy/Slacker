@@ -15,8 +15,8 @@ class Server(db.Model):
     is_public = db.Column(db.Boolean, default=True)
     profile_pic = db.Column(db.String, default='/serverpic.png')
     description = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now)
 
     owner = db.relationship('User', back_populates='owned_servers')
 

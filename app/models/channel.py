@@ -15,8 +15,8 @@ class Channel(db.Model):
     created_by = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     is_public = db.Column(db.Boolean, default=True)
     description = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now)
 
     servers = db.relationship('Server', back_populates='channels')
 
