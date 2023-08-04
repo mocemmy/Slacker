@@ -16,7 +16,10 @@ function ChannelForm({ channel, type, server }) {
     const validateData = () => {
         const errorObj = {};
 
-        if (!name) errorObj.name = "Name is required"
+        if (name.length === 0) errorObj.name = "Field is required."
+        if (name.length > 50) errorObj.name = 'Must be less than 50 characters.'
+
+        if (description.length > 255) errorObj.description = 'Must be less than 255 characters.'
 
         if (Object.keys(errorObj).length > 0) return errorObj
         else return false
@@ -28,6 +31,7 @@ function ChannelForm({ channel, type, server }) {
         const newErrors = validateData();
 
         if (newErrors) return setErrors(newErrors)
+        console.log(errors)
 
         const data = {
             created_by: currentUser.id,
@@ -63,9 +67,9 @@ function ChannelForm({ channel, type, server }) {
     return (
         <div>
             <form className='form-container' method="post" onSubmit={handleSubmit}>
-                <h1 className='modal-title'>{title}</h1>
+                <h1 className='modal-title' id='channelFormTitle'>{title}</h1>
                 {errors.serverErrors && <p className='errors'>{errors.serverErrors}</p>}
-                <label htmlFor='name'>Channel Name<span className='errors'>: {errors.name}</span></label>
+                <label htmlFor='name'>Name{errors.name && <span className='errors'>: {errors.name}</span>}</label>
                 <input
                     name='name'
                     value={name}
@@ -73,7 +77,7 @@ function ChannelForm({ channel, type, server }) {
                     onChange={(e) => setName(e.target.value)}
                     placeholder='channel name'
                 />
-                <label htmlFor='description'>Channel Description</label>
+                <label htmlFor='description'>Description{errors.description && <span className='errors'>: {errors.description}</span>}</label>
                 <input
                     name='description'
                     type="text"
@@ -81,7 +85,7 @@ function ChannelForm({ channel, type, server }) {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder='description'
                 />
-                <button className='form-button' type="submit" disabled={Object.keys(errors).length}>{buttonText}</button>
+                <button className='form-button' type="submit">{buttonText}</button>
             </form>
         </div>
     )

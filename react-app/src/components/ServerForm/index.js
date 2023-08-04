@@ -32,7 +32,6 @@ const ServerForm = ({ server, formType }) => {
 
         if (serverName.length === 0) errorObj.name = 'This field is required.'
         if (serverName.length > 30) errorObj.name = 'Must be shorter than 30 characters.'
-        if (serverName.length <= 30) delete Object.name
 
         if (pfpURL) {
             const splitImg = pfpURL.split('.')
@@ -41,8 +40,7 @@ const ServerForm = ({ server, formType }) => {
             }
         }
 
-        if (description.length > 255) errorObj.description = 'Must be shorter than 255 characters'
-        if (description.length <= 255) delete Object.description
+        if (description.length > 255) errorObj.description = 'Must be shorter than 255 characters.'
 
         if (Object.keys(errorObj).length > 0) return errorObj
         else return false
