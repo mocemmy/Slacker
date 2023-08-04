@@ -34,9 +34,19 @@
     border-radius: 5px;
 }
 
-.channelListItem:hover {
-    cursor: pointer;
-    background-color: #484949d3;
+.channelListItem button {
+  background-color: transparent;
+  border: none;
+  color: #d1d2d3d3;
+  font-size: 1rem;;
+}
+
+
+.channelListItem:hover,
+.workspace-dropdown button:hover,
+.ul-dropdown button:hover {
+  cursor: pointer;
+  background-color: #484949d3;
 }
 
 .channelHashtag {
@@ -68,6 +78,15 @@
     border-radius: 5px;
     align-items: center;
     justify-content: center;
+  display: flex;
+  position: fixed;
+  top: 5rem;
+  left: 18rem;
+  background-color: #1d1c1d;;
+  color: white;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
 }
 
 .ul-dropdown li {
@@ -76,6 +95,17 @@
 
 .ul-channel {
     padding: 0.2rem 0.5rem;
+}
+
+.ul-dropdown button {
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-top: 1px solid rgba(250, 250, 250, 0.25);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.25);
 }
 
 .server-title {
@@ -92,4 +122,29 @@
 
 .channel-title:hover {
     background-color: rgb(119, 119, 119);
+}
+
+.workspace-dropdown {
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.workspace-dropdown ul {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  padding-left: 0;
+}
+
+.workspace-dropdown button {
+  background-color: transparent;
+  color: #d1d2d3d3;
+  font-size: 1rem;
+  border: none;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: left;
+  border-radius: 0.25rem;
 }

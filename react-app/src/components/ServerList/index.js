@@ -54,7 +54,6 @@ const ServerList = () => {
     }
   }, [servers, dispatch]);
 
-
   if (!isLoaded || !user) return <Loading />;
 
   const changeServer = (e, server) => {
@@ -77,13 +76,13 @@ const ServerList = () => {
   };
 
   const handleDeleteUser = () => {
-    if ( user.id === 15 || user.id === 16) {
-      window.alert("You can't delete the demo user!")
+    if (user.id === 15 || user.id === 16) {
+      window.alert("You can't delete the demo user!");
     } else {
       dispatch(sessionActions.thunkDeleteUser(user));
-      history.push('/')
+      history.push("/");
     }
-  }
+  };
 
   const ulClassName = "userDropdown-li" + (showUserMenu ? "" : " hidden");
 
@@ -97,7 +96,7 @@ const ServerList = () => {
             src={user.profile_pic}
             className="serverListImg"
             onClick={openMenu}
-            title='Edit Profile'
+            title="Edit Profile"
           ></img>
         </div>
 
@@ -109,17 +108,29 @@ const ServerList = () => {
             {user.email}
           </li>
           <li className="userDropdown-li pfpButton">
-            <OpenModalButton buttonText="Edit User Information" modalComponent={<EditUser user={user}/> } />
+            <OpenModalButton
+              buttonText="Edit User Information"
+              modalComponent={<EditUser user={user} />}
+            />
           </li>
-          <li>
-            <OpenModalButton buttonText="Delete User" modalComponent={<ConfirmModal modalTitle="Are you sure you want to delete yourself?" yesHandler={handleDeleteUser}/>} />
+          <li className="userDropdown-li pfpButton">
+            <OpenModalButton
+              buttonText="Delete User"
+              modalComponent={
+                <ConfirmModal
+                  modalTitle="Are you sure you want to delete yourself?"
+                  yesHandler={handleDeleteUser}
+                />
+              }
+            />
           </li>
-          <button
-            className="userDropdown-li logoutButton"
-            onClick={(e) => logout(e)}
-          >
-            Logout
-          </button>
+          <li className="userDropdown-li pfpButton">
+            <button
+              onClick={(e) => logout(e)}
+            >
+              Logout
+            </button>
+          </li>
         </ul>
 
         <ul id="serverList">
