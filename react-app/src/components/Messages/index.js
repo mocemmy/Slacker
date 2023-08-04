@@ -48,9 +48,9 @@ function Messages({ channel }) {
                 firstName: user.first_name,
                 lastName: user.last_name,
             };
-            
+
             socketInstance.emit("my_message", data);
-            
+
             setMessage("");
             setErrors({})
         }
@@ -173,7 +173,7 @@ function Messages({ channel }) {
                         onChange={handleText}
                         onKeyDown={handleEnter}
                     />
-                    {charactersLeft >= 0 && <p className="character-count">{charactersLeft}</p> }
+                    {charactersLeft >= 0 && charactersLeft < 500 && <p className="character-count">{charactersLeft}</p> }
                     {charactersLeft < 0 && <p className="character-count-errors">{charactersLeft}</p>}
                     <button className="message-submit-button" onClick={handleSubmit}>
                         <i className="fa-solid fa-paper-plane"></i>

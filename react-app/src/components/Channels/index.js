@@ -36,11 +36,14 @@ function Channels({ server }) {
 
     useEffect(() => {
         if (channels && channels[0]?.id) {
-            setDefaultChannel(channels[0].id);
             setCurrChannel(channels[0]);
             dispatch(thunkGetAllMessages(channels[0].id));
         }
     }, [channels, dispatch]);
+
+    useEffect(() => {
+        setDefaultChannel(currChannel?.id);
+    }, [currChannel])
 
     useEffect(() => {
         if (!showMenu) return;

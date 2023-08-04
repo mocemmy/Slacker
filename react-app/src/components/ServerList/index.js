@@ -47,12 +47,12 @@ const ServerList = () => {
   }, [showUserMenu]);
 
   useEffect(() => {
-    if (servers && servers[0]) {
+    if (isLoaded && servers && servers[0]) {
       setDefaultServer(servers[0].id);
       setCurrServer(servers[0]);
       dispatch(thunkGetAllChannels(servers[0].id));
     }
-  }, [servers, dispatch]);
+  }, [servers, dispatch, isLoaded]);
 
   if (!isLoaded || !user) return <Loading />;
 
