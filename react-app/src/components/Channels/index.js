@@ -10,7 +10,6 @@ import { thunkDeleteServer, thunkLeaveServer } from "../../store/servers";
 import UpdateServerForm from "../UpdateServerForm";
 import { thunkLeaveChannel, thunkDeleteChannel } from "../../store/channels";
 import ChannelForm from "../ChannelForm";
-// import Loading from "../Loading";
 
 function Channels({ server }) {
     const channels = useSelector((state) => state.channels.channelList);
@@ -198,7 +197,7 @@ function Channels({ server }) {
                             <OpenModalButton modalComponent={<ChannelForm type="UPDATE" channel={currChannel} server={server} />} buttonText="Edit Channel" />
                         </li>
                         <li>
-                            <OpenModalButton buttonText={'Delete Channel'} modalComponent={<ConfirmModal modalTitle={`Are you sure you want to delete the channel ${currChannel.name}`} yesHandler={handleDeleteChannel} />} />
+                            <OpenModalButton buttonText={'Delete Channel'} modalComponent={<ConfirmModal modalTitle={`Are you sure you want to delete the channel ${currChannel.name}?`} yesHandler={handleDeleteChannel} />} />
                         </li>
                     </ul>
                     <ul className={notOwnedChannel}>
