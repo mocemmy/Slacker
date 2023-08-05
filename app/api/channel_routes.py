@@ -17,9 +17,6 @@ def messages(id):
     """
     messages = Message.query.filter(Message.channel_id == id).order_by(Message.created_at).all()
 
-    for message in messages:
-        print(message.created_at)
-
     return {"messages": [message.to_dict() for message in messages]}
 
 @channel_routes.route('/new', methods=['POST'])
@@ -76,7 +73,6 @@ def edit_channel(id):
     channel = Channel.query.get(id)
 
     form = ChannelForm()
-    print('*******************', ChannelForm())
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']

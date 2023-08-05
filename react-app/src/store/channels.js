@@ -1,10 +1,14 @@
 const GET_CHANNELS = 'channels/ALL'
+const REMOVE_ALL_CHANNELS = 'channels/remove'
 
 const actionGetChannels = (channels) => ({
     type: GET_CHANNELS,
     channels
 })
 
+export const actionRemoveAllChannels = () => ({
+    type: REMOVE_ALL_CHANNELS
+})
 
 export const thunkLeaveChannel = (channelId, serverId) => async (dispatch) => {
     const response = await fetch(`/api/channels/${channelId}/leave`, {
@@ -90,13 +94,15 @@ export const thunkGetAllChannels = (serverId) => async (dispatch) => {
 }
 
 
-const initialState = {channelList: null}
+const initialState = { channelList: null }
 
 
 export default function channelReducer(state = initialState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case GET_CHANNELS:
-            return { ...state, channelList: action.channels}
+            return { ...state, channelList: action.channels }
+        case REMOVE_ALL_CHANNELS:
+            return { channelList: null }
         default:
             return state
     }

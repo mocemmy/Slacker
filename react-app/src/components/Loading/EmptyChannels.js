@@ -2,43 +2,29 @@ import OpenModalButton from "../OpenModalButton";
 import MessageDisplay from "../MessageDisplay";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import ChannelForm from "../ChannelForm";
+import EmptyServers from "./EmptyServers";
+import ServerDropdown from "../ServerDropdown";
 
 function EmptyChannels({ server }) {
-  if (!server)
+
+    if (!server) return <EmptyServers />
     return (
-      <div id="channel-container">
-        <div className="server-title">
-          <p>No Workspaces Yet!</p>
-        </div>
-        <ul id="channelList">
-          <h4 id="channelList-header">No Channels</h4>
+        <>
+            <div id="channel-container">
+                <ServerDropdown server={server} />
+                <ul id="channelList">
+                    <h4 id="channelList-header">No Channels</h4>
 
-          <li className="channelListItem">
-            <i className="fa-solid fa-plus"></i>&nbsp;&nbsp;
-            <OpenModalButton buttonText="Add Channel" />
-          </li>
-        </ul>
-        <div id="message-container"></div>
-      </div>
+                    <li className="channelListItem">
+                        <i className="fa-solid fa-plus"></i>&nbsp;&nbsp;
+                        <OpenModalButton buttonText="Add Channel" modalComponent={<ChannelForm type="CREATE" server={server} />} />
+                    </li>
+                </ul>
+            </div>
+            <div id="message-container"></div>
+        </>
     );
-  return (
-    <>
-      <div id="channel-container">
-        <div className="server-title">
-          <p>{server.name}</p>
-        </div>
-        <ul id="channelList">
-          <h4 id="channelList-header">No Channels</h4>
-
-          <li className="channelListItem">
-            <i className="fa-solid fa-plus"></i>&nbsp;&nbsp;
-            <OpenModalButton buttonText="Add Channel" />
-          </li>
-        </ul>
-      </div>
-      <div id="message-container"></div>
-    </>
-  );
 }
 
 export default EmptyChannels;

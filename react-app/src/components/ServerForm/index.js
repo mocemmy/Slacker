@@ -22,7 +22,7 @@ const ServerForm = ({ server, formType }) => {
     const validateData = () => {
         const errorObj = {};
 
-        if (serverName.length === 0) errorObj.name = 'This field is required.'
+        if (!serverName.length) errorObj.name = 'This field is required.'
         if (serverName.length > 30) errorObj.name = 'Must be shorter than 30 characters.'
 
         if (pfpURL) {
@@ -57,7 +57,6 @@ const ServerForm = ({ server, formType }) => {
 
             const response = await dispatch(thunkCreateNewServer(newServer));
             if (response.errors) {
-                console.log(response.errors)
                 setErrors(response.errors)
             } else {
                 await dispatch(thunkGetAllServers())
@@ -72,7 +71,6 @@ const ServerForm = ({ server, formType }) => {
 
             const response = await dispatch(thunkUpdateServerById(newServer, server.id));
             if (response.errors) {
-                console.log(response.errors)
                 setErrors(response.errors)
             } else {
                 // await dispatch(thunkGetAllServers())
@@ -111,7 +109,6 @@ const ServerForm = ({ server, formType }) => {
                 <label htmlFor='description' className='server-form-label'>Description{errors.description && <span className='errors'>: {errors.description}</span>}</label>
                 {/* {errors.description && <p className='new-server-form-error'>Description Error: {errors.description}</p>} */}
                 <textarea
-                    contentEditable
                     id='serverFormDescription'
                     name='description'
                     placeholder='Workspace description'

@@ -1,5 +1,6 @@
 const SET_SERVERS = 'servers/ALL'
 const SET_SINGLE_SERVER = 'servers/new'
+const REMOVE_EVERYTHING = 'server/everything'
 
 const actionSetServers = (servers) => ({
     type: SET_SERVERS,
@@ -9,6 +10,10 @@ const actionSetServers = (servers) => ({
 const actionSetSingleServer = (server) => ({
     type: SET_SINGLE_SERVER,
     server
+})
+
+export const actionRemoveEverything = () => ({
+    type: REMOVE_EVERYTHING
 })
 
 export const thunkGetAllServers = () => async (dispatch) => {
@@ -34,12 +39,10 @@ export const thunkCreateNewServer = (server) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data', data)
         dispatch(actionSetSingleServer(data.server))
         return data
     } else {
         const errors = await response.json();
-        console.log('errors', errors)
         return errors
     }
 }
@@ -52,13 +55,11 @@ export const thunkUpdateServerById = (server, serverId) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json();
-        // console.log('data', data)
         // dispatch(actionSetSingleServer(data.server))
         dispatch(thunkGetAllServers())
         return data
     } else {
         const errors = await response.json();
-        console.log('errors', errors)
         return errors
     }
 }
@@ -104,6 +105,8 @@ export default function serverReducer(state = initialState, action) {
             return { ...state, serverList: action.servers };
         case SET_SINGLE_SERVER:
             return { ...state, singleServer: action.server }
+        case REMOVE_EVERYTHING:
+            return { serverList: null }
         default:
             return state
     }
