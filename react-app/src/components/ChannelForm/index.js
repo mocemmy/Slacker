@@ -42,7 +42,8 @@ function ChannelForm({ channel, type, server, setCurrChannel }) {
         if (type == "CREATE") {
            response = await dispatch(thunkCreateChannel(server.id, data));
            if (response.id){
-               setCurrChannel(response);
+               if (setCurrChannel) setCurrChannel(response);
+               closeModal();
            }
         } else {
             response = await dispatch(thunkEditChannel(channel.id, server.id, data));
