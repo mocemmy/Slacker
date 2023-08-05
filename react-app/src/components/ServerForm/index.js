@@ -19,14 +19,6 @@ const ServerForm = ({ server, formType }) => {
         title = "Update Workspace"
     }
 
-    // const dispatch = useDispatch();
-    // const [serverName, setServerName] = useState(null);
-    // const [pfpURL, setPfpURL] = useState(null);
-    // const [description, setDescription] = useState(null);
-    // const [selectedOption, setSelectedOption] = useState("public");
-    // const [errors, setErrors] = useState({});
-    // const { closeModal } = useModal();
-
     const validateData = () => {
         const errorObj = {};
 
@@ -83,7 +75,7 @@ const ServerForm = ({ server, formType }) => {
                 console.log(response.errors)
                 setErrors(response.errors)
             } else {
-                await dispatch(thunkGetAllServers())
+                // await dispatch(thunkGetAllServers())
                 closeModal();
             }
             return
