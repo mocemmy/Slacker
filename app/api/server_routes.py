@@ -58,12 +58,19 @@ def create_new_server():
     form = ServerForm(data=data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        server = Server(
-            name=form.data['name'],
-            created_by=current_user.id,
-            profile_pic=form.data['profilePic'],
-            description=form.data['description']
-        )
+        if form.data['profilePic']:
+            server = Server(
+                name=form.data['name'],
+                created_by=current_user.id,
+                profile_pic=form.data['profilePic'],
+                description=form.data['description']
+            )
+        else:
+            server = Server(
+                name=form.data['name'],
+                created_by=current_user.id,
+                description=form.data['description']
+            )
         server.members.append(current_user)
         db.session.add(server)
         db.session.commit()

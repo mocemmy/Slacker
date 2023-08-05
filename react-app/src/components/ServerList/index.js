@@ -3,21 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
 import CreateServerForm from "../CreateServerForm";
-import OpenModalButton from "../OpenModalButton";
 import ServerListModalListItem from "./ServerListModalListItem";
 import Loading from "../Loading";
 import "./serverList.css";
-import * as sessionActions from "../../store/session";
 import { useHistory } from "react-router-dom";
 import Channels from "../Channels";
-import EditUser from "../EditUser";
-import ConfirmModal from "../ConfirmModal";
 import EmptyChannels from "../Loading/EmptyChannels";
 import ProfileDropdown from "../ProfileDropdown";
+import EmptyServers from "../Loading/EmptyServers";
 
 const ServerList = () => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [showUserMenu, setUserMenu] = useState(false);
     const servers = useSelector((state) => state.server.serverList);
     const user = useSelector((state) => state.session.user);
     const [currServer, setCurrServer] = useState(null);
@@ -34,18 +30,7 @@ const ServerList = () => {
         data();
     }, [dispatch]);
 
-    useEffect(() => {
-        if (!showUserMenu) return;
 
-        const closeMenu = (e) => {
-            if (ulRef.current && !ulRef.current.contains(e.target))
-                setUserMenu(false);
-        };
-
-        document.addEventListener("click", closeMenu); //close menu on click anywhere on document exept menu or button
-
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showUserMenu]);
     useEffect(() => {
         if (isLoaded && servers && servers[0]) {
             if (!currServer) {
@@ -66,7 +51,7 @@ const ServerList = () => {
     }, [servers, dispatch, isLoaded]);
 
     if (!isLoaded || !user || !currServer) return <Loading />;
-    console.log('Server in ServerList', currServer)
+
     const changeServer = (e, server) => {
         // setDefaultServer(server.id);
         setCurrServer(server);
