@@ -31,7 +31,6 @@ function ChannelForm({ channel, type, server }) {
         const newErrors = validateData();
 
         if (newErrors) return setErrors(newErrors)
-        console.log(errors)
 
         const data = {
             created_by: currentUser.id,

@@ -39,12 +39,10 @@ export const thunkCreateNewServer = (server) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data', data)
         dispatch(actionSetSingleServer(data.server))
         return data
     } else {
         const errors = await response.json();
-        console.log('errors', errors)
         return errors
     }
 }
@@ -57,13 +55,11 @@ export const thunkUpdateServerById = (server, serverId) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json();
-        // console.log('data', data)
         // dispatch(actionSetSingleServer(data.server))
         dispatch(thunkGetAllServers())
         return data
     } else {
         const errors = await response.json();
-        console.log('errors', errors)
         return errors
     }
 }

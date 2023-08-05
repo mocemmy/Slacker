@@ -80,7 +80,6 @@ function Messages({ channel }) {
 
         return () => {
             // Clean up the socket connection and leave the room when the component unmounts
-            console.log('channel', channel)
             if (socket && channel) {
                 socket.emit("leave", { room: channel.toString() });
                 socket.disconnect();

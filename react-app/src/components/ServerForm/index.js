@@ -57,7 +57,6 @@ const ServerForm = ({ server, formType }) => {
 
             const response = await dispatch(thunkCreateNewServer(newServer));
             if (response.errors) {
-                console.log(response.errors)
                 setErrors(response.errors)
             } else {
                 await dispatch(thunkGetAllServers())
@@ -72,7 +71,6 @@ const ServerForm = ({ server, formType }) => {
 
             const response = await dispatch(thunkUpdateServerById(newServer, server.id));
             if (response.errors) {
-                console.log(response.errors)
                 setErrors(response.errors)
             } else {
                 // await dispatch(thunkGetAllServers())
