@@ -36,7 +36,7 @@ def channels(id):
     """
     Query for all channels belonging to a server
     """
-    all_channels = Channel.query.filter(Channel.server_id == id).all()
+    all_channels = Channel.query.filter(Channel.server_id == id).order_by(Channel.created_at).all()
 
     user_channels = []
 

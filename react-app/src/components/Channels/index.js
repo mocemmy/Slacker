@@ -64,7 +64,7 @@ function Channels({ server, currChannel, setCurrChannel }) {
                     ))}
                     <li className="channelListItem">
                         <i className="fa-solid fa-plus"></i>&nbsp;&nbsp;
-                        <OpenModalButton buttonText="Add Channel" modalComponent={<ChannelForm type="CREATE" server={server} />} />
+                        <OpenModalButton buttonText="Add Channel" modalComponent={<ChannelForm type="CREATE" server={server} setCurrChannel={setCurrChannel} />} />
                     </li>
                 </ul>
             </div>
