@@ -52,8 +52,8 @@ const ServerList = () => {
                 setCurrServer(servers[0]);
                 dispatch(thunkGetAllChannels(servers[0].id));
             } else {
-                const currentServer = servers.find(server => server.id === currServer.id)
-                setCurrServer(currentServer)
+                const updatedServer = servers.find(server => server.id === currServer.id)
+                setCurrServer(updatedServer)
                 dispatch(thunkGetAllChannels(currServer.id))
             }
         }
