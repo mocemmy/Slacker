@@ -91,7 +91,7 @@ function MessageDisplay({
 
   const ownedMessage =
     currentUser && currentUser.id === message.sent_by ? "" : "hidden";
-  const menuHidden = showMessageMenu ? "" : "hidden";
+  const menuHidden = showMessageMenu ? "message-menu" : "hidden";
 
   const time = new Date(message.created_at);
   const dispTime = time.toLocaleTimeString("en-US", {
@@ -110,7 +110,7 @@ function MessageDisplay({
         <p>{dispTime}</p>
       </div>
       <div className={`message-body ${notEditMessage}`}>
-        <div>
+        <div id='message-text'>
           <p>{message.message_body}</p>
         </div>
         <div className="menu-options-container">
@@ -130,7 +130,7 @@ function MessageDisplay({
               />
             </div>
           </div>
-          <div className={ownedMessage}>
+          <div className={ownedMessage} id='message-edit-button'>
             <button id="message-menu" onClick={openMenu} ref={menuRef}>
               <i className="fa-solid fa-ellipsis-vertical"></i>
             </button>

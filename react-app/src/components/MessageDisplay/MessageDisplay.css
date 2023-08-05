@@ -34,6 +34,10 @@
     justify-content: space-between;
     align-items: center;
 }
+#message-text {
+    width: 80%;
+    overflow-wrap: break-word;
+}
 
 #message-menu {
     background-color: transparent;
@@ -59,11 +63,13 @@
 
 .menu-options-container {
     display: flex;
-
+    height: 5rem;
+    align-items: center;
 }
 .options-container {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 .options-container button {
     padding: 0.5rem 0;
