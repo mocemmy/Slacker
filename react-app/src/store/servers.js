@@ -1,5 +1,6 @@
 const SET_SERVERS = 'servers/ALL'
 const SET_SINGLE_SERVER = 'servers/new'
+const REMOVE_EVERYTHING = 'server/everything'
 
 const actionSetServers = (servers) => ({
     type: SET_SERVERS,
@@ -9,6 +10,10 @@ const actionSetServers = (servers) => ({
 const actionSetSingleServer = (server) => ({
     type: SET_SINGLE_SERVER,
     server
+})
+
+export const actionRemoveEverything = () => ({
+    type: REMOVE_EVERYTHING
 })
 
 export const thunkGetAllServers = () => async (dispatch) => {
@@ -104,6 +109,8 @@ export default function serverReducer(state = initialState, action) {
             return { ...state, serverList: action.servers };
         case SET_SINGLE_SERVER:
             return { ...state, singleServer: action.server }
+        case REMOVE_EVERYTHING:
+            return { serverList: null }
         default:
             return state
     }

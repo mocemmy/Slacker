@@ -12,11 +12,6 @@ import ChannelDropdown from "../ChannelDropdown";
 function Channels({ server, currChannel, setCurrChannel }) {
     const channels = useSelector((state) => state.channels.channelList);
     const dispatch = useDispatch();
-    const currentUser = useSelector((state) => state.session.user);
-
-
-    const ulRef = useRef();
-    const channelRef = useRef();
 
     useEffect(() => {
         setCurrChannel(null)
@@ -29,8 +24,13 @@ function Channels({ server, currChannel, setCurrChannel }) {
                 dispatch(thunkGetAllMessages(channels[0].id));
             } else {
                 const newChannel = channels.find(channel => channel.id === currChannel.id)
-                setCurrChannel(newChannel)
-                dispatch(thunkGetAllMessages(currChannel.id))
+                if (newChannel) {
+                    setCurrChannel(newChannel)
+                    dispatch(thunkGetAllMessages(currChannel.id))
+                } else {
+                    dispatch(thunkGetAllMessages(channels[0].id))
+                    setCurrChannel(channels[0])
+                }
             }
         }
     }, [channels, dispatch]);
@@ -39,7 +39,6 @@ function Channels({ server, currChannel, setCurrChannel }) {
     if (!channels || !channels.length || !currChannel) return <EmptyChannels server={server} />;
     const changeChannel = (e, currChannel) => {
         dispatch(thunkGetAllMessages(currChannel.id));
-        // setDefaultChannel(currChannel.id);
         setCurrChannel(currChannel);
     };
 
