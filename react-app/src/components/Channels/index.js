@@ -9,10 +9,9 @@ import ChannelForm from "../ChannelForm";
 import ServerDropdown from "../ServerDropdown";
 import ChannelDropdown from "../ChannelDropdown";
 
-function Channels({ server }) {
+function Channels({ server, currChannel, setCurrChannel }) {
     const channels = useSelector((state) => state.channels.channelList);
     const dispatch = useDispatch();
-    const [currChannel, setCurrChannel] = useState();
     const currentUser = useSelector((state) => state.session.user);
     
 
