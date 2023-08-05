@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from app.models import db, User, Message
-from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_socketio import SocketIO, emit, join_room, leave_room, rooms
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
@@ -57,7 +57,7 @@ def handle_join(data):
 def handle_leave(data):
     room = data['room']
     leave_room(room)
-    # emit('my_message', {'message': 'You left the room: ' + room}, room=room)
+    # emit('my_message', {'message': 'You left the room: ' + room}, broadcast=True)
 
 @socketio.on('my_message')
 def handle_message(data):

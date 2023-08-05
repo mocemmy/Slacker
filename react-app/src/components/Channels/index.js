@@ -13,7 +13,7 @@ function Channels({ server, currChannel, setCurrChannel }) {
     const channels = useSelector((state) => state.channels.channelList);
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.session.user);
-    
+
 
     const ulRef = useRef();
     const channelRef = useRef();
@@ -34,8 +34,6 @@ function Channels({ server, currChannel, setCurrChannel }) {
             }
         }
     }, [channels, dispatch]);
-
-
 
 
     if (!channels || !channels.length || !currChannel) return <EmptyChannels server={server} />;

@@ -23,8 +23,8 @@ function Messages({ channel }) {
 
         const characterCount = e.target.value.length;
         setCharactersLeft(500 - characterCount);
-        if (characterCount > 500){
-            setErrors({characters: "Maximum of 500 characters allowed"})
+        if (characterCount > 500) {
+            setErrors({ characters: "Maximum of 500 characters allowed" })
         } else {
             setErrors({})
         }
@@ -34,8 +34,8 @@ function Messages({ channel }) {
     const handleSubmit = () => {
         if (!message || !channel) return;
         const date = new Date();
-        if(charactersLeft < 0) {
-            setErrors({characters: "Maximum of 500 characters allowed"})
+        if (charactersLeft < 0) {
+            setErrors({ characters: "Maximum of 500 characters allowed" })
         } else {
 
             const data = {
@@ -63,9 +63,10 @@ function Messages({ channel }) {
         }
     }
 
+    let socket;
     useEffect(() => {
         // Establish socket connection when the component mounts
-        const socket =
+        socket =
             process.env.NODE_ENV !== "production"
                 ? io("http://localhost:5000")
                 : io("https://slacker-chat-collab.onrender.com");
@@ -79,7 +80,8 @@ function Messages({ channel }) {
 
         return () => {
             // Clean up the socket connection and leave the room when the component unmounts
-            if (socketInstance && channel) {
+            console.log('channel', channel)
+            if (socket && channel) {
                 socket.emit("leave", { room: channel.toString() });
                 socket.disconnect();
             }
@@ -165,7 +167,7 @@ function Messages({ channel }) {
                 </ul>
             </div>
             <div className="message-input-footer">
-                    {errors.characters && <p className="errors">{errors.characters}</p>}
+                {errors.characters && <p className="errors">{errors.characters}</p>}
                 <div className="input-container">
                     <input
                         className="message-input"
@@ -174,7 +176,7 @@ function Messages({ channel }) {
                         onChange={handleText}
                         onKeyDown={handleEnter}
                     />
-                    {charactersLeft >= 0 && charactersLeft < 500 && <p className="character-count">{charactersLeft}</p> }
+                    {charactersLeft >= 0 && charactersLeft < 500 && <p className="character-count">{charactersLeft}</p>}
                     {charactersLeft < 0 && <p className="character-count-errors">{charactersLeft}</p>}
                     <button className="message-submit-button" onClick={handleSubmit}>
                         <i className="fa-solid fa-paper-plane"></i>
