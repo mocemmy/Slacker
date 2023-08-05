@@ -73,7 +73,7 @@ function Channels({ server }) {
                 </ul>
             </div>
             <div id="message-container">
-                <ChannelDropdown currChannel={currChannel} server={server} />
+                <ChannelDropdown currChannel={currChannel} setCurrChannel={setCurrChannel} server={server} />
                 <Messages channel={currChannel.id} />
             </div>
         </>

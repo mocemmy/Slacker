@@ -7,8 +7,9 @@ import OpenModalButton from "../OpenModalButton";
 import ChannelForm from "../ChannelForm";
 import ConfirmModal from "../ConfirmModal";
 
-function ChannelDropdown({ currChannel, server }) {
+function ChannelDropdown({ currChannel, setCurrChannel, server }) {
   const currentUser = useSelector((state) => state.session.user);
+  const channels = useSelector((state) => state.channels.channelList);
   const [showChannelMenu, setShowChannelMenu] = useState(false);
   const dispatch = useDispatch();
   const channelRef = useRef();
@@ -38,8 +39,9 @@ function ChannelDropdown({ currChannel, server }) {
     }
   };
 
-  const handleDeleteChannel = () => {
-    dispatch(thunkDeleteChannel(currChannel.id, server.id));
+  const handleDeleteChannel = async () => {
+    await dispatch(thunkDeleteChannel(currChannel.id, server.id));
+    setCurrChannel(channels[0])
   };
 
   
