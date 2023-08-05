@@ -22,7 +22,7 @@ const ServerForm = ({ server, formType }) => {
     const validateData = () => {
         const errorObj = {};
 
-        if (serverName.length === 0) errorObj.name = 'This field is required.'
+        if (!serverName.length) errorObj.name = 'This field is required.'
         if (serverName.length > 30) errorObj.name = 'Must be shorter than 30 characters.'
 
         if (pfpURL) {
