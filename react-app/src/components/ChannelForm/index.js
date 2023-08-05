@@ -5,7 +5,7 @@ import { thunkEditChannel, thunkCreateChannel } from '../../store/channels';
 import './ChannelForm.css'
 
 
-function ChannelForm({ channel, type, server }) {
+function ChannelForm({ channel, type, server, setCurrChannel }) {
     const dispatch = useDispatch();
     const [name, setName] = useState(channel ? channel.name : "")
     const [description, setDescription] = useState(channel ? channel.description : "")
@@ -40,7 +40,10 @@ function ChannelForm({ channel, type, server }) {
         }
         let response;
         if (type == "CREATE") {
-            response = await dispatch(thunkCreateChannel(server.id, data));
+           response = await dispatch(thunkCreateChannel(server.id, data));
+           if (response.id){
+               setCurrChannel(response);
+           }
         } else {
             response = await dispatch(thunkEditChannel(channel.id, server.id, data));
         }
