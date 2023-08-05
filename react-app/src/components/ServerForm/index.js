@@ -111,7 +111,6 @@ const ServerForm = ({ server, formType }) => {
                 <label htmlFor='description' className='server-form-label'>Description{errors.description && <span className='errors'>: {errors.description}</span>}</label>
                 {/* {errors.description && <p className='new-server-form-error'>Description Error: {errors.description}</p>} */}
                 <textarea
-                    contentEditable
                     id='serverFormDescription'
                     name='description'
                     placeholder='Workspace description'
