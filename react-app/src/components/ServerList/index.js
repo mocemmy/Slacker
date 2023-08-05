@@ -50,6 +50,7 @@ const ServerList = () => {
         }
     }, [servers, dispatch, isLoaded]);
 
+    if (servers && servers.length === 0) return < EmptyServers server={currServer} setCurrChannel={setCurrChannel} setCurrServer={setCurrServer} />
     if (!isLoaded || !user || !currServer) return <Loading />;
 
     const changeServer = (e, server) => {
@@ -62,7 +63,7 @@ const ServerList = () => {
     return (
         <>
             <div id="serverList-container">
-                <ProfileDropdown setCurrChannel={setCurrChannel} setCurrServer={setCurrServer}/>
+                <ProfileDropdown setCurrChannel={setCurrChannel} setCurrServer={setCurrServer} />
 
                 <ul id="serverList">
                     {servers.map((server) => {
