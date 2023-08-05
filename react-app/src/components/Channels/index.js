@@ -14,7 +14,7 @@ import ChannelForm from "../ChannelForm";
 function Channels({ server }) {
     const channels = useSelector((state) => state.channels.channelList);
     const dispatch = useDispatch();
-    const [defaultChannel, setDefaultChannel] = useState();
+    // const [defaultChannel, setDefaultChannel] = useState();
     const [currChannel, setCurrChannel] = useState();
     const currentUser = useSelector((state) => state.session.user);
     const [showMenu, setShowMenu] = useState(false);
@@ -35,15 +35,19 @@ function Channels({ server }) {
     }
 
     useEffect(() => {
-        if (channels && channels[0]?.id) {
-            setCurrChannel(channels[0]);
-            dispatch(thunkGetAllMessages(channels[0].id));
-        }
-    }, [channels, dispatch]);
+        setCurrChannel(null)
+    }, [server.id])
 
     useEffect(() => {
-        setDefaultChannel(currChannel?.id);
-    }, [currChannel])
+        if (channels && channels[0]) {
+            if (!currChannel) {
+                setCurrChannel(channels[0]);
+                dispatch(thunkGetAllMessages(channels[0].id));
+            } else {
+                dispatch(thunkGetAllMessages(currChannel.id))
+            }
+        }
+    }, [channels, dispatch]);
 
     useEffect(() => {
         if (!showMenu) return;
@@ -72,10 +76,10 @@ function Channels({ server }) {
     }, [showChannelMenu]);
 
     if (!channels || !currChannel) return <EmptyChannels server={server} />;
-
+    console.log('Server in Channels', server)
     const changeChannel = (e, currChannel) => {
         dispatch(thunkGetAllMessages(currChannel.id));
-        setDefaultChannel(currChannel.id);
+        // setDefaultChannel(currChannel.id);
         setCurrChannel(currChannel);
     };
 
@@ -166,18 +170,18 @@ function Channels({ server }) {
                 </div>
                 <ul id="channelList">
                     <h4 id="channelList-header">Channels</h4>
-                    {channels.map((currChannel) => (
+                    {channels.map((channel) => (
                         <li
-                            key={currChannel.id}
-                            onClick={(e) => changeChannel(e, currChannel)}
+                            key={channel.id}
+                            onClick={(e) => changeChannel(e, channel)}
                             className={
-                                currChannel.id === defaultChannel
+                                channel.id === currChannel.id
                                     ? "channelListItem selected"
                                     : "channelListItem"
                             }
                         >
                             <div className="channelHashtag">#</div>
-                            {currChannel.name}
+                            {channel.name}
                         </li>
                     ))}
                     <li className="channelListItem">
@@ -216,7 +220,7 @@ function Channels({ server }) {
                         </li>
                     </ul>
                 </div>
-                <Messages channel={defaultChannel} server={server} />
+                <Messages channel={currChannel.id} />
             </div>
         </>
     );
