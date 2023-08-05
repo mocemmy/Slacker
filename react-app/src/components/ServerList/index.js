@@ -45,7 +45,6 @@ const ServerList = () => {
 
         return () => document.removeEventListener("click", closeMenu);
     }, [showUserMenu]);
-
     useEffect(() => {
         if (isLoaded && servers && servers[0]) {
             if (!currServer) {
@@ -53,15 +52,17 @@ const ServerList = () => {
                 dispatch(thunkGetAllChannels(servers[0].id));
             } else {
                 const updatedServer = servers.find(server => server.id === currServer.id)
-                setCurrServer(updatedServer)
-                dispatch(thunkGetAllChannels(currServer.id))
+                if (updatedServer) {
+                    setCurrServer(updatedServer)
+                    dispatch(thunkGetAllChannels(currServer.id))
+                } else {
+                    setCurrServer(servers[0])
+                    dispatch(thunkGetAllChannels(servers[0].id))
+                }
+                // dispatch(thunkGetAllChannels(currServer.id))
             }
         }
     }, [servers, dispatch, isLoaded]);
-
-    // useEffect(() => {
-    //     setDefaultServer(currServer);
-    // }, [currServer])
 
     if (!isLoaded || !user || !currServer) return <Loading />;
     console.log('Server in ServerList', currServer)

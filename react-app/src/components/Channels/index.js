@@ -14,7 +14,6 @@ import ChannelForm from "../ChannelForm";
 function Channels({ server }) {
     const channels = useSelector((state) => state.channels.channelList);
     const dispatch = useDispatch();
-    // const [defaultChannel, setDefaultChannel] = useState();
     const [currChannel, setCurrChannel] = useState();
     const currentUser = useSelector((state) => state.session.user);
     const [showMenu, setShowMenu] = useState(false);
@@ -76,7 +75,6 @@ function Channels({ server }) {
     }, [showChannelMenu]);
 
     if (!channels || !currChannel) return <EmptyChannels server={server} />;
-    console.log('Server in Channels', server)
     const changeChannel = (e, currChannel) => {
         dispatch(thunkGetAllMessages(currChannel.id));
         // setDefaultChannel(currChannel.id);
