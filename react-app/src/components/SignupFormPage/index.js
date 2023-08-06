@@ -45,7 +45,7 @@ function SignupFormPage() {
             validationErrors.confirmPassword = "Passwords must match";
 
         setErrors(validationErrors);
-    }, [first_name, last_name, username, password, hasSubmitted]);
+    }, [first_name, last_name, username, password, email, hasSubmitted]);
 
     const onClick = () => {
         setHasSubmitted(true);
