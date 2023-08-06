@@ -41,11 +41,13 @@ function SignupFormPage() {
 
         if (!password) validationErrors.password = "Password is required";
 
+        if (password.length < 6) validationErrors.password = 'Password must be 6 or more characters'
+
         if (password !== confirmPassword)
             validationErrors.confirmPassword = "Passwords must match";
 
         setErrors(validationErrors);
-    }, [first_name, last_name, username, password, email, hasSubmitted]);
+    }, [first_name, last_name, username, password, confirmPassword, email, hasSubmitted]);
 
     const onClick = () => {
         setHasSubmitted(true);
