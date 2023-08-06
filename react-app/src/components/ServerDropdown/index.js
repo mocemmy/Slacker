@@ -28,7 +28,7 @@ function ServerDropdown ({ server }) {
     if (!currentUser) return <Loading />
 
     const leaveServer = async () => {
-        if (currentUser.id == 15 || currentUser.id == 16) {
+        if (currentUser.id === 15 || currentUser.id === 16) {
             window.alert("Demo users can't leave existing workspaces, Please create your own workspace.")
         } else {
             dispatch(thunkLeaveServer(server.id));
@@ -38,7 +38,7 @@ function ServerDropdown ({ server }) {
     const deleteServer = async () => {
         await dispatch(thunkDeleteServer(server.id))
     }
-    
+
     const toggleMenu = () => {
         if (!showMenu) setShowMenu(true);
         else setShowMenu(false);
@@ -58,7 +58,7 @@ const notOwnedWorkspace =
     return (
         <div className="server-title" ref={ulRef} onClick={toggleMenu}>
             <div id="serverNameContainer">
-                        <p id="serverName">{server.name}&nbsp;<i class="fa-solid fa-arrow-down-short-wide"></i></p>
+                        <p id="serverName">{server.name}&nbsp;<i className="fa-solid fa-arrow-down-short-wide"></i></p>
                     </div>
                     <div className={ulClassName}>
                         <ul className={ownedWorkspace}>

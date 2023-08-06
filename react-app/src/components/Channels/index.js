@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import EmptyChannels from "../Loading/EmptyChannels";
 import { thunkGetAllMessages } from "../../store/messages";
@@ -15,6 +15,7 @@ function Channels({ server, currChannel, setCurrChannel }) {
 
     useEffect(() => {
         setCurrChannel(null)
+        // eslint-disable-next-line
     }, [server.id])
 
     useEffect(() => {
@@ -33,6 +34,7 @@ function Channels({ server, currChannel, setCurrChannel }) {
                 }
             }
         }
+        // eslint-disable-next-line
     }, [channels, dispatch]);
 
 

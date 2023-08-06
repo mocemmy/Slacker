@@ -30,7 +30,7 @@ function ChannelDropdown({ currChannel, setCurrChannel, server }) {
   if (!currentUser) return <Loading />;
 
   const handleLeaveChannel = () => {
-    if (currentUser.id == 15 || currentUser.id == 16) {
+    if (currentUser.id === 15 || currentUser.id === 16) {
       window.alert(
         "Demo users can't leave existing channels, Please create your own channel."
       );
@@ -44,7 +44,7 @@ function ChannelDropdown({ currChannel, setCurrChannel, server }) {
     setCurrChannel(channels[0])
   };
 
-  
+
   const toggleChannelMenu = () => {
     if (!showChannelMenu) setShowChannelMenu(true);
     else setShowChannelMenu(false);
@@ -70,7 +70,7 @@ function ChannelDropdown({ currChannel, setCurrChannel, server }) {
       >
         <p>
           {currChannel.name}&nbsp;
-          <i class="fa-solid fa-arrow-down-short-wide"></i>
+          <i className="fa-solid fa-arrow-down-short-wide"></i>
         </p>
       </div>
       <div className={ulChannelName}>

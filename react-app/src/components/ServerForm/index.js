@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkCreateNewServer, thunkGetAllServers, thunkUpdateServerById } from '../../store/servers';
 import { useModal } from '../../context/Modal'
@@ -9,7 +9,6 @@ const ServerForm = ({ server, formType }) => {
     const [serverName, setServerName] = useState(server.name);
     const [pfpURL, setPfpURL] = useState(server.profile_pic);
     const [description, setDescription] = useState(server.description);
-    const [selectedOption, setSelectedOption] = useState(server.isPublic ? "public" : "private");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
     let title;
@@ -27,7 +26,7 @@ const ServerForm = ({ server, formType }) => {
 
         if (pfpURL) {
             const splitImg = pfpURL.split('.')
-            if (!(splitImg[splitImg.length - 1] === 'jpg' || splitImg[splitImg.length - 1] === 'png' || splitImg[splitImg.length - 1] === 'jpeg')) {
+            if (!(splitImg[splitImg.length - 1].toLowerCase() === 'jpg' || splitImg[splitImg.length - 1].toLowerCase() === 'png' || splitImg[splitImg.length - 1].toLowerCase() === 'jpeg')) {
                 errorObj.serverPic = 'Must end in .png, .jpg or .jpeg.';
             }
         }
@@ -45,7 +44,6 @@ const ServerForm = ({ server, formType }) => {
         // end validation
         const newServer = {
             name: serverName,
-            isPublic: selectedOption === "public",
             profilePic: pfpURL,
             description: description,
         };

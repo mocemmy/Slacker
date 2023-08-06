@@ -2,8 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './AppHomePage.css'
-//import other components here
-import Channels from "../Channels";
 import ServerList from '../ServerList'
 
 function AppHomePage() {

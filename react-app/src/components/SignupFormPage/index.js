@@ -18,6 +18,7 @@ function SignupFormPage() {
 
     const validateEmail = (email) => {
         return email.match(
+            // eslint-disable-next-line
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
     };
@@ -41,11 +42,13 @@ function SignupFormPage() {
 
         if (!password) validationErrors.password = "Password is required";
 
+        if (password.length < 6) validationErrors.password = 'Password must be 6 or more characters'
+
         if (password !== confirmPassword)
             validationErrors.confirmPassword = "Passwords must match";
 
         setErrors(validationErrors);
-    }, [first_name, last_name, username, password, hasSubmitted]);
+    }, [first_name, last_name, username, password, confirmPassword, email, hasSubmitted]);
 
     const onClick = () => {
         setHasSubmitted(true);

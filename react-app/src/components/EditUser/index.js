@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkEditUser } from "../../store/session";
 import "./EditUser.css";
@@ -34,7 +34,7 @@ function EditUser({ user }) {
     if(!profile_pic.toLowerCase().endsWith(".jpg") &&
     !profile_pic.toLowerCase().endsWith(".png") &&
     !profile_pic.toLowerCase().endsWith(".jpeg")) validationErrors.profile_pic = "url must end with .jpg, .jpeg, or .png"
-    
+
     setErrors(validationErrors);
   }, [first_name, last_name, bio, profile_pic, hasSubmitted]);
 
@@ -42,6 +42,7 @@ function EditUser({ user }) {
     if (user.id === 15 || user.id === 16) {
       window.alert("You can't edit the Demo User");
     }
+    // eslint-disable-next-line
   }, [])
 
   const onClick = () => {
