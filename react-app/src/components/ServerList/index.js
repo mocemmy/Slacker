@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkGetAllServers } from "../../store/servers";
 import { thunkGetAllChannels } from "../../store/channels";
@@ -6,7 +6,6 @@ import CreateServerForm from "../CreateServerForm";
 import ServerListModalListItem from "./ServerListModalListItem";
 import Loading from "../Loading";
 import "./serverList.css";
-import { useHistory } from "react-router-dom";
 import Channels from "../Channels";
 import EmptyChannels from "../Loading/EmptyChannels";
 import ProfileDropdown from "../ProfileDropdown";
@@ -19,8 +18,6 @@ const ServerList = () => {
     const [currServer, setCurrServer] = useState(null);
     const [currChannel, setCurrChannel] = useState();
     const dispatch = useDispatch();
-    const ulRef = useRef();
-    const history = useHistory();
 
     useEffect(() => {
         const data = async () => {
@@ -45,16 +42,15 @@ const ServerList = () => {
                     setCurrServer(servers[0])
                     dispatch(thunkGetAllChannels(servers[0].id))
                 }
-                // dispatch(thunkGetAllChannels(currServer.id))
             }
         }
+        // eslint-disable-next-line
     }, [servers, dispatch, isLoaded]);
 
     if (servers && servers.length === 0) return < EmptyServers server={currServer} setCurrChannel={setCurrChannel} setCurrServer={setCurrServer} />
     if (!isLoaded || !user || !currServer) return <Loading />;
 
     const changeServer = (e, server) => {
-        // setDefaultServer(server.id);
         setCurrServer(server);
         dispatch(thunkGetAllChannels(server.id));
     };

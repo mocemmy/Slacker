@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
         <div className="nav-content-container">
             <ul className="nav-container">
                 <li className="navlinks">
-                    <img src="/favicon.png" id="slacker-logo"></img>
+                    <img src="/favicon.png" id="slacker-logo" alt='slacker-logo'></img>
                     <NavLink className="home-link" exact to="/">
                         slacker
                     </NavLink>

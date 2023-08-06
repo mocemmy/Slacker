@@ -67,6 +67,7 @@ function Messages({ channel }) {
     useEffect(() => {
         // Establish socket connection when the component mounts
         socket =
+        // eslint-disable-next-line
             process.env.NODE_ENV !== "production"
                 ? io("http://localhost:5000")
                 : io("https://slacker-chat-collab.onrender.com");
@@ -124,6 +125,7 @@ function Messages({ channel }) {
                 }
             });
         }
+        // eslint-disable-next-line
     }, [socketInstance]);
 
     const scrollToBottom = () => {
