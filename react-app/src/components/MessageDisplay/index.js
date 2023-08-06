@@ -81,6 +81,12 @@ function MessageDisplay({
     }
   };
 
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      handleSave();
+    }
+  }
+
   const handleText = (e) => {
     const inputMessage = e.target.value;
     setUserMessage(inputMessage);
@@ -145,6 +151,7 @@ function MessageDisplay({
             type="text"
             value={userMessage}
             onChange={handleText}
+            onKeyDown={handleEnter}
           />
           <div className="menu-options-container options-container">
             <button className="cancel-save-button" onClick={handleCancel}>
