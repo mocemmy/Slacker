@@ -65,14 +65,15 @@ function WorkspaceSearch() {
         <div id="search-results-container">
           {searchResults.map((server) => (
             <div key={server.id} className="searched-server">
+              <img className="searched-server-pic" src={server.profile_pic}></img>
               {server.name}
               {!server.user_is_member && (
-                <button onClick={(e) => joinWorkspace(server.id)}>
+                <button className='searched-join-server-button' onClick={(e) => joinWorkspace(server.id)}>
                   Join Workspace
                 </button>
               )}
               {server.user_is_member && (
-                <button onClick={(e) => leaveWorkspace(server.id)}>
+                <button className='searched-leave-server-button' onClick={(e) => leaveWorkspace(server.id)}>
                   Leave Workspace
                 </button>
               )}
@@ -85,14 +86,17 @@ function WorkspaceSearch() {
       )}
 
       {!submittedSearch && (
-        <div>
+        <div id="search-results-container">
           {browseServers.map((server) => (
-            <div key={server.id}>
+            <div key={server.id} className="searched-server">
+              <img className="searched-server-pic" src={server.profile_pic}></img>
               {server.name}
-              <button onClick={(e) => joinWorkspace(server.id)}>
+              <button className='searched-join-server-button' onClick={(e) => joinWorkspace(server.id)}>
                 Join Workspace
               </button>
-              {server.user_is_member && <button id="test" onClick={e => leaveWorkspace(server.id)}>Leave Workspace</button>}
+              {server.user_is_member && <button className='searched-leave-server-button' onClick={e => leaveWorkspace(server.id)}>
+                Leave Workspace
+              </button>}
             </div>
           ))}
         </div>
