@@ -75,9 +75,9 @@ function ChannelSearch({ serverId }) {
           ))}
         </div>
       )}
-      {submittedSearch && searchResults && !searchResults.length && (
+      {/* {submittedSearch && searchResults && !searchResults.length && (
         <p>No channels found</p>
-      )}
+      )} */}
       {!submittedSearch && (
         <div id="search-channel-results-container">
           {browseChannels.map((channel) => (

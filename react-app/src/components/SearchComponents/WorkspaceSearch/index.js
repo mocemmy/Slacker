@@ -81,9 +81,9 @@ function WorkspaceSearch() {
           ))}
         </div>
       )}
-      {submittedSearch && searchResults && !searchResults.length && (
+      {/* {submittedSearch && searchResults && !searchResults.length && (
         <p>No workspaces found</p>
-      )}
+      )} */}
 
       {!submittedSearch && (
         <div id="search-results-container">
