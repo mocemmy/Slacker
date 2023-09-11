@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from sqlalchemy import and_
 from app.forms import ServerForm
 from app.models import db, Server, Channel, Message, User
 
@@ -262,3 +263,25 @@ def request_leave_server(id):
 
 # @server_routes.route('/<int:id>/removeUser', methods=['POST'])
 # @login_required
+
+
+#Search Server Route
+@server_routes.route('/search', methods=['POST'])
+@login_required
+def search_servers():
+    """
+    Query for servers matching search terms
+    """
+
+    #search phrase from the request body
+    search_terms = request.json
+    search_words = search_terms.split()
+
+    #search for server name, split by words to match Slack's search algorithm
+    word_matches = []
+    for word in search_words:
+        word_matches.append(Server.name.ilike(f'%{word}%'))
+    
+    and_clauses = and_(*word_matches)
+    servers = Server.query.filter(and_clauses).all()
+    return {'servers': [server.to_dict() for server in servers]}
