@@ -92,3 +92,9 @@
   align-items: center;
   flex-direction: column;
 }
+
+#in-all-channels {
+  color: gray;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
