@@ -114,8 +114,9 @@ message-container bkc: #272627
     border-radius: 0.25rem;
     background-color: transparent;
     border: none;
+    padding: 0;
 }
 #search-servers i {
-    padding: 0.5rem;
+    padding: 0.75rem;
     border-radius: 0.25rem;
 }
