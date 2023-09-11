@@ -88,7 +88,7 @@ function ChannelSearch({ serverId }) {
               </button>
             </div>
           ))}
-          {browseChannels.length == 0 && <p id="in-all-channels">Already in all of the workspaces channels</p>}
+          {browseChannels.length == 0 && <p id="in-all-channels">Already in all of the workspace's channels</p>}
         </div>
       )}
       {submittedSearch && searchResults && !searchResults.length && <p>No channels found</p>}
