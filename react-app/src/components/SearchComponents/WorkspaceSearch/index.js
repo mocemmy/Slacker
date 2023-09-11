@@ -49,14 +49,14 @@ function WorkspaceSearch() {
         </button>
       </div>
       {submittedSearch && searchResults && !!searchResults.length && (
-        <div>
+        <div id="search-results-container">
           {searchResults.map((server) => (
-            <div key={server.id}>
+            <div key={server.id} className="searched-server">
               {server.name}
               {!server.user_is_member && <button onClick={e => joinWorkspace(server.id)}>
                 Join Workspace
               </button>}
-              {server.user_is_member && <button onClick={e => leaveWorkspace(server.id)}>Leave Workspace</button>}
+              {server.user_is_member && <button id="test" onClick={e => leaveWorkspace(server.id)}>Leave Workspace</button>}
             </div>
           ))}
         </div>

@@ -45,7 +45,7 @@ function ChannelSearch({ serverId }) {
         </button>
       </div>
       {submittedSearch && searchResults && !!searchResults.length && (
-        <div>
+        <div id="search-results-container">
           {searchResults.map((channel) => (
             <div key={channel.id}>
               {channel.name}
