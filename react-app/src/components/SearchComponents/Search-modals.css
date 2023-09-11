@@ -4,7 +4,7 @@
   align-items: center;
 
   width: 25rem;
-  height: 30rem;
+  height: fit-content;
 }
 
 #search-bar {
@@ -35,8 +35,38 @@
 
 .searched-server {
   width: 5rem;
+  height: 7.5rem;
+
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-direction: column;
 }
 
-#test {
-  width: 2rem;
+#browse-container,
+#search-results-container {
+  margin-bottom: 1.5rem;
+}
+
+.searched-server-pic {
+  width: 4rem;
+  border-radius: 10px;
+}
+
+.searched-join-server-button {
+  background-color: #541554;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  width: 6rem;
+  height: 2.3rem;
+}
+
+.searched-leave-server-button {
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  width: 6rem;
+  height: 2.3rem;
 }
