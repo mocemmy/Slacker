@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from sqlalchemy import and_
+from sqlalchemy import and_, not_
 from app.forms import ServerForm
 from app.models import db, Server, Channel, Message, User
 
@@ -28,6 +28,28 @@ def current_users_servers():
     """
     servers = current_user.owned_servers
     return {"servers": [server.to_dict() for server in servers]}
+
+@server_routes.route('/browse-servers', methods=['GET'])
+@login_required
+def browse_servers():
+    """
+    Query for all servers that user isn't a member of
+    """
+    servers = Server.query.filter(not_(Server.members.contains(current_user))).all()
+    return {"servers": [server.to_dict() for server in servers]}
+
+
+@server_routes.route('/<int:id>/browse-channels', methods=['GET'])
+@login_required
+def browse_channels(id):
+    """
+    Query for all of the channels in a server that the user doesn't belong to
+    """
+    server = Server.query.get(id)
+    if not server:
+        return {'errors': ['Workspace not found']}, 404
+    channels = Channel.query.filter(and_(not_(Channel.members.contains(current_user)), Channel.server_id == id)).all()
+    return {"channels": [channel.to_dict() for channel in channels]}
 
 # Get channels in a server GET  /api/servers/:serverId/channels
 

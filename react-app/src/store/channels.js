@@ -1,6 +1,7 @@
 const GET_CHANNELS = 'channels/ALL'
 const REMOVE_ALL_CHANNELS = 'channels/remove'
 const SEARCH_CHANNELS = 'channels/SEARCH_CHANNELS'
+const BROWSE_CHANNELS = 'channels/BROWSE_CHANNELS'
 
 const actionGetChannels = (channels) => ({
     type: GET_CHANNELS,
@@ -15,6 +16,12 @@ const actionSearchChannels = (channels) => ({
 export const actionRemoveAllChannels = () => ({
     type: REMOVE_ALL_CHANNELS
 })
+
+const actionBrowseChannels = (channels) => ({
+    type: BROWSE_CHANNELS,
+    channels
+})
+
 
 export const thunkJoinChannel = (channelId, serverId) => async (dispatch) => {
     const response = await fetch(`/api/channels/${channelId}/join`)
@@ -131,8 +138,21 @@ export const thunkSearchChannels = (serverId, search) => async (dispatch) => {
     }
 }
 
+export const thunkBrowseChannels = (serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}/browse-channels`)
 
-const initialState = { channelList: null, searchChannels: null }
+    if (response.ok){
+        const data = await response.json()
+        dispatch(actionBrowseChannels(data.channels))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
+
+const initialState = { channelList: null, searchChannels: null, browseChannels: null }
 
 
 export default function channelReducer(state = initialState, action) {
@@ -143,6 +163,8 @@ export default function channelReducer(state = initialState, action) {
             return { channelList: null }
         case SEARCH_CHANNELS:
             return {...state, searchChannels: action.channels}
+        case BROWSE_CHANNELS:
+            return { ...state, browseChannels: action.channels}
         default:
             return state
     }

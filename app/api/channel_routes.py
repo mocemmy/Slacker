@@ -17,6 +17,9 @@ def messages(id):
     """
     messages = Message.query.filter(Message.channel_id == id).order_by(Message.created_at).all()
 
+    for message in messages:
+        print(message.created_at)
+
     return {"messages": [message.to_dict() for message in messages]}
 
 @channel_routes.route('/new', methods=['POST'])
@@ -73,6 +76,7 @@ def edit_channel(id):
     channel = Channel.query.get(id)
 
     form = ChannelForm()
+    print('*******************', ChannelForm())
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -92,21 +96,6 @@ def edit_channel(id):
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@channel_routes.route('/<int:id>/join')
-@login_required
-def join_channel(id):
-    """
-    Join a channel by its id
-    """
-    channel = Channel.query.get(id)
-    if channel is None:
-        return {'errors': ['Channel not found']}, 404
-    if current_user in channel.members:
-        return {'errors': 'User is already in this channel'}
-    channel.members.append(current_user)
-    db.session.commit()
-    return {'message': "User successfuly joined channel"}
-
 @channel_routes.route('/<int:id>/leave', methods=['DELETE'])
 @login_required
 def leave_channel(id):
@@ -125,4 +114,3 @@ def leave_channel(id):
             return {'message': 'You left the channel!'}
 
     return {"errors": ['User is not in channel']}, 400
-

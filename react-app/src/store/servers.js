@@ -2,6 +2,7 @@ const SET_SERVERS = 'servers/ALL'
 const SET_SINGLE_SERVER = 'servers/new'
 const REMOVE_EVERYTHING = 'server/everything'
 const SEARCH_SERVER = 'server/SEARCH_SERVERS'
+const BROWSE_SERVERS = 'server/BROWSE_SERVERS'
 
 const actionSetServers = (servers) => ({
     type: SET_SERVERS,
@@ -20,6 +21,11 @@ const actionSearchServer = (servers) => ({
 
 export const actionRemoveEverything = () => ({
     type: REMOVE_EVERYTHING
+})
+
+export const actionBrowseServers = (servers) => ({
+    type: BROWSE_SERVERS,
+    servers
 })
 
 export const thunkGetAllServers = () => async (dispatch) => {
@@ -128,11 +134,25 @@ export const thunkSearchServer = (search) => async (dispatch) => {
     }
 }
 
+export const thunkBrowseServer = () => async (dispatch) => {
+    const response = await fetch('/api/servers/browse-servers')
+
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionBrowseServers(data.servers))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
 
 const initialState = {
     serverList: null,
     singleServer: null,
-    searchServer: null
+    searchServer: null,
+    browseServer: null
 }
 
 
@@ -146,6 +166,8 @@ export default function serverReducer(state = initialState, action) {
             return { serverList: null }
         case SEARCH_SERVER:
             return {...state, searchServer: action.servers}
+        case BROWSE_SERVERS:
+            return {...state, browseServer: action.servers}
         default:
             return state
     }

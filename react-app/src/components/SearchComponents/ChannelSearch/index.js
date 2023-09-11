@@ -1,33 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { thunkJoinChannel, thunkLeaveChannel, thunkSearchChannels } from "../../../store/channels";
-
+import {
+  thunkBrowseChannels,
+  thunkJoinChannel,
+  thunkLeaveChannel,
+  thunkSearchChannels,
+} from "../../../store/channels";
+import Loading from "../../Loading";
 
 function ChannelSearch({ serverId }) {
   const { closeModal } = useModal();
   const [search, setSearch] = useState("");
   const [submittedSearch, setSubmittedSearch] = useState(false);
   const searchResults = useSelector((state) => state.channels.searchChannels);
+  const browseChannels = useSelector((state) => state.channels.browseChannels);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(thunkBrowseChannels(serverId));
+  }, [dispatch]);
+
+  if(!browseChannels) return <Loading />
 
   const handleSearch = () => {
     if (search.length) {
-      dispatch(thunkSearchChannels(serverId, search))
-      setSubmittedSearch(true)
+      dispatch(thunkSearchChannels(serverId, search));
+      setSubmittedSearch(true);
     }
   };
   const handleEnter = (e) => {
     if (e.key === "Enter" || e.key === "NumpadEnter") handleSearch();
   };
   const joinChannel = (channelId) => {
-    dispatch(thunkJoinChannel(channelId, serverId))
+    dispatch(thunkJoinChannel(channelId, serverId));
     closeModal();
-  }
+  };
   const leaveChannel = (channelId) => {
-    dispatch(thunkLeaveChannel(channelId, serverId))
+    dispatch(thunkLeaveChannel(channelId, serverId));
     closeModal();
-  }
+  };
   return (
     <>
       <h1>Search Channels</h1>
@@ -48,15 +60,35 @@ function ChannelSearch({ serverId }) {
           {searchResults.map((channel) => (
             <div key={channel.id}>
               {channel.name}
-              {!channel.user_is_channel_member && <button onClick={e => joinChannel(channel.id)}>
-                Join Channel
-              </button>}
-              {channel.user_is_channel_member && <button onClick={e => leaveChannel(channel.id)}>Leave Channel</button>}
+              {!channel.user_is_channel_member && (
+                <button onClick={(e) => joinChannel(channel.id)}>
+                  Join Channel
+                </button>
+              )}
+              {channel.user_is_channel_member && (
+                <button onClick={(e) => leaveChannel(channel.id)}>
+                  Leave Channel
+                </button>
+              )}
             </div>
           ))}
         </div>
       )}
-      {submittedSearch && searchResults && !searchResults.length && <p>No channels found</p>}
+      {submittedSearch && searchResults && !searchResults.length && (
+        <p>No channels found</p>
+      )}
+      {!submittedSearch && (
+        <div>
+          {browseChannels.map((channel) => (
+            <div key={channel.id}>
+              {channel.name}
+              <button onClick={(e) => joinChannel(channel.id)}>
+                Join Channel
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
