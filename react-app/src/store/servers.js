@@ -1,6 +1,8 @@
 const SET_SERVERS = 'servers/ALL'
 const SET_SINGLE_SERVER = 'servers/new'
 const REMOVE_EVERYTHING = 'server/everything'
+const SEARCH_SERVER = 'server/SEARCH_SERVERS'
+const BROWSE_SERVERS = 'server/BROWSE_SERVERS'
 
 const actionSetServers = (servers) => ({
     type: SET_SERVERS,
@@ -12,8 +14,18 @@ const actionSetSingleServer = (server) => ({
     server
 })
 
+const actionSearchServer = (servers) => ({
+    type: SEARCH_SERVER,
+    servers
+})
+
 export const actionRemoveEverything = () => ({
     type: REMOVE_EVERYTHING
+})
+
+export const actionBrowseServers = (servers) => ({
+    type: BROWSE_SERVERS,
+    servers
 })
 
 export const thunkGetAllServers = () => async (dispatch) => {
@@ -63,7 +75,18 @@ export const thunkUpdateServerById = (server, serverId) => async (dispatch) => {
         return errors
     }
 }
+export const thunkJoinServer = (serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}/join`)
 
+    if(response.ok){
+        const data = await response.json();
+        dispatch(thunkGetAllServers())
+        return data
+    } else {
+        const errors = await response.json()
+        return errors;
+    }
+}
 export const thunkLeaveServer = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/leave`);
 
@@ -92,10 +115,44 @@ export const thunkDeleteServer = (serverId) => async (dispatch) => {
     }
 }
 
+export const thunkSearchServer = (search) => async (dispatch) => {
+    const response = await fetch('/api/servers/search', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(search)
+    })
+    
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionSearchServer(data.servers))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
+export const thunkBrowseServer = () => async (dispatch) => {
+    const response = await fetch('/api/servers/browse-servers')
+
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionBrowseServers(data.servers))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
 
 const initialState = {
     serverList: null,
     singleServer: null,
+    searchServer: null,
+    browseServer: null
 }
 
 
@@ -107,6 +164,10 @@ export default function serverReducer(state = initialState, action) {
             return { ...state, singleServer: action.server }
         case REMOVE_EVERYTHING:
             return { serverList: null }
+        case SEARCH_SERVER:
+            return {...state, searchServer: action.servers}
+        case BROWSE_SERVERS:
+            return {...state, browseServer: action.servers}
         default:
             return state
     }

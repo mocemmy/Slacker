@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from sqlalchemy import and_, not_
 from app.forms import ServerForm
 from app.models import db, Server, Channel, Message, User
 
@@ -27,6 +28,28 @@ def current_users_servers():
     """
     servers = current_user.owned_servers
     return {"servers": [server.to_dict() for server in servers]}
+
+@server_routes.route('/browse-servers', methods=['GET'])
+@login_required
+def browse_servers():
+    """
+    Query for all servers that user isn't a member of
+    """
+    servers = Server.query.filter(not_(Server.members.contains(current_user))).all()
+    return {"servers": [server.to_dict() for server in servers]}
+
+
+@server_routes.route('/<int:id>/browse-channels', methods=['GET'])
+@login_required
+def browse_channels(id):
+    """
+    Query for all of the channels in a server that the user doesn't belong to
+    """
+    server = Server.query.get(id)
+    if not server:
+        return {'errors': ['Workspace not found']}, 404
+    channels = Channel.query.filter(and_(not_(Channel.members.contains(current_user)), Channel.server_id == id)).all()
+    return {"channels": [channel.to_dict() for channel in channels]}
 
 # Get channels in a server GET  /api/servers/:serverId/channels
 
@@ -186,8 +209,28 @@ def delete_server_by_id(id):
     else:
         return {'errors': ['Unauthorized']}, 401
 
-# Join a server POST /api/servers/:serverId/join
+#Join a server GET /api/servers/:serverId/join
+@server_routes.route('/<int:id>/join', methods=["GET"])
+@login_required
+def join_server(id):
+    """
+    Request to join a server by its id
+    """
+    server = Server.query.get(id)
+    if server is None:
+        return {'errors': ['Workspace not found']}, 404
+    user = User.query.get(current_user.id)
+    if user is None:
+        return {"errors": [f'Bad request, user with ID {current_user.id} does not exits']}, 400
+    member_id_list = [member.id for member in server.members]
+    if user.id in member_id_list:
+        return {"errors": [f'Bad request, user with ID {user.id} is already in this workspace']}, 400
+    server.members.append(user)
+    db.session.commit()
 
+    return {'message': f'User with ID {user.id} Successfully joined workspace with {server.id}'}
+
+# Join a server POST /api/servers/:serverId/join
 @server_routes.route('/<int:id>/join', methods=['POST'])
 @login_required
 def request_join_server(id):
@@ -251,7 +294,8 @@ def request_leave_server(id):
     user = User.query.get(current_user.id)
 
     for channel in server.channels:
-        channel.members.remove(user)
+        if user in channel.members:
+            channel.members.remove(user)
 
     # Deletes user from the server
     server.members.remove(user)
@@ -262,3 +306,47 @@ def request_leave_server(id):
 
 # @server_routes.route('/<int:id>/removeUser', methods=['POST'])
 # @login_required
+
+
+#Search Server Route
+@server_routes.route('/search', methods=['POST'])
+@login_required
+def search_servers():
+    """
+    Query for servers matching search terms
+    """
+
+    #search phrase from the request body
+    search_terms = request.json
+    search_words = search_terms.split()
+
+    #search for server name, split by words to match Slack's search algorithm
+    word_matches = []
+    for word in search_words:
+        word_matches.append(Server.name.ilike(f'%{word}%'))
+    
+    and_clauses = and_(*word_matches)
+    servers = Server.query.filter(and_clauses).all()
+    return {'servers': [{**server.to_dict(), 'user_is_member': current_user in server.members} for server in servers]}
+
+#Search Channel Route
+@server_routes.route('/<int:id>/search', methods=['POST'])
+@login_required
+def search_channels(id):
+    """
+    Query for channels matching search terms in the current server
+    """
+    server = Server.query.get(id)
+    if not server:
+        return {'errors': ['Workspace not found']}, 404
+    
+    search_terms = request.json
+    search_words = search_terms.split()
+
+    word_matches = []
+    for word in search_words:
+        word_matches.append(Channel.name.ilike(f'%{word}%'))
+    
+    and_clauses = and_(*word_matches, Channel.server_id == id)
+    channels = Channel.query.filter(and_clauses).all()
+    return {'channels': [{**channel.to_dict(), 'user_is_channel_member': current_user in channel.members} for channel in channels]}

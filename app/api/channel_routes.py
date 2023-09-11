@@ -92,6 +92,21 @@ def edit_channel(id):
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+@channel_routes.route('/<int:id>/join')
+@login_required
+def join_channel(id):
+    """
+    Join a channel by its id
+    """
+    channel = Channel.query.get(id)
+    if channel is None:
+        return {'errors': ['Channel not found']}, 404
+    if current_user in channel.members:
+        return {'errors': 'User is already in this channel'}
+    channel.members.append(current_user)
+    db.session.commit()
+    return {'message': "User successfuly joined channel"}
+
 @channel_routes.route('/<int:id>/leave', methods=['DELETE'])
 @login_required
 def leave_channel(id):
@@ -110,3 +125,4 @@ def leave_channel(id):
             return {'message': 'You left the channel!'}
 
     return {"errors": ['User is not in channel']}, 400
+
