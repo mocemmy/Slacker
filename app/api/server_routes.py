@@ -306,3 +306,25 @@ def search_servers():
     and_clauses = and_(*word_matches)
     servers = Server.query.filter(and_clauses).all()
     return {'servers': [{**server.to_dict(), 'user_is_member': current_user in server.members} for server in servers]}
+
+#Search Channel Route
+@server_routes.route('/<int:id>/search', methods=['POST'])
+@login_required
+def search_channels(id):
+    """
+    Query for channels matching search terms in the current server
+    """
+    server = Server.query.get(id)
+    if not server:
+        return {'errors': ['Workspace not found']}, 404
+    
+    search_terms = request.json
+    search_words = search_terms.split()
+
+    word_matches = []
+    for word in search_words:
+        word_matches.append(Channel.name.ilike(f'%{word}%'))
+    
+    and_clauses = and_(*word_matches, Channel.server_id == id)
+    channels = Channel.query.filter(and_clauses).all()
+    return {'channels': [{**channel.to_dict(), 'user_is_channel_member': current_user in channel.members} for channel in channels]}

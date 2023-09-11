@@ -1,14 +1,33 @@
 const GET_CHANNELS = 'channels/ALL'
 const REMOVE_ALL_CHANNELS = 'channels/remove'
+const SEARCH_CHANNELS = 'channels/SEARCH_CHANNELS'
 
 const actionGetChannels = (channels) => ({
     type: GET_CHANNELS,
     channels
 })
 
+const actionSearchChannels = (channels) => ({
+    type: SEARCH_CHANNELS,
+    channels
+})
+
 export const actionRemoveAllChannels = () => ({
     type: REMOVE_ALL_CHANNELS
 })
+
+export const thunkJoinChannel = (channelId, serverId) => async (dispatch) => {
+    const response = await fetch(`/api/channels/${channelId}/join`)
+
+    if(response.ok){
+        const data = await response.json();
+        dispatch(thunkGetAllChannels(serverId))
+        return data
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+}
 
 export const thunkLeaveChannel = (channelId, serverId) => async (dispatch) => {
     const response = await fetch(`/api/channels/${channelId}/leave`, {
@@ -93,8 +112,27 @@ export const thunkGetAllChannels = (serverId) => async (dispatch) => {
     }
 }
 
+export const thunkSearchChannels = (serverId, search) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}/search`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(search)
+    })
 
-const initialState = { channelList: null }
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionSearchChannels(data.channels))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
+
+const initialState = { channelList: null, searchChannels: null }
 
 
 export default function channelReducer(state = initialState, action) {
@@ -103,6 +141,8 @@ export default function channelReducer(state = initialState, action) {
             return { ...state, channelList: action.channels }
         case REMOVE_ALL_CHANNELS:
             return { channelList: null }
+        case SEARCH_CHANNELS:
+            return {...state, searchChannels: action.channels}
         default:
             return state
     }

@@ -8,6 +8,7 @@ import OpenModalButton from "../OpenModalButton";
 import ChannelForm from "../ChannelForm";
 import ServerDropdown from "../ServerDropdown";
 import ChannelDropdown from "../ChannelDropdown";
+import ChannelSearch from "../SearchComponents/ChannelSearch";
 
 function Channels({ server, currChannel, setCurrChannel }) {
     const channels = useSelector((state) => state.channels.channelList);
@@ -67,6 +68,10 @@ function Channels({ server, currChannel, setCurrChannel }) {
                     <li className="channelListItem">
                         <i className="fa-solid fa-plus"></i>&nbsp;&nbsp;
                         <OpenModalButton buttonText="Add Channel" modalComponent={<ChannelForm type="CREATE" server={server} setCurrChannel={setCurrChannel} />} />
+                    </li>
+                    <li className="channelListItem">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <OpenModalButton buttonText="Search Channels" modalComponent={<ChannelSearch serverId={server.id}/>} />
                     </li>
                 </ul>
             </div>
