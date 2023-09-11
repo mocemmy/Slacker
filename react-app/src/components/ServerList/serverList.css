@@ -11,9 +11,12 @@ message-container bkc: #272627
 }
 
 #serverList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 0 1rem;
+    height: 85%;
 }
-
 .serverListItem {
     list-style: none;
 }
@@ -34,7 +37,12 @@ message-container bkc: #272627
     cursor: pointer;
 }
 
-#serverList-container > *>*>:hover{
+#search-servers {
+    border-radius: 0.25rem;
+}
+
+.serverListImg:hover,
+#search-servers:hover {
     outline: 2px solid rgb(255, 255, 255);
 }
 

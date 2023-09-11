@@ -12,6 +12,7 @@ import ProfileDropdown from "../ProfileDropdown";
 import EmptyServers from "../Loading/EmptyServers";
 import OpenModalButton from "../OpenModalButton";
 import WorkspaceSearch from "../SearchComponents/WorkspaceSearch";
+import CreatorDropdown from "../CreatorDropdown";
 
 const ServerList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -74,33 +75,43 @@ const ServerList = () => {
         />
 
         <ul id="serverList">
-          {servers.map((server) => {
-            return (
-              <li
-                key={server.id}
-                title={server.name}
-                className="serverListItem"
-              >
-                <img
-                  src={server.profile_pic}
-                  alt={server.name}
-                  onClick={(e) => changeServer(e, server)}
-                  className={
-                    server.id === currServer.id
-                      ? "serverListImg selectedServer"
-                      : "serverListImg"
-                  }
-                ></img>
-              </li>
-            );
-          })}
-          <li id="search-servers" className="serverListItem">
-            <OpenModalButton
-              buttonText={<i className="fa-solid fa-magnifying-glass"></i>}
-              modalComponent={<WorkspaceSearch/>}
-            />
-          </li>
-          <ServerListModalListItem modalComponent={<CreateServerForm />} />
+          <div className="servers">
+            {servers.map((server) => {
+              return (
+                <li
+                  key={server.id}
+                  title={server.name}
+                  className="serverListItem"
+                >
+                  <img
+                    src={server.profile_pic}
+                    alt={server.name}
+                    onClick={(e) => changeServer(e, server)}
+                    className={
+                      server.id === currServer.id
+                        ? "serverListImg selectedServer"
+                        : "serverListImg"
+                    }
+                  ></img>
+                </li>
+              );
+            })}
+          </div>
+          <div className="servers">
+            <li id="search-servers" className="serverListItem">
+              <OpenModalButton
+                buttonText={<i className="fa-solid fa-magnifying-glass"></i>}
+                modalComponent={<WorkspaceSearch />}
+              />
+            </li>
+            <ServerListModalListItem modalComponent={<CreateServerForm />} />
+            <li id="search-servers" className="serverListItem">
+              <OpenModalButton
+                buttonText={<i className="fa-solid fa-brain"></i>}
+                modalComponent={<CreatorDropdown />}
+              />
+            </li>
+          </div>
         </ul>
       </div>
       {!!servers.length && (
