@@ -20,7 +20,7 @@ function ChannelSearch({ serverId }) {
   useEffect(() => {
     dispatch(thunkBrowseChannels(serverId));
   }, [dispatch]);
-  
+
   if (!browseChannels) return <Loading />
 
   const handleSearch = () => {
@@ -59,15 +59,15 @@ function ChannelSearch({ serverId }) {
       {submittedSearch && searchResults && !!searchResults.length && (
         <div id="search-results-container">
           {searchResults.map((channel) => (
-            <div key={channel.id}>
+            <div key={channel.id} className="searched-channel">
               {channel.name}
               {!channel.user_is_channel_member && (
-                <button onClick={(e) => joinChannel(channel.id)}>
+                <button className='searched-join-server-button' onClick={(e) => joinChannel(channel.id)}>
                   Join Channel
                 </button>
               )}
               {channel.user_is_channel_member && (
-                <button onClick={(e) => leaveChannel(channel.id)}>
+                <button className='searched-leave-server-button' onClick={(e) => leaveChannel(channel.id)}>
                   Leave Channel
                 </button>
               )}
@@ -81,9 +81,9 @@ function ChannelSearch({ serverId }) {
       {!submittedSearch && (
         <div>
           {browseChannels.map((channel) => (
-            <div key={channel.id}>
+            <div key={channel.id} className="searched-channel">
               {channel.name}
-              <button onClick={(e) => joinChannel(channel.id)}>
+              <button className='searched-join-server-button' onClick={(e) => joinChannel(channel.id)}>
                 Join Channel
               </button>
             </div>

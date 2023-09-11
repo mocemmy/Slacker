@@ -70,3 +70,13 @@
   width: 6rem;
   height: 2.3rem;
 }
+
+.searched-channel {
+  width: 7rem;
+  height: 4.5em;
+
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-direction: column;
+}
