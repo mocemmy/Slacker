@@ -188,7 +188,7 @@ def delete_server_by_id(id):
         return {'errors': ['Unauthorized']}, 401
 
 #Join a server GET /api/servers/:serverId/join
-@server_routes.route('/<int:id/join', methods=["GET"])
+@server_routes.route('/<int:id>/join', methods=["GET"])
 @login_required
 def join_server(id):
     """
@@ -272,7 +272,8 @@ def request_leave_server(id):
     user = User.query.get(current_user.id)
 
     for channel in server.channels:
-        channel.members.remove(user)
+        if user in channel.members:
+            channel.members.remove(user)
 
     # Deletes user from the server
     server.members.remove(user)
@@ -304,4 +305,4 @@ def search_servers():
     
     and_clauses = and_(*word_matches)
     servers = Server.query.filter(and_clauses).all()
-    return {'servers': [server.to_dict() for server in servers]}
+    return {'servers': [{**server.to_dict(), 'user_is_member': current_user in server.members} for server in servers]}
