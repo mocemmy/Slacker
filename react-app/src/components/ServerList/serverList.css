@@ -107,3 +107,15 @@ message-container bkc: #272627
     color: white;
     border-radius: 0.25rem;
 }
+
+#search-servers button {
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    border: none;
+}
+#search-servers i {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}

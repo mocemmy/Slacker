@@ -187,8 +187,28 @@ def delete_server_by_id(id):
     else:
         return {'errors': ['Unauthorized']}, 401
 
-# Join a server POST /api/servers/:serverId/join
+#Join a server GET /api/servers/:serverId/join
+@server_routes.route('/<int:id/join', methods=["GET"])
+@login_required
+def join_server(id):
+    """
+    Request to join a server by its id
+    """
+    server = Server.query.get(id)
+    if server is None:
+        return {'errors': ['Workspace not found']}, 404
+    user = User.query.get(current_user.id)
+    if user is None:
+        return {"errors": [f'Bad request, user with ID {current_user.id} does not exits']}, 400
+    member_id_list = [member.id for member in server.members]
+    if user.id in member_id_list:
+        return {"errors": [f'Bad request, user with ID {user.id} is already in this workspace']}, 400
+    server.members.append(user)
+    db.session.commit()
 
+    return {'message': f'User with ID {user.id} Successfully joined workspace with {server.id}'}
+
+# Join a server POST /api/servers/:serverId/join
 @server_routes.route('/<int:id>/join', methods=['POST'])
 @login_required
 def request_join_server(id):
