@@ -57,7 +57,7 @@ function ChannelSearch({ serverId }) {
         </button>
       </div>
       {submittedSearch && searchResults && !!searchResults.length && (
-        <div id="search-results-container">
+        <div id="search-channel-results-container">
           {searchResults.map((channel) => (
             <div key={channel.id} className="searched-channel">
               {channel.name}
@@ -79,7 +79,7 @@ function ChannelSearch({ serverId }) {
         <p>No channels found</p>
       )}
       {!submittedSearch && (
-        <div>
+        <div id="search-channel-results-container">
           {browseChannels.map((channel) => (
             <div key={channel.id} className="searched-channel">
               {channel.name}
