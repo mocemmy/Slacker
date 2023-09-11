@@ -43,65 +43,64 @@ function WorkspaceSearch() {
     dispatch(thunkLeaveServer(serverId))
     closeModal()
   }
+
   //   console.log(searchResults)
-  dispatch(thunkLeaveServer(serverId));
-  closeModal();
-};
-//   console.log(searchResults)
-return (
-  <div id="search-container">
-    <h1>Search Workspaces</h1>
-    <div className="search-bar-container">
-      <input
-        type="text"
-        placeholder={"Search Workspaces"}
-        value={search}
-        onKeyDown={handleEnter}
-        onChange={(e) => setSearch(e.target.value)}
-        id="search-bar"
-      />
-      <button type="submit" onClick={handleSearch} id="search-button">
-        <i className="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </div>
-    {submittedSearch && searchResults && !!searchResults.length && (
-      <div id="search-results-container">
-        {searchResults.map((server) => (
-          <div key={server.id} className="searched-server">
-            {server.name}
-            {!server.user_is_member && (
+  return (
+    <div id="search-container">
+      <h1>Search Workspaces</h1>
+      <div className="search-bar-container">
+        <input
+          type="text"
+          placeholder={"Search Workspaces"}
+          value={search}
+          onKeyDown={handleEnter}
+          onChange={(e) => setSearch(e.target.value)}
+          id="search-bar"
+        />
+        <button type="submit" onClick={handleSearch} id="search-button">
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      {submittedSearch && searchResults && !!searchResults.length && (
+        <div id="search-results-container">
+          {searchResults.map((server) => (
+            <div key={server.id} className="searched-server">
+              {server.name}
+              {!server.user_is_member && (
+                <button onClick={(e) => joinWorkspace(server.id)}>
+                  Join Workspace
+                </button>
+              )}
+              {server.user_is_member && (
+                <button onClick={(e) => leaveWorkspace(server.id)}>
+                  Leave Workspace
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      {submittedSearch && searchResults && !searchResults.length && (
+        <p>No workspaces found</p>
+      )}
+
+      {!submittedSearch && (
+        <div>
+          {browseServers.map((server) => (
+            <div key={server.id}>
+              {server.name}
               <button onClick={(e) => joinWorkspace(server.id)}>
                 Join Workspace
               </button>
-            )}
-            {server.user_is_member && (
-              <button onClick={(e) => leaveWorkspace(server.id)}>
-                Leave Workspace
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-    )}
-    {submittedSearch && searchResults && !searchResults.length && (
-      <p>No workspaces found</p>
-    )}
-    {!submittedSearch && (
-      <div>
-        {browseServers.map((server) => (
-          <div key={server.id}>
-            {server.name}
-            <button onClick={(e) => joinWorkspace(server.id)}>
-              Join Workspace
-            </button>}
-            {server.user_is_member && <button id="test" onClick={e => leaveWorkspace(server.id)}>Leave Workspace</button>}
-          </div>
-        ))}
-      </div>
-    )}
-    {submittedSearch && searchResults && !searchResults.length && <p>No workspaces found</p>}
-  </div>
-);
+              {server.user_is_member && <button id="test" onClick={e => leaveWorkspace(server.id)}>Leave Workspace</button>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {submittedSearch && searchResults && !searchResults.length && <p>No workspaces found</p>}
+    </div>
+  );
 }
 
 export default WorkspaceSearch;
