@@ -20,7 +20,7 @@ function ChannelSearch({ serverId }) {
   useEffect(() => {
     dispatch(thunkBrowseChannels(serverId));
   }, [dispatch]);
-
+  
   if (!browseChannels) return <Loading />
 
   const handleSearch = () => {
