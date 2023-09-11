@@ -29,7 +29,7 @@ function ChannelSearch({ serverId }) {
     closeModal();
   }
   return (
-    <>
+    <div id="search-container">
       <h1>Search Channels</h1>
       <div className="search-bar-container">
         <input
@@ -38,8 +38,9 @@ function ChannelSearch({ serverId }) {
           value={search}
           onKeyDown={handleEnter}
           onChange={(e) => setSearch(e.target.value)}
+          id="search-bar"
         />
-        <button type="submit" onClick={handleSearch}>
+        <button type="submit" onClick={handleSearch} id="search-button">
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
@@ -57,7 +58,7 @@ function ChannelSearch({ serverId }) {
         </div>
       )}
       {submittedSearch && searchResults && !searchResults.length && <p>No channels found</p>}
-    </>
+    </div>
   );
 }
 

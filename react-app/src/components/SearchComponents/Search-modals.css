@@ -1,0 +1,24 @@
+#search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 25rem;
+  height: 30rem;
+}
+
+#search-bar {
+  border-radius: 50px 0px 0px 50px;
+  height: 20px;
+  outline: none;
+}
+
+#search-button {
+  border-radius: 0px 50px 50px 0px;
+  text-align: center;
+  height: 38px;
+  width: 2rem;
+  color: white;
+  border: none;
+  background-color: #541554;
+}

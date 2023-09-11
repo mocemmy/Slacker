@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkJoinServer, thunkLeaveServer, thunkSearchServer } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
+import '../Search-modals.css'
 
 function WorkspaceSearch() {
   const { closeModal } = useModal();
@@ -30,19 +31,20 @@ function WorkspaceSearch() {
     dispatch(thunkLeaveServer(serverId))
     closeModal()
   }
-//   console.log(searchResults)
+  //   console.log(searchResults)
   return (
-    <>
+    <div id="search-container">
       <h1>Search Workspaces</h1>
       <div className="search-bar-container">
         <input
           type="text"
-          placeholder="Search Workspaces"
+          placeholder={"Search Workspaces"}
           value={search}
           onKeyDown={handleEnter}
           onChange={(e) => setSearch(e.target.value)}
+          id="search-bar"
         />
-        <button type="submit" onClick={handleSearch}>
+        <button type="submit" onClick={handleSearch} id="search-button">
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
@@ -60,7 +62,7 @@ function WorkspaceSearch() {
         </div>
       )}
       {submittedSearch && searchResults && !searchResults.length && <p>No workspaces found</p>}
-    </>
+    </div>
   );
 }
 
